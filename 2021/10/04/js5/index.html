@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="this 的不同场景，如何取值 手写bind函数（改变this指向） 实际开发中闭包的应用场景，举例说明  1234567891011&#x2F;&#x2F; 题目：创建10个&lt;a&gt;标签，点击的时候弹出来对应的序号let afor (let i&#x3D;0; i&lt;10; i++)&amp;#123; &#x2F;&#x2F; 把let i 放到for循环中，每次循环都会形成块级作用域    a &#x3D; document.createEl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="作用域和闭包">
+<meta property="og:url" content="http://example.com/2021/10/04/js5/index.html">
+<meta property="og:site_name" content="web">
+<meta property="og:description" content="this 的不同场景，如何取值 手写bind函数（改变this指向） 实际开发中闭包的应用场景，举例说明  1234567891011&#x2F;&#x2F; 题目：创建10个&lt;a&gt;标签，点击的时候弹出来对应的序号let afor (let i&#x3D;0; i&lt;10; i++)&amp;#123; &#x2F;&#x2F; 把let i 放到for循环中，每次循环都会形成块级作用域    a &#x3D; document.createEl">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/10/04/js5/image/bind%E5%87%BD%E6%95%B0.jpg">
+<meta property="article:published_time" content="2021-10-04T08:20:41.000Z">
+<meta property="article:modified_time" content="2021-10-05T08:46:08.010Z">
+<meta property="article:author" content="lazycat">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/10/04/js5/image/bind%E5%87%BD%E6%95%B0.jpg">
+
+
+<link rel="canonical" href="http://example.com/2021/10/04/js5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/10/04/js5/","path":"2021/10/04/js5/","title":"作用域和闭包"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>作用域和闭包 | web</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">web</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">7</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E7%94%B1%E5%8F%98%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">自由变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AD%E5%8C%85"><span class="nav-number">3.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this"><span class="nav-number">4.</span> <span class="nav-text">this</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%86%99bind%E5%87%BD%E6%95%B0"><span class="nav-number">4.0.1.</span> <span class="nav-text">手写bind函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E9%97%AD%E5%8C%85%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">实际开发中闭包的应用</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lazycat"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">lazycat</p>
+  <div class="site-description" itemprop="description">Notes on front-end learning</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/04/js5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          作用域和闭包
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-04 16:20:41" itemprop="dateCreated datePublished" datetime="2021-10-04T16:20:41+08:00">2021-10-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-05 16:46:08" itemprop="dateModified" datetime="2021-10-05T16:46:08+08:00">2021-10-05</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ol>
+<li>this 的不同场景，如何取值</li>
+<li>手写bind函数（改变this指向）</li>
+<li>实际开发中闭包的应用场景，举例说明</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 题目：创建10个&lt;a&gt;标签，点击的时候弹出来对应的序号</span></span><br><span class="line"><span class="keyword">let</span> a</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123; <span class="comment">// 把let i 放到for循环中，每次循环都会形成块级作用域</span></span><br><span class="line">    a = <span class="built_in">document</span>.createElement(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    a.innerHTML = i + <span class="string">&#x27;&lt;br&gt;&#x27;</span></span><br><span class="line">    a.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">        e.preventDefault()</span><br><span class="line">        alert(i)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><ol>
+<li>全局作用域</li>
+<li>函数作用域</li>
+<li>块级作用域</li>
+</ol>
+<h2 id="自由变量"><a href="#自由变量" class="headerlink" title="自由变量"></a>自由变量</h2><ul>
+<li>一个变量在当前作用域没有定义，但被使用</li>
+<li>向上级作用域，一层一层依次寻找，直到找到为止</li>
+<li>如果到全局作用域都没有找到，会报错xx is not defined</li>
+</ul>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><ul>
+<li>作用域应用的特殊情况，有两种表现：</li>
+<li>函数作为参数被传递</li>
+<li>函数作为返回值被返回                                                                                                                                                                                                                  </li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数作为返回值</span></span><br><span class="line"><span class="comment">// 定义之后返回再执行</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">100</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a)   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">create()   <span class="comment">// 得到 function()&#123; console.log(a) &#125;</span></span><br><span class="line"><span class="keyword">let</span> fn = create() <span class="comment">// 相当于 fn = function()&#123; console.log(a) &#125;</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">200</span></span><br><span class="line">fn()    <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数作为参数</span></span><br><span class="line"><span class="comment">// 定义之后，通过参数传进去，然后执行</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">200</span></span><br><span class="line">    fn()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> a = <span class="number">100</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a) <span class="comment">// 在函数定义的地方，向上级作用域查找</span></span><br><span class="line">&#125;</span><br><span class="line">print(fn)   <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>所有的自由变量的查找，是在函数定义的地方，向上级作用域查找，不是在执行的地方</p>
+</blockquote>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p>this的应用场景比较多：</p>
+<ol>
+<li>作为普通函数被调用                  //  window</li>
+<li>使用call apply bind 被调用      //  传入什么，绑定的就是什么</li>
+<li>作为对象方法被调用                 //  返回对象本身</li>
+<li>在class方法中被调用                //  当前实例本身</li>
+<li>箭头函数                                    //  找上级作用域this的值</li>
+</ol>
+<blockquote>
+<p>this 取什么值，是在函数执行的时候确认的，不是在函数定义的时候确认的</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>)</span><br><span class="line">&#125;</span><br><span class="line">fn1()   <span class="comment">// window  作为普通函数被调用</span></span><br><span class="line">fn1.call(&#123; <span class="attr">x</span>: <span class="number">100</span> &#125;)  <span class="comment">// &#123; x: 100 &#125;</span></span><br><span class="line"><span class="comment">// 通过bind调用，bind也可以改变this指向。bind会返回一个新的函数去执行</span></span><br><span class="line"><span class="keyword">const</span> fn2 = fn1.bind(&#123; <span class="attr">x</span>: <span class="number">200</span> &#125;)</span><br><span class="line">fn2()   <span class="comment">// &#123; x: 200 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zhangsan = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">    <span class="function"><span class="title">sayHi</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>) <span class="comment">//this 即当前对象  作为对象方法被调用</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">wait</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="comment">// 这个函数被执行，是setTimeout本身触发的执行，不是zhangsan.sayHi()这样触发的执行</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="built_in">this</span>) <span class="comment">// this === window</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zhangsan = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">    <span class="function"><span class="title">sayHi</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>) <span class="comment">//this 即当前对象  作为对象方法被调用: zhangsan.sayHi()</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">waitAgain</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// console.log(this)</span></span><br><span class="line">        <span class="comment">// 如果是在waitAgain()直接打印this，那就和sayHi()中的this是一样的</span></span><br><span class="line">        <span class="comment">// 箭头函数的this是取决于它上级作用域的this，它本身不会决定this的值</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>) <span class="comment">// this 即当前对象</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name</span><br><span class="line">        <span class="built_in">this</span>.age = <span class="number">20</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">sayHi</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> zhangsan = <span class="keyword">new</span> People(<span class="string">&#x27;张三&#x27;</span>)</span><br><span class="line"><span class="comment">// 在class方法中被调用，谁调用this就指向谁</span></span><br><span class="line">zhangsan.sayHi()  <span class="comment">// 打印出 zhangsan  this指向zhangsan这个对象</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="手写bind函数"><a href="#手写bind函数" class="headerlink" title="手写bind函数"></a>手写bind函数</h4><p><strong>bind函数的用法</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params">a, b, c</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;this&#x27;</span>, <span class="built_in">this</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(a, b)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;this is fn1&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 第一个参数就是我们的this,其他参数对应a b c</span></span><br><span class="line"><span class="keyword">const</span> fn2 = fn1.bind(&#123; <span class="attr">x</span>: <span class="number">100</span> &#125;, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>) </span><br><span class="line"><span class="keyword">const</span> res = fn2()</span><br><span class="line"><span class="built_in">console</span>.log(res)   <span class="comment">// this &#123;x: 100&#125; , 10 20 30 , this is fn1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="./image/bind%E5%87%BD%E6%95%B0.jpg" alt="bind函数"></p>
+<h2 id="实际开发中闭包的应用"><a href="#实际开发中闭包的应用" class="headerlink" title="实际开发中闭包的应用"></a>实际开发中闭包的应用</h2><ol>
+<li>隐藏数据</li>
+<li>如做一个简单的<code>cache</code>工具</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 闭包隐藏数据，只提供API</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCache</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> data = &#123;&#125;   <span class="comment">// 闭包中的数据被隐藏，不被外界访问</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">set</span>: <span class="function"><span class="keyword">function</span>(<span class="params">key, val</span>) </span>&#123;</span><br><span class="line">            data[key] = val</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="attr">get</span>: <span class="function"><span class="keyword">function</span>(<span class="params">key</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> data[key]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> c = createCache()</span><br><span class="line">c.set(<span class="string">&#x27;a&#x27;</span>, <span class="number">100</span>)</span><br><span class="line"><span class="built_in">console</span>.log(c.get(<span class="string">&#x27;a&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/javascript/" rel="tag"># javascript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/04/js4/" rel="prev" title="原型和原型链">
+                  <i class="fa fa-chevron-left"></i> 原型和原型链
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/10/05/js6/" rel="next" title="异步">
+                  异步 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lazycat</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -84,7 +84,7 @@
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">7</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a></li>
   </ul>
 </nav>
 
@@ -129,7 +129,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -173,6 +173,501 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/07/js10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/07/js10/" class="post-title-link" itemprop="url">存储</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-10-07 20:11:56 / 修改时间：22:00:39" itemprop="dateCreated datePublished" datetime="2021-10-07T20:11:56+08:00">2021-10-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h2><ul>
+<li>cookie</li>
+<li>localStorage             // 数据会永久存储，除非代码删除或手动删除</li>
+<li>sessionStorage       //  数据只存于当前会话，浏览器关闭则清空</li>
+</ul>
+<h4 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h4><ul>
+<li>本身用于浏览器和server通讯</li>
+<li>被 ‘借用’ 到本地存储来</li>
+<li>可用document.cookie = ‘….’ 来修改</li>
+</ul>
+<p><strong>cookie缺陷</strong></p>
+<ul>
+<li>存储大小，最大4KB</li>
+<li>http 请求时需要发送到服务端，会增加请求数据量</li>
+<li>只能用document.cookie = ‘….’ 来修改，太过简陋</li>
+</ul>
+<h4 id="localStorage和sessionStorage"><a href="#localStorage和sessionStorage" class="headerlink" title="localStorage和sessionStorage"></a>localStorage和sessionStorage</h4><ul>
+<li>HTML5专门为存储而设计，最大可存5M</li>
+<li>API简单易用 setItem  getItem      // 比如localStorage.setItem(‘a’, 100)</li>
+<li>不会随着http请求被发送出去</li>
+</ul>
+<h2 id="防抖-debounce"><a href="#防抖-debounce" class="headerlink" title="防抖 debounce"></a>防抖 debounce</h2><ol>
+<li>监听一个输入框的，文字变化后会触发change事件</li>
+<li>直接用<code>keyup</code>事件，会频繁触发change事件</li>
+<li>防抖：用户输入结束或暂停时，才会触发change事件</li>
+</ol>
+<h4 id="防抖函数"><a href="#防抖函数" class="headerlink" title="防抖函数"></a>防抖函数</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 节流函数</span></span><br><span class="line">&lt;input type=<span class="string">&#x27;text&#x27;</span> id=<span class="string">&#x27;input&#x27;</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> input = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;input&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">input.addEventListener(<span class="string">&#x27;keyup&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// setTimeout方法返回的是唯一的数值，执行几个setTimeout方法，timer数值就是几</span></span><br><span class="line">    <span class="comment">// clearTimeout(timer)中的timer参数必须填、timer的值就相当于第几个定时器</span></span><br><span class="line">    <span class="keyword">if</span>(timer)&#123; <span class="built_in">clearTimeout</span>(timer) &#125;   <span class="comment">// 如果timer有值，就关闭定时。</span></span><br><span class="line">    timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(input.value)</span><br><span class="line">        timer = <span class="literal">null</span></span><br><span class="line">    &#125;, <span class="number">500</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="手写-debounce-函数"><a href="#手写-debounce-函数" class="headerlink" title="手写 debounce 函数"></a>手写 debounce 函数</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay=<span class="number">500</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span>      <span class="comment">// timer 是在闭包中的,不受外部影响</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;    <span class="comment">// 函数作为返回值被返回，形成闭包</span></span><br><span class="line">        <span class="keyword">if</span>(timer)&#123; <span class="built_in">clearTimeout</span>(timer) &#125;</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            fn.apply(<span class="built_in">this</span>, <span class="built_in">arguments</span>)  <span class="comment">// 可以直接改为 fn()</span></span><br><span class="line">            timer = <span class="literal">null</span>               </span><br><span class="line">        &#125;, delay)</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// apply用this，debounce传的参数不能用箭头函数</span></span><br><span class="line">input.addEventListener(<span class="string">&#x27;keyup&#x27;</span>, debounce(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(input.value)</span><br><span class="line">&#125;, <span class="number">600</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="节流-throttle"><a href="#节流-throttle" class="headerlink" title="节流 throttle"></a>节流 throttle</h2><ol>
+<li>拖拽一个元素时，要随时拿到该元素被拖拽的位置</li>
+<li>直接用drag事件，这会频繁触发，很容易导致卡顿</li>
+<li>节流：无论拖拽速度多快，都会每隔一段时间触发一次</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-id">#div1</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;div1&#x27;</span> <span class="attr">draggable</span>=<span class="string">&#x27;true&#x27;</span>&gt;</span>可拖拽<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span> = <span class="string">&#x27;./throttle.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// throttle.js文件</span></span><br><span class="line"><span class="keyword">const</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;div1&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">div1.addEventListener(<span class="string">&#x27;drag&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(timer)&#123;<span class="keyword">return</span>&#125;</span><br><span class="line">    timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(e.offsetX, e.offsetY)</span><br><span class="line">        timer = <span class="literal">null</span></span><br><span class="line">    &#125;, <span class="number">100</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="做一个节流函数"><a href="#做一个节流函数" class="headerlink" title="做一个节流函数"></a>做一个节流函数</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, delay=<span class="number">100</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(timer)&#123;<span class="keyword">return</span>&#125;</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            fn.apply(<span class="built_in">this</span>, <span class="built_in">arguments</span>)</span><br><span class="line">            timer = <span class="literal">null</span></span><br><span class="line">        &#125;, delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">div1.addEventListener(<span class="string">&#x27;drag&#x27;</span>, throttle(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e.offsetX, e.offsetY)</span><br><span class="line">&#125;, <span class="number">200</span>))</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/07/js9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/07/js9/" class="post-title-link" itemprop="url">Ajax</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-10-07 00:23:29 / 修改时间：20:10:43" itemprop="dateCreated datePublished" datetime="2021-10-07T00:23:29+08:00">2021-10-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h2><blockquote>
+<p>Ajax其实就是浏览器与服务器之间的一种异步通信方式</p>
+</blockquote>
+<h4 id="Ajax中的异步"><a href="#Ajax中的异步" class="headerlink" title="Ajax中的异步"></a>Ajax中的异步</h4><p>可以异步的向服务器发送请求，在等待响应的过程中，不会阻塞当前页面，浏览器可以做自己的事情，直到成功获取响应后，浏览器才可以处理响应数据</p>
+<h4 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h4><p>可扩展标记语言，是前后端数据通信时传输数据的一种格式，XML不怎么用了，现在常用JSON</p>
+<h4 id="Ajax基本用法"><a href="#Ajax基本用法" class="headerlink" title="Ajax基本用法"></a>Ajax基本用法</h4><p>Ajax需要依靠XMLHttpRequest(一种构造函数)才能实现浏览器与服务器之间的异步通信 </p>
+<p>Ajax使用步骤：</p>
+<ol>
+<li><p>const xhr = new XMLHttpRequest();</p>
+</li>
+<li><p>准备发送请求：xhr.open()    // 调用open不会真正发送请求，而只是做好发送请求前的准备工作</p>
+</li>
+<li><p>发送请求：调用send()正是发送请求，send()的参数是通过请求体携带的数据(get不会带数据)</p>
+<p>xhr.send(null);</p>
+</li>
+<li><p>监听事件，处理响应。<strong>为了兼容性考虑，应该放到open之前：</strong></p>
+<p>当获取到响应后，会触发<code>xhr</code>对象的的readystatechange事件，可以在该事件中对响应进行处理</p>
+<p>xhr.onreadystatechange = () =&gt; {}</p>
+<p>readystatechange事件监听readystate这个状态的变化，他的值是0~4，一共五个状态</p>
+<ol start="0">
+<li>未初始化，尚未调用open()</li>
+<li>启动，已经调用open()，但未调用send()</li>
+<li>发送，已经调用send()，但未接收到响应</li>
+<li>接收，已经接收到部分相应数据</li>
+<li>完成，已经接收到全部响应数据，而且已经在浏览器中使用了</li>
+</ol>
+</li>
+</ol>
+<h4 id="XMLHttpRequest"><a href="#XMLHttpRequest" class="headerlink" title="XMLHttpRequest"></a>XMLHttpRequest</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// post请求</span></span><br><span class="line"><span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">xhr.open(<span class="string">&#x27;POST&#x27;</span>, <span class="string">&#x27;/login&#x27;</span>, <span class="literal">true</span>)  <span class="comment">// 第三个参数为true才是异步的,false为同步请求</span></span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 这里的函数异步执行，可参考子谦JS基础中的异步模块</span></span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState === <span class="number">4</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(xhr.status === <span class="number">200</span>)&#123;</span><br><span class="line">            alert(xhr.responseText)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> postData = &#123;</span><br><span class="line">    <span class="attr">userName</span>: <span class="string">&#x27;zhangsan&#x27;</span>,</span><br><span class="line">    <span class="attr">password</span>: <span class="string">&#x27;xxx&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">xhr.send(<span class="built_in">JSON</span>.stringify(postData))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="什么是浏览器的同源策略"><a href="#什么是浏览器的同源策略" class="headerlink" title="什么是浏览器的同源策略"></a>什么是浏览器的同源策略</h2><p><strong>同源策略：</strong>ajax请求时，浏览器要求当前网页和server必须同源(安全)</p>
+<p><strong>同源：</strong>协议、域名、端口、三者必须一致 </p>
+<p>加载图片、 css、js 可无视同源策略</p>
+<p>&lt;img src = ‘跨域的地址’ /&gt;</p>
+<p>&lt;link href = ‘跨域的地址’ /&gt;</p>
+<p>&lt;script src = ‘跨域的地址’&gt;&lt;/script&gt;</p>
+<h4 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h4><ul>
+<li>所有的跨域，都必须经过server端允许和配合</li>
+<li>未经server端允许就实现跨域，说明浏览器有漏洞，危险信号 </li>
+</ul>
+<h2 id="实现跨域的常见方式-jsonp和CORS"><a href="#实现跨域的常见方式-jsonp和CORS" class="headerlink" title="实现跨域的常见方式-jsonp和CORS"></a>实现跨域的常见方式-jsonp和CORS</h2><h4 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h4><ul>
+<li>访问<a target="_blank" rel="noopener" href="https://www.baidu.com/">https://www.baidu.com</a>, 服务端一定返回一个html文件吗？</li>
+<li>服务器可以任意的动态拼接数据返回，只要符合html格式要求</li>
+<li>同理于&lt;script src=’<a target="_blank" rel="noopener" href="https://www.baidu.com/getDta.js&#39;&gt;">https://www.baidu.com/getDta.js&#39;&gt;</a></li>
+</ul>
+<h4 id="jsonp和jsonpcallback的使用"><a href="#jsonp和jsonpcallback的使用" class="headerlink" title="jsonp和jsonpcallback的使用"></a>jsonp和jsonpcallback的使用</h4><p><strong>1. jsonp、jsonpCallback jsonp跨域时可以自定义的两个参数</strong></p>
+<p><strong>2. jsonp: 回掉函数名的参数名，默认callback，服务端通过它来获取到回掉函数名</strong></p>
+<p><strong>3. jsonpCallback: 回掉函数名，默认jquery自动生成</strong></p>
+<p><strong>4. 指定*<em>jsonpCallback时可以将回掉函数写在ajax外面做其他操作，不指定时不能这样做，只能在success里做操作*</em></strong></p>
+<p>一般jquery跨域用到的两个方法为：$.ajax 和$.getJSON</p>
+<p>最后，仔细安静下来，细读 json 官方文档后发现这么一段：</p>
+<p>JSON数据是一种能很方便通过JavaScript解析的结构化数据。如果获取的数据文件存放在远程服务器上（域名不同，也就是跨域获取数据），则需要使用jsonp类型。使用这种类型的话，会创建一个查询字符串参数 callback=? ，这个参数会加在请求的URL后面。服务器端应当在JSON数据前加上回调函数名，以便完成一个有效的JSONP请求。如果要指定回调函数的参数名来取代默认的callback，可以通过设置$.ajax()的jsonp参数。</p>
+<p>其实jquery跨域的原理是通过外链&lt;script&gt; 来实现的,然后在通过回调函数加上回调函数的参数来实现真正的跨域</p>
+<h4 id="JSONP原理"><a href="#JSONP原理" class="headerlink" title="JSONP原理"></a>JSONP原理</h4><p>在js中，我们直接用XMLHttpRequest请求不同域上的数据时，是不可以的。但是，在页面上引入不同域上的js脚本文件却是可以的，jsonp正是利用这个特性来实现的。</p>
+<p>比如，有个a.html页面，它里面的代码需要利用ajax获取一个不同域上的json数据，假设这个json数据地址是<a target="_blank" rel="noopener" href="http://localhost:8002/jsonp.js,%E9%82%A3%E4%B9%88a.html%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%A0%81%E5%B0%B1%E5%8F%AF%E4%BB%A5%E8%BF%99%E6%A0%B7%EF%BC%9A">http://localhost:8002/jsonp.js,那么a.html中的代码就可以这样：</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 当前域名</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>一段文字<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">        <span class="built_in">window</span>.callback = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(data)     <span class="comment">// 得到 &#123; name: &#x27;zhangsan&#x27; &#125;</span></span></span><br><span class="line"><span class="javascript">        &#125;</span></span><br><span class="line"><span class="javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    // 默认回调函数名为callback，也可以通过callback=abc来设置回调函数名为abc</span><br><span class="line">    // <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&#x27;http://localhost:8002/jsonp.js?callback=abc&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    // 这也需要改为 window.abc</span><br><span class="line">   </span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&#x27;http://localhost:8002/jsonp.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 域名http://localhost:8002/jsonp.js</span></span><br><span class="line">callback(</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;zhangsan&#x27;</span> &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h4 id="jQuery实现jsonp"><a href="#jQuery实现jsonp" class="headerlink" title="jQuery实现jsonp"></a>jQuery实现jsonp</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;http://localhost:8002/jsonp.js&#x27;</span>,</span><br><span class="line">    <span class="attr">dataType</span>: <span class="string">&#x27;jsonp&#x27;</span>    <span class="comment">// 告诉jQuery要发送jsonp请求，不是ajax请求</span></span><br><span class="line">	<span class="attr">jsonpCallback</span>: <span class="string">&#x27;callback&#x27;</span>,   <span class="comment">// 设置回调函数名，相当于上面的?callback=abc</span></span><br><span class="line">    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;     <span class="comment">// 相当于上面的window.callback的方法</span></span><br><span class="line">    	<span class="built_in">console</span>.log(data)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="CORS-服务器设置http-header"><a href="#CORS-服务器设置http-header" class="headerlink" title="CORS-服务器设置http header"></a>CORS-服务器设置http header</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二个参数填写允许跨域的域名称，不建议直接写‘*’</span></span><br><span class="line">response.setHeader(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>,<span class="string">&#x27;http://localhost:8002&#x27;</span>);</span><br><span class="line">response.setHeader(<span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span>,<span class="string">&#x27;X-Requested-With&#x27;</span>);</span><br><span class="line">response.setHeader(<span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span>,<span class="string">&#x27;PUT,POST,GET,DELETE,OPTIONS&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接收跨域的cookie</span></span><br><span class="line">response.setHeader(<span class="string">&#x27;Access-Control-Allow-Credentials&#x27;</span>,<span class="string">&#x27;true&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Ajax相关题目和JSON简析"><a href="#Ajax相关题目和JSON简析" class="headerlink" title="Ajax相关题目和JSON简析"></a>Ajax相关题目和JSON简析</h2><h4 id="JSON简析"><a href="#JSON简析" class="headerlink" title="JSON简析"></a>JSON简析</h4><p><strong>在数据传输中，json是以文本，即字符串的形式传递的，而js操作json对象，所以json对象和json字符串之间的转换是关键。</strong></p>
+<p><strong>json字符串</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str1 = <span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">        &quot;key&quot;: &quot;test1&quot;,</span></span><br><span class="line"><span class="string">        &quot;value&quot;: 123,</span></span><br><span class="line"><span class="string">        &quot;type&quot;: &quot;number&quot;</span></span><br><span class="line"><span class="string">    &#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>就是在对象的基础上加上引号<code>&#39;</code></p>
+<p><strong>json对象</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str2 = &#123;</span><br><span class="line">        <span class="string">&quot;key&quot;</span>: <span class="string">&quot;test1&quot;</span>,</span><br><span class="line">        <span class="string">&quot;value&quot;</span>: <span class="number">123</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;number&quot;</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>json字符串转换成json对象</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">&#x27;&#123;&quot;a&quot;:2&#125;&#x27;</span>;</span><br><span class="line"><span class="built_in">JSON</span>.parse(a);  <span class="comment">// &#123;a:2&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>json对象转换成字符串</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = &#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">2</span>&#125;;</span><br><span class="line"><span class="built_in">JSON</span>.stringify(s);  <span class="comment">//&quot;&#123;&quot;a&quot;:2&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Ajax相关题目"><a href="#Ajax相关题目" class="headerlink" title="Ajax相关题目"></a>Ajax相关题目</h4><p><strong>ajax和nodejs的区别：</strong></p>
+<p>​    Node.js和Ajax之间的区别在于，Ajax（异步Javascript和XML的简称）是一种客户端技术，通常用于更新页面内容而不刷新它。 而Node.js是服务器端Javascript，用于开发服务器软件。 Node.js不在浏览器中执行，而是由服务器执行</p>
+<p><strong>手写Ajax函数</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resovle, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> str = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">        xhr.open(<span class="string">&#x27;GET&#x27;</span>, url, <span class="literal">true</span>)</span><br><span class="line">        xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(xhr.readyState === <span class="number">4</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(xhr.status === <span class="number">200</span>)&#123;</span><br><span class="line">                    resolve(<span class="built_in">JSON</span>.parse(xhr.responseText))</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(xhr.status === <span class="number">404</span>)&#123;</span><br><span class="line">                    reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;404 not found&#x27;</span>))</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        xhr.send(<span class="literal">null</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> p </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> url = <span class="string">&#x27;http://www.aaa.com/data/test.json&#x27;</span></span><br><span class="line">ajax(url).then( <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;).catch( <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/06/js8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/06/js8/" class="post-title-link" itemprop="url">Web-API-事件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-06 18:47:25" itemprop="dateCreated datePublished" datetime="2021-10-06T18:47:25+08:00">2021-10-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-07 00:21:05" itemprop="dateModified" datetime="2021-10-07T00:21:05+08:00">2021-10-07</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><ol>
+<li>编写一个通用的事件监听函数</li>
+<li>描述事件冒泡的流程</li>
+<li>无限下拉的图片列表，如何监听每个图片的点击</li>
+</ol>
+<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
+<li>事件绑定</li>
+<li>事件冒泡</li>
+<li>时间代理</li>
+</ul>
+<h2 id="事件绑定，事件冒泡，事件代理"><a href="#事件绑定，事件冒泡，事件代理" class="headerlink" title="事件绑定，事件冒泡，事件代理"></a>事件绑定，事件冒泡，事件代理</h2><h4 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;btn1&#x27;</span>)</span><br><span class="line">btn.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;clicked&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通用的事件绑定函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindEvent</span>(<span class="params">elem, type, fn</span>)</span>&#123;</span><br><span class="line">    elem.addEventListener(type, fn)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;btn1&#x27;</span>)</span><br><span class="line">bindEvent(a, <span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(event.target)<span class="comment">// 获取触发的元素 &lt;button id=&#x27;btn1&#x27;&gt;一个按钮&lt;/button&gt;</span></span><br><span class="line">    e.preventDefault()  <span class="comment">// 阻止默认行为</span></span><br><span class="line">    alert(<span class="string">&#x27;clicked&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h4><p><strong>事件冒泡：当前元素中监听事件和，在它上一级，上上一级，只要是它的上级监听事件，都可以把这个事件监听到</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;div1&#x27;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&#x27;p1&#x27;</span>&gt;</span>激活<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&#x27;p2&#x27;</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&#x27;p3&#x27;</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&#x27;p4&#x27;</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;div2&#x27;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&#x27;p5&#x27;</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&#x27;p6&#x27;</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p1 = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;p1&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> body = <span class="built_in">document</span>.body</span><br><span class="line">bindEvent(p1, <span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    e.stopPropagation()  <span class="comment">// 注释这一行，体验冒泡</span></span><br><span class="line">    alert(<span class="string">&#x27;激活&#x27;</span>)        <span class="comment">// 注释后，点击当前元素，先弹出激活，再弹出div1，再弹出取消</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 点击body下的元素，最后都会弹出取消!除非取消冒泡(e.stopPropagation())</span></span><br><span class="line">bindEvent(body, <span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    alert(<span class="string">&#x27;取消&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;div1&#x27;</span>)</span><br><span class="line"><span class="comment">// 点击id=div1下的元素，先弹出div1，再弹出取消</span></span><br><span class="line">bindEvent(div1, <span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    alert(<span class="string">&#x27;div1&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="事件代理"><a href="#事件代理" class="headerlink" title="事件代理"></a>事件代理</h4><ul>
+<li>代码简洁</li>
+<li>减少浏览器内存占用</li>
+<li>但是，不要滥用</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;div3&#x27;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#x27;#&#x27;</span>&gt;</span>a1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#x27;#&#x27;</span>&gt;</span>a1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#x27;#&#x27;</span>&gt;</span>a1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#x27;#&#x27;</span>&gt;</span>a1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span>&gt;</span></span><br><span class="line">        加载更多。。。。</span><br><span class="line">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>事件代理需要用到事件冒泡</strong></p>
+<p><strong>事件代理：不要滥用。结构复杂，不好每个都去绑定事件的情况下，把它绑定到某个父元素上。通过event.target获取元素，然后进行判断</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> div3 = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;div3&#x27;</span>)</span><br><span class="line">bindEvent(div3, <span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">    event.preventDefault()</span><br><span class="line">    <span class="keyword">const</span> target = event.target    <span class="comment">// 获取点击到当前元素，如&lt;a href=&#x27;#&#x27;&gt;a1&lt;/a&gt;&lt;br&gt;</span></span><br><span class="line">    <span class="comment">//if(target.nodeName === &#x27;A&#x27;)&#123;</span></span><br><span class="line">        alert(target.innerHTML)</span><br><span class="line">    <span class="comment">//&#125;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="通用的事件绑定函数"><a href="#通用的事件绑定函数" class="headerlink" title="通用的事件绑定函数"></a>通用的事件绑定函数</h4><p><img src="./image/%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E5%87%BD%E6%95%B0.jpg" alt="事件绑定函数"></p>
+<h4 id="描述事件冒泡的流程"><a href="#描述事件冒泡的流程" class="headerlink" title="描述事件冒泡的流程"></a>描述事件冒泡的流程</h4><ol>
+<li>基于DOM树形结构</li>
+<li>事件会顺着触发元素往上冒泡</li>
+<li>应用场景：代理</li>
+</ol>
+<h4 id="无限下拉图片列表，如何监听每个图片被点击"><a href="#无限下拉图片列表，如何监听每个图片被点击" class="headerlink" title="无限下拉图片列表，如何监听每个图片被点击"></a>无限下拉图片列表，如何监听每个图片被点击</h4><ol>
+<li>事件代理。用上面的通用的事件绑定函数</li>
+<li>用<strong>e.target</strong>获取触发元素</li>
+<li>用<strong>matches</strong>来判断是否是触发元素</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/05/js7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/05/js7/" class="post-title-link" itemprop="url">JS Web API</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-05 21:55:16" itemprop="dateCreated datePublished" datetime="2021-10-05T21:55:16+08:00">2021-10-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-06 18:45:39" itemprop="dateModified" datetime="2021-10-06T18:45:39+08:00">2021-10-06</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Web-API:</strong> DOM, BOM, 事件绑定，ajax，存储</p>
+<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><p><strong>前言：vue和react框架应用广泛，封装了DOM操作，但是DOM操作一只都是前端工程师的基础，只会vue而不懂DOM操作的前端程序员不会长久</strong></p>
+<h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><ol>
+<li>DOM是那种数据类型      //  树（DOM树）</li>
+<li>DOM操作的常用API        //  1. DOM节点操作  2. DOM结构操作</li>
+<li>attribute和property的区别</li>
+<li>一次性插入多个DOM节点，考虑性能</li>
+</ol>
+<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ol>
+<li>DOM本质</li>
+<li>DOM节点操作</li>
+<li>DOM结构操作</li>
+<li>DOM性能</li>
+</ol>
+<p> DOM本质：DOM本质是一个树，可以理解为浏览器把拿到的HTML代码结构化，并且浏览器可以识别，js可以操作的一个模型</p>
+<h2 id="DOM节点操作"><a href="#DOM节点操作" class="headerlink" title="DOM节点操作"></a>DOM节点操作</h2><ul>
+<li>获取DOM节点</li>
+<li>atribute</li>
+<li>property</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HTML</span></span><br><span class="line">&lt;div id=<span class="string">&#x27;div1&#x27;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&#x27;container&#x27;</span>&gt;&lt;/div&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;div2&#x27;</span> <span class="attr">class</span>=<span class="string">&#x27;container&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// JS</span></span><br><span class="line"><span class="keyword">const</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;div1&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;div1&#x27;</span>, div1)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> divList = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;div&#x27;</span>) <span class="comment">// 集合</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;divList.length&#x27;</span>, divList.length)  <span class="comment">// divList.length 2</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;divList[1]&#x27;</span>, divList[<span class="number">1</span>])  <span class="comment">// divList[1]                            // &lt;div id=&#x27;div2&#x27; class=&#x27;container&#x27;&gt;&lt;/div&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> containerList = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&#x27;container&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;containerList[1]&#x27;</span>, containerList[<span class="number">1</span>])  <span class="comment">// containerList[1] </span></span><br><span class="line"> <span class="comment">// &lt;div id=&#x27;div2&#x27; class=&#x27;container&#x27;&gt;&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="property形式"><a href="#property形式" class="headerlink" title="property形式"></a>property形式</h4><blockquote>
+<p>property本身不是一个API的名字，它是JS的属性操作的一种形式</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pList = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;p&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> p1 = pList[<span class="number">0</span>]</span><br><span class="line">p1.style.width = <span class="string">&#x27;100px&#x27;</span>    </span><br><span class="line">p1.className = <span class="string">&#x27;red&#x27;</span>     <span class="comment">// &lt;p style:&#x27;width:100px&#x27; class=&#x27;red&#x27;&gt;&lt;/p&gt;</span></span><br><span class="line"><span class="built_in">console</span>.log(p1.nodeName, p1.className) <span class="comment">// p  red</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="attribute形式"><a href="#attribute形式" class="headerlink" title="attribute形式"></a>attribute形式</h4><blockquote>
+<p>通过getAttribute和setAttribute去直接修改html的结构</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">p.getAttribute(<span class="string">&#x27;data-name&#x27;</span>)</span><br><span class="line">p.setAttribute(<span class="string">&#x27;data-name&#x27;</span>, <span class="string">&#x27;imooc&#x27;</span>)</span><br><span class="line"></span><br><span class="line">p.getAttribute(<span class="string">&#x27;style&#x27;</span>)</span><br><span class="line">p.setAttribute(<span class="string">&#x27;style&#x27;</span>, <span class="string">&#x27;font-size:300px&#x27;</span>)</span><br><span class="line"><span class="comment">// 得到 &lt;p data-name=&#x27;imooc&#x27; style=&#x27;font-size:300px&#x27;&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>property和attribute的区别：</strong></p>
+<p><strong>1. property：修改对象属性，不会体现到html结构</strong></p>
+<p><strong>2. attribute：修改html属性，会改变html结构</strong></p>
+<p><strong>两者都有可能引起DOM重新渲染，建议使用property操作</strong></p>
+<h2 id="DOM结构操作"><a href="#DOM结构操作" class="headerlink" title="DOM结构操作"></a>DOM结构操作</h2><p><img src="./image/DOM%E7%BB%93%E6%9E%84%E6%93%8D%E4%BD%9C.jpg" alt="DOM结构操作"></p>
+<h2 id="DOM性能"><a href="#DOM性能" class="headerlink" title="DOM性能"></a>DOM性能</h2><ul>
+<li>DOM操作非常”昂贵”，避免频繁的DOM操作</li>
+<li>对DOM查询做缓存</li>
+<li>将频繁操作改为一次操作</li>
+</ul>
+<h4 id="DOM查询做缓存"><a href="#DOM查询做缓存" class="headerlink" title="DOM查询做缓存"></a>DOM查询做缓存</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不缓存DOM查询结果</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> = <span class="number">0</span>; i &lt; <span class="built_in">document</span>.getElementByTagName(<span class="string">&#x27;p&#x27;</span>).length; i++)&#123;</span><br><span class="line">    <span class="comment">// 每次循环都会计算length, 频繁进行DOM查询</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 缓存DOM查询结果</span></span><br><span class="line"><span class="keyword">const</span> pList = <span class="built_in">document</span>.getElementByTagName(<span class="string">&#x27;p&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> length = pList.length</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;length; i++)&#123;</span><br><span class="line">    <span class="comment">// 缓存length, 只进行一次DOM查询</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="将频繁操作改为一次性操作"><a href="#将频繁操作改为一次性操作" class="headerlink" title="将频繁操作改为一次性操作"></a>将频繁操作改为一次性操作</h4><p><strong>一次性插入多个DOM节点，考虑性能</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// html</span></span><br><span class="line">&lt;ul id=<span class="string">&#x27;list&#x27;</span>&gt;&lt;/ul&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ListNode = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;list&#x27;</span>)</span><br><span class="line"><span class="comment">// 创建一个文档片段，此时还没有插入到DOM树中</span></span><br><span class="line"><span class="keyword">const</span> frag = <span class="built_in">document</span>.createDocumentFragment()</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> x=<span class="number">0</span>; x&lt;<span class="number">10</span>; x++)&#123;</span><br><span class="line">    <span class="keyword">const</span> li = <span class="built_in">document</span>.createElement(<span class="string">&#x27;li&#x27;</span>)</span><br><span class="line">    li.innerHTML = <span class="string">&#x27;List item&#x27;</span> + x</span><br><span class="line">    frag.appendChild(li)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 都完成以后，再插入到DOM树中</span></span><br><span class="line">listNode.appendChild(frag)</span><br></pre></td></tr></table></figure>
+
+<h2 id="BOM操作"><a href="#BOM操作" class="headerlink" title="BOM操作"></a>BOM操作</h2><h4 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h4><ul>
+<li>如何识别浏览器的类型     // navigator</li>
+<li>分析拆解url各个部分       // location</li>
+</ul>
+<h4 id="知识点-1"><a href="#知识点-1" class="headerlink" title="知识点"></a>知识点</h4><ul>
+<li>navigator</li>
+<li>screen</li>
+<li>location</li>
+<li>history</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// navigator</span></span><br><span class="line"><span class="keyword">const</span> ua = navigator.userAgent   <span class="comment">//通过 navigator.userAgent拿到浏览器信息</span></span><br><span class="line"><span class="comment">// indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。</span></span><br><span class="line"><span class="keyword">const</span> isChrome = ua.indexOf(<span class="string">&#x27;Chrome&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(isChrome)</span><br><span class="line"></span><br><span class="line"><span class="comment">// screen</span></span><br><span class="line"><span class="built_in">console</span>.log(screen.width)</span><br><span class="line"><span class="built_in">console</span>.log(screen.height)</span><br><span class="line"></span><br><span class="line"><span class="comment">// location</span></span><br><span class="line"><span class="comment">// https://www.baidu.com/class/chapter/115.html?a=100&amp;b=200#Anchor</span></span><br><span class="line">location.protocol  <span class="comment">// https:</span></span><br><span class="line">location.host      <span class="comment">// www.baidu.com</span></span><br><span class="line">location.search    <span class="comment">// ?a=100&amp;b=200</span></span><br><span class="line">location.hash      <span class="comment">// #Anchor</span></span><br><span class="line">location.pathname  <span class="comment">// /class/chapter/115.html</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// history</span></span><br><span class="line">history.back()    <span class="comment">// 后退</span></span><br><span class="line">history.forward() <span class="comment">// 前进</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/05/js6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -198,7 +693,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-10-05 11:59:44 / 修改时间：17:02:13" itemprop="dateCreated datePublished" datetime="2021-10-05T11:59:44+08:00">2021-10-05</time>
+      <time title="创建时间：2021-10-05 11:59:44 / 修改时间：21:41:58" itemprop="dateCreated datePublished" datetime="2021-10-05T11:59:44+08:00">2021-10-05</time>
     </span>
 
   
@@ -224,7 +719,7 @@
 <li>遇到等待（网络请求，定时任务）不能卡住</li>
 <li>需要异步,回调callback函数</li>
 </ul>
-<p><strong>异步和同步</strong></p>
+<p><strong>异步和同步的区别</strong></p>
 <ul>
 <li>基于JS是单线程语言</li>
 <li>异步不会阻塞代码执行</li>
@@ -834,96 +1329,9 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/28/js1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lazycat">
-      <meta itemprop="description" content="Notes on front-end learning">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="web">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/28/js1/" class="post-title-link" itemprop="url">HTML中的javascript</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2021-09-28 17:51:07 / 修改时间：19:07:09" itemprop="dateCreated datePublished" datetime="2021-09-28T17:51:07+08:00">2021-09-28</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="lt-script-gt-元素"><a href="#lt-script-gt-元素" class="headerlink" title="&lt;script&gt;元素"></a>&lt;script&gt;元素</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">sayScript</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;&lt;\/script&gt;&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    此代码中运用转义字符。浏览器解析行内脚本的方式决定了它在看到字符串时，会将其当成结束的 标签发生错误。想避免这个问题，只能用转义字符<code>\</code></p>
-<h4 id="src-属性"><a href="#src-属性" class="headerlink" title="src 属性"></a>src 属性</h4><p>​    包含外部文件的javascript，必须使用<strong>src</strong>属性，比如<code>&lt;script src=&#39;example.js&gt;&lt;/script&gt;&#39;</code>, &lt;script&gt;元素的src属性和&lt;img&gt;元素很像，可以是一个完整的URL，浏览器在解析这个资源时，会向src属性指定的路径发送一个GET请求，以取得相应资源，而不受到浏览器同源策略限制。</p>
-<blockquote>
-<p>注意：&lt;script&gt;元素中的代码被计算完成之前，页面后面的内容不会被加载</p>
-</blockquote>
-<h4 id="推迟执行脚本"><a href="#推迟执行脚本" class="headerlink" title="推迟执行脚本"></a>推迟执行脚本</h4><p><strong>defer</strong>属性只对外部脚本文件有效</p>
-<p><code>&lt;script defer src=&quot;example.js&quot;&gt;&lt;/sctipt&gt;</code></p>
-<p>​    &lt;script&gt;元素定义了一个叫 <strong>defer</strong> 的属性。这个属性表示脚本会被延迟到整个页面都解析完毕后再运行。因此，在&lt;script&gt;元素上设置 defer 属性，相当于告诉浏览器<strong>立即下载，但延迟执行</strong>。</p>
-<h4 id="异步执行脚本"><a href="#异步执行脚本" class="headerlink" title="异步执行脚本"></a>异步执行脚本</h4><p><strong>async</strong>属性也只适用于外部脚本</p>
-<p>​    async 属性与 defer 类似。当然，它们两者也都只适用于外部脚本，都会告诉浏览器立即开始下载。不过，与 defer 不同的 是，标记为 async 的脚本并不保证能按照它们出现的次序执行，比如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">title</span>&gt;</span>Example HTML Page<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">&quot;example1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">&quot;example2.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- 这里是页面内容 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>​        在这个例子中，第二个脚本可能先于第一个脚本执行。因此，重点在于它们之间没有依赖关系。给 脚本添加 async 属性的目的是告诉浏览器，不必等脚本下载和执行完后再加载页面，同样也不必等到 该异步脚本下载和执行后再加载其他脚本</p>
-<h4 id="动态加载脚本"><a href="#动态加载脚本" class="headerlink" title="动态加载脚本"></a>动态加载脚本</h4><p>​    JavaScript 可以使用 DOM API 动态添加 script 元素同样可以加载指定的脚本。只要创建一个 script 元素并将其添加到 DOM 即可。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">script.src = <span class="string">&#x27;gibberish.js&#x27;</span>;</span><br><span class="line"><span class="built_in">document</span>.head.appendChild(script);</span><br></pre></td></tr></table></figure>
-
-<p>在把 HTMLElement 元素添加到 DOM 且执行到这段代码之前不会发送请求。默认情况下， 以这种方式创建的&lt;script&gt;元素是以异步方式加载的，相当于添加了 async 属性。不过这样做可能会有问题，因为所有浏览器都支持 createElement()方法，但不是所有浏览器都支持 async 属性。因此，如果要统一动态脚本的加载行为，可以明确将其设置为同步加载：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">script.src = <span class="string">&#x27;gibberish.js&#x27;</span>;</span><br><span class="line">script.async = <span class="literal">false</span>;</span><br><span class="line"><span class="built_in">document</span>.head.appendChild(script);</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>​    </p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 </div>
   </main>

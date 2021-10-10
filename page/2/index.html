@@ -83,8 +83,8 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">15</span></a></li>
   </ul>
 </nav>
 
@@ -129,13 +129,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -164,6 +164,441 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/04/js4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/04/js4/" class="post-title-link" itemprop="url">原型和原型链</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-04 12:34:27" itemprop="dateCreated datePublished" datetime="2021-10-04T12:34:27+08:00">2021-10-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-05 11:57:49" itemprop="dateModified" datetime="2021-10-05T11:57:49+08:00">2021-10-05</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ol>
+<li>如何判断一个变量是不是数组</li>
+<li>手写一个简易的jQuery，考虑插件和扩展性</li>
+<li>class的圆形本质，怎样理解？</li>
+<li>class和继承</li>
+<li>类型判断instanceof</li>
+<li>原型和原型链</li>
+</ol>
+<h2 id="class"><a href="#class" class="headerlink" title="class"></a>class</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父类 默认继承Object</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">eat</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>eat something`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//通过 new 一个对象（实例）</span></span><br><span class="line"><span class="keyword">const</span> xiaoming = <span class="keyword">new</span> People(<span class="string">&#x27;小明&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(xiaoming.name)   <span class="comment">// 小明</span></span><br><span class="line">xiaoming.eat()             <span class="comment">// 小明eat something</span></span><br><span class="line">xiaoming.__proto__.eat()   <span class="comment">// undefined eat something</span></span><br></pre></td></tr></table></figure>
+
+<p>xiaoming.eat()的eat方法是从原型链中得到的，xiaoming._<em>proto</em>_.eat()。name是本身的，xiaoming.name 得到的是 小明</p>
+<p>然而xiaoming._<em>proto，原型中是没有name值的，xiaoming._<em>proto</em></em>.name是undefined</p>
+<h2 id="用class实现继承"><a href="#用class实现继承" class="headerlink" title="用class实现继承"></a>用class实现继承</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name,number</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>(name)</span><br><span class="line">        <span class="built_in">this</span>.number = number</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">sayHi</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`姓名<span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span> 学号<span class="subst">$&#123;<span class="built_in">this</span>.number&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> xialuo = <span class="keyword">new</span> Student(<span class="string">&#x27;xialuo&#x27;</span>,<span class="number">100</span>)</span><br><span class="line"><span class="built_in">console</span>.log(xialuo.name,xialuo.number)<span class="comment">//xialuo 100</span></span><br><span class="line">xialuo.sayHi()        <span class="comment">//姓名xialuo学号100</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="类型判断-instanceof"><a href="#类型判断-instanceof" class="headerlink" title="类型判断-instanceof"></a>类型判断-instanceof</h2><h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// class 实际上是原型，可见是语法糖</span></span><br><span class="line"><span class="keyword">typeof</span> Student  <span class="comment">// function</span></span><br><span class="line"><span class="keyword">typeof</span> People      <span class="comment">// function</span></span><br><span class="line"><span class="comment">// 隐式原型和显示原型</span></span><br><span class="line"><span class="built_in">console</span>.log(xialuo.__proto__)</span><br><span class="line"><span class="built_in">console</span>.log(Student.prototype)</span><br><span class="line"><span class="built_in">console</span>.log(xialuo.__proto__ === Student.prototype) <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="./image/%E5%8E%9F%E5%9E%8B.png" alt="原型"></p>
+<ol>
+<li>每个class都有显示原型prototype</li>
+<li>每个实例都有隐式原型_<em>proto</em>_</li>
+<li>实例的__proto__指向对应的class的prototype</li>
+</ol>
+<h4 id="基于原型的执行规则"><a href="#基于原型的执行规则" class="headerlink" title="基于原型的执行规则"></a>基于原型的执行规则</h4><ol>
+<li>获取属性xialuo.name或执行方法xialuo.sayHi()时</li>
+<li>先在自身属性和方法寻找</li>
+<li>如果找不到则自动去__proto__中查找</li>
+</ol>
+<h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><p><img src="./image/%E5%8E%9F%E5%9E%8B%E9%93%BE.png" alt="原型链"></p>
+<h4 id="instansof"><a href="#instansof" class="headerlink" title="instansof"></a>instansof</h4><p>语法：</p>
+<p><code>obj instanceof Class</code></p>
+<p>如果 <code>obj</code> 隶属于 <code>Class</code> 类（或 <code>Class</code> 类的衍生类），则返回 <code>true</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> xialuo = <span class="keyword">new</span> Student();</span><br><span class="line"></span><br><span class="line"><span class="comment">// xialuo 是 Student class 的对象吗？</span></span><br><span class="line">alert( xialuo <span class="keyword">instanceof</span> Student ); <span class="comment">// true</span></span><br><span class="line"><span class="comment">// Student 继承自 People</span></span><br><span class="line">alert( xialuo <span class="keyword">instanceof</span> People );  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>标准的逻辑是</strong>：使用 <code>obj instanceOf Class</code> 检查 <code>Class.prototype</code> 是否等于 <code>obj</code> 的原型链中的原型之一</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">obj.__proto__ === Class.prototype?</span><br><span class="line">obj.__proto__.__proto__ === Class.prototype?</span><br><span class="line">obj.__proto__.__proto__.__proto__ === Class.prototype?</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 如果任意一个的答案为 true，则返回 true</span></span><br><span class="line"><span class="comment">// 否则，如果我们已经检查到了原型链的尾端，则返回 false</span></span><br></pre></td></tr></table></figure>
+
+<p>与诸如 <code>Array</code> 之类的内建 class 一起使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">alert( arr <span class="keyword">instanceof</span> <span class="built_in">Array</span> ); <span class="comment">// true</span></span><br><span class="line">alert( arr <span class="keyword">instanceof</span> <span class="built_in">Object</span> ); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p><code>arr</code> 隶属于 <code>Object</code> 类。因为从原型上来讲，<code>Array</code> 是继承自 <code>Object</code> 的。</p>
+<p>通常，<code>instanceof</code> 在检查中会将原型链考虑在内。 </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/02/js3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/02/js3/" class="post-title-link" itemprop="url">js变量类型与计算</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-02 17:21:39" itemprop="dateCreated datePublished" datetime="2021-10-02T17:21:39+08:00">2021-10-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-03 21:55:41" itemprop="dateModified" datetime="2021-10-03T21:55:41+08:00">2021-10-03</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="值类型与引用类型的区别"><a href="#值类型与引用类型的区别" class="headerlink" title="值类型与引用类型的区别"></a>值类型与引用类型的区别</h2><p>​    值类型占用空间比较少，直接放入栈中，对性能造成不了多大影响</p>
+<p>​    引用类型：比如一个json，对象，会非常大，直接放到栈中占用空间很大，不好管理。2.在复制时直接复制值，会非常慢</p>
+<h4 id="值类型"><a href="#值类型" class="headerlink" title="值类型"></a>值类型</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">100</span></span><br><span class="line"><span class="keyword">let</span> b = a</span><br><span class="line">a = <span class="number">200</span></span><br><span class="line"><span class="built_in">console</span>.log(b)  <span class="comment">//100</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="./image/zhi.png" alt="zhi"></p>
+<p><img src="./image/zhi1.png" alt="zhi1"></p>
+<h4 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123; <span class="attr">age</span>: <span class="number">20</span> &#125;</span><br><span class="line"><span class="keyword">let</span> b = a</span><br><span class="line">b.age = <span class="number">21</span></span><br><span class="line"><span class="built_in">console</span>.log(a.age)  <span class="comment">//21</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="./image/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B.png" alt="引用类型"></p>
+<p><img src="./image/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B1.png" alt="引用类型"></p>
+<h4 id="typeof-运算符"><a href="#typeof-运算符" class="headerlink" title="typeof 运算符"></a>typeof 运算符</h4><ol>
+<li> 识别所有值类型</li>
+<li> 识别函数</li>
+<li> 只能判断是不是引用类型（不可再细分判断出null，数组，对象）</li>
+</ol>
+<h2 id="js-深拷贝"><a href="#js-深拷贝" class="headerlink" title="js 深拷贝"></a>js 深拷贝</h2><h4 id="递归拷贝"><a href="#递归拷贝" class="headerlink" title="递归拷贝"></a>递归拷贝</h4><p><strong>实现原理：</strong>对变量中的每个元素进行获取，若遇到<code>基本类型值</code>，直接获取；若遇到<code>引用类型值</code>， 则继续对该值的内部每个元素进行获取</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">age</span>: <span class="number">20</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;xxx&#x27;</span>,</span><br><span class="line">    <span class="attr">address</span>: &#123;<span class="attr">city</span>:<span class="string">&#x27;beijing&#x27;</span>&#125;,</span><br><span class="line">    <span class="attr">arr</span>: [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 浅拷贝</span></span><br><span class="line"><span class="keyword">const</span> obj2 = obj1 </span><br><span class="line">obj2.address.city = <span class="string">&#x27;shanghai&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(obj1.address.city) <span class="comment">//shanghai</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//深拷贝</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">obj = &#123;&#125;</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(type obj != <span class="string">&#x27;object&#x27;</span> || obj == <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="comment">// obj 是 null, 或者不是对象和数组，直接返回</span></span><br><span class="line">        <span class="keyword">return</span> obj</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 初始化返回结果</span></span><br><span class="line">    <span class="keyword">let</span> result</span><br><span class="line">    <span class="keyword">if</span>(obj <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123;</span><br><span class="line">        result = []</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        result = &#123;&#125;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">        <span class="keyword">if</span>(obj.hasOwnProperty(key))&#123;   <span class="comment">//保证key是obj自己的属性,不是原型中的属性</span></span><br><span class="line">            result[key] = deepClone(obj[key])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回结果</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> obj2 = deepClone(obj1)</span><br><span class="line">obj2.address.city = <span class="string">&#x27;shanghai&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(obj1.address.city) <span class="comment">//beijing</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="利用json函数进行深拷贝"><a href="#利用json函数进行深拷贝" class="headerlink" title="利用json函数进行深拷贝"></a>利用json函数进行深拷贝</h4><p><strong>实现原理:</strong> 将变量的值转变成字符串形式， 然后再转化成对象赋值给新的变量</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">age</span>: <span class="number">20</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;xxx&#x27;</span>,</span><br><span class="line">    <span class="attr">address</span>: &#123;<span class="attr">city</span>:<span class="string">&#x27;beijing&#x27;</span>&#125;,</span><br><span class="line">    <span class="attr">arr</span>: [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> b = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(a))</span><br><span class="line"><span class="comment">//变量b 已经完全独立存在了， 无论变量a 怎么变， 变量b 都保持不变了</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="变量计算"><a href="#变量计算" class="headerlink" title="变量计算"></a>变量计算</h2><h4 id="运算符"><a href="#运算符" class="headerlink" title="==运算符"></a>==运算符</h4><p>==运算符：就是尽量让他们类型转换之后去相等（会做隐式的类型转换）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">100</span> == <span class="string">&#x27;100&#x27;</span>  <span class="comment">//true</span></span><br><span class="line"><span class="number">0</span> == <span class="string">&#x27;&#x27;</span>       <span class="comment">//true</span></span><br><span class="line"><span class="number">0</span> == <span class="literal">false</span>    <span class="comment">//true</span></span><br><span class="line"><span class="literal">false</span> == <span class="string">&#x27;&#x27;</span>   <span class="comment">//true</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>  <span class="comment">//true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>除了  <u>== null</u> 之外，其他的都一律用 ===</strong> </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">x</span>:<span class="number">100</span> &#125;</span><br><span class="line"><span class="keyword">if</span>(obj.a == <span class="literal">null</span>) &#123; &#125;</span><br><span class="line"><span class="comment">//相当于if(obj.a === null || obj.a === undefined) &#123; &#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/29/linux-log/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/29/linux-log/" class="post-title-link" itemprop="url">linux日志管理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-29 21:34:20" itemprop="dateCreated datePublished" datetime="2021-09-29T21:34:20+08:00">2021-09-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-09-30 15:56:17" itemprop="dateModified" datetime="2021-09-30T15:56:17+08:00">2021-09-30</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="日志管理服务rsyslogd"><a href="#日志管理服务rsyslogd" class="headerlink" title="日志管理服务rsyslogd"></a>日志管理服务rsyslogd</h2><p><strong>rsyslogd日志管理服务，依据/etc/rsyslog.conf文件，把生成的日志保存到对应的文件中</strong></p>
+<p>查询Linux中的rsyslogd服务是否自启动</p>
+<blockquote>
+<p>ps aux | grep “rsyslog” | grep -v “grep”</p>
+</blockquote>
+<p>查询rsyslogd服务的自启动状态</p>
+<blockquote>
+<p>systemctl list-unit-files | grep rsyslog</p>
+</blockquote>
+<p>配置文件:  /etc/rsyslog.conf</p>
+<p>编辑文件的格式： *.*  存放日志文件</p>
+<blockquote>
+<p>第一个*代表日志类型，第二个*代表日志级别！参数自行查找</p>
+</blockquote>
+<p>例子：在 /etc/rsyslog.conf 中添加一个日志文件 /var/log/zyh.log </p>
+<p>进入/etc/rsyslog.conf文件中添加语句<code>*.* /var/log/zyh.log</code></p>
+<h2 id="日志轮替"><a href="#日志轮替" class="headerlink" title="日志轮替"></a>日志轮替</h2><p><strong>centos7使用logrotate进行日志轮替管理，日志轮替就是把旧的日志文件移动并改名，同时建立新的空日志文件，当旧的日志文件超出保存的范围之后，就自行删除</strong></p>
+<h4 id="把自己的日志加入日志轮替"><a href="#把自己的日志加入日志轮替" class="headerlink" title="把自己的日志加入日志轮替"></a>把自己的日志加入日志轮替</h4><p>第一种方法是直接在<code>/etc/logrotate.conf</code>配置文件中写入该日志的轮替策略</p>
+<p>第二种方法是在<code>etc/logrotate.d</code>目录中新建该日志的轮替文件，写入轮替策略。因为该目录的文件会被<strong>include</strong>到主配置文件中，所以也可以把日志加入轮替</p>
+<p><strong>推荐使用第二种方法</strong></p>
+<blockquote>
+<p>注：在/etc/logrotate.conf配置文件中有一行语句 include /etc/logrotate.d</p>
+</blockquote>
+<p>例子：把<code>var/log/zyh.log</code>加入轮替</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/logrotate.d</span><br><span class="line">touch zyhlog</span><br><span class="line">vim zyhlog</span><br><span class="line">在zyhlog文件中的写入:</span><br><span class="line">/var/log/zyh.log</span><br><span class="line">&#123;</span><br><span class="line">   missingok</span><br><span class="line">   daily</span><br><span class="line">   rotate 7</span><br><span class="line">   等其他轮替参数</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="日志轮替机制原理"><a href="#日志轮替机制原理" class="headerlink" title="日志轮替机制原理"></a>日志轮替机制原理</h4><p>日志轮替之所以可以在指定的时间备份日志，是依赖系统定时任务。在<code>etc/cron.daily</code>。目录，就会发现这个目录中有<strong>logrotate</strong>可执行文件，<strong>logrotate</strong>通过这个文件依赖定时任务执行。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/29/js2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/29/js2/" class="post-title-link" itemprop="url">javascript 语言基础</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-09-29 11:10:36 / 修改时间：22:07:24" itemprop="dateCreated datePublished" datetime="2021-09-29T11:10:36+08:00">2021-09-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>​    变量可以用于保存任何类型的数据。每个变量只不过是一个用于保存任意值的命名占位符。有 3 个关键字可以声明变量：var、const 和 let。其中，var 在ECMAScript 的所有版本中都可以使用，而 const 和 let 只能在 ECMAScript 6 及更晚的版本中使用。</p>
+<h4 id="var关键字"><a href="#var关键字" class="headerlink" title="var关键字"></a>var关键字</h4><p><strong>1. var 声明作用域</strong></p>
+<p>​    使用 var 操作符定义的变量会成为包含它的函数的局部变量。比如，使用 var在一个函数内部定义一个变量，就意味着该变量将在函数退出时被销毁：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line"> <span class="keyword">var</span> message = <span class="string">&quot;hi&quot;</span>; <span class="comment">// 局部变量</span></span><br><span class="line">&#125; </span><br><span class="line">test(); </span><br><span class="line"><span class="built_in">console</span>.log(message); <span class="comment">// 出错！</span></span><br></pre></td></tr></table></figure>
+
+<p>​    这里，message 变量是在函数内部使用 var 定义的。函数叫 test()，调用它会创建这个变量并给<br>它赋值。调用之后变量随即被销毁</p>
+<p>​    这里去掉<code>var</code>操作符后，message就变成了全局变量，只要调用一次函数 test()，就会定义<br>这个变量，并且可以在函数外部访问到。</p>
+<blockquote>
+<p>注意：不推荐这么做。在局部作用域中定义的全局变量很难维护，在严格模式下，如果像这样给未声明的变量赋值，则会导致抛出 ReferenceError。</p>
+</blockquote>
+<p><strong>2. var声明提升</strong></p>
+<p>​    使用这个关键字声明的变量会自动提升到函数作用域顶部</p>
+<p><strong>3. let 声明</strong></p>
+<p>​    let声明的范围是<strong>块级作用域</strong>，而var声明的范围是<strong>函数作用域</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123; </span><br><span class="line"> <span class="keyword">let</span> age = <span class="number">26</span>; </span><br><span class="line"> <span class="built_in">console</span>.log(age); <span class="comment">// 26 </span></span><br><span class="line">&#125; </span><br><span class="line"><span class="built_in">console</span>.log(age); <span class="comment">// ReferenceError: age 没有定义</span></span><br></pre></td></tr></table></figure>
+
+<p>​    age 变量之所以不能在 if 块外部被引用，是因为它的作用域仅限于该块内部。<strong>块作用域是函数作用域的子集</strong>，因此适用于 var 的作用域限制同样也适用于 let</p>
+<p><strong>4. for 循环中的 let 声明</strong></p>
+<p>在 let 出现之前，for 循环定义的<strong>迭代变量</strong>会渗透到循环体外部：<br>for (var i = 0; i &lt; 5; ++i) {<br> // 循环逻辑<br>}<br>console.log(i); // 5<br>改成使用 let 之后，这个问题就消失了，因为迭代变量的作用域仅限于 for 循环块内部：<br>for (let i = 0; i &lt; 5; ++i) {<br> // 循环逻辑<br>}<br>console.log(i); // ReferenceError: i 没有定义<br>在使用 var 的时候，最常见的问题就是对迭代变量的奇特声明和修改：<br>for (var i = 0; i &lt; 5; ++i) {<br> setTimeout(() =&gt; console.log(i), 0)<br>}<br>// 你可能以为会输出 0、1、2、3、4<br>// 实际上会输出 5、5、5、5、5<br>之所以会这样，是因为在退出循环时，迭代变量保存的是导致循环退出的值：5。在之后执行超时<br>逻辑时，所有的 i 都是同一个变量，因而输出的都是同一个最终值。<br>而在使用 let 声明迭代变量时，JavaScript 引擎在后台会为每个迭代循环声明一个新的迭代变量，即每一个迭代变量都有局部作用域，不受外界影响。<br>每个 setTimeout 引用的都是不同的变量实例，所以 console.log 输出的是我们期望的值，也就是循<br>环执行过程中每个迭代变量的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// i虽然在全局作用域声明，但是在for循环体局部作用域中使用的时候，变量会被固定，不受外界干扰。</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123; </span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);    <span class="comment">//  i 是循环体内局部作用域，不受外界影响。</span></span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出结果：</span></span><br><span class="line"><span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span> <span class="number">9</span></span><br></pre></td></tr></table></figure>
+
+<p>这种每次迭代声明一个独立变量实例的行为适用于所有风格的 for 循环，包括 for-in 和 for-of<br>循环。</p>
+<p><strong>5. 暂时性死区</strong></p>
+<p>let 与 var 的另一个重要的区别，就是 let 声明的变量不会在作用域中被提升</p>
+<p>在 let 声明之前的执行瞬间被称为“暂时性死区”（temporal dead zone），在此阶段引用任何后面才声明的变量都会抛出 ReferenceError。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// name 会被提升</span></span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// undefined </span></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;Matt&#x27;</span>; </span><br><span class="line"><span class="comment">// age 不会被提升</span></span><br><span class="line"><span class="built_in">console</span>.log(age); <span class="comment">// ReferenceError：age 没有定义</span></span><br><span class="line"><span class="keyword">let</span> age = <span class="number">26</span>; </span><br></pre></td></tr></table></figure>
+
+<h4 id="const-声明"><a href="#const-声明" class="headerlink" title="const 声明"></a>const 声明</h4><p>​    使用 const 声明可以让浏览器运行时强制保持变量不变，也可以让静态代码分析工具提前发现不合法的赋值操作。</p>
+<p>​    const 的行为与 let 基本相同，唯一一个重要的区别是用它声明变量时必须同时初始化变量，且尝试修改 const 声明的变量会导致运行时错误</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> age = <span class="number">26</span>; </span><br><span class="line">age = <span class="number">36</span>; <span class="comment">// TypeError: 给常量赋值</span></span><br><span class="line"><span class="comment">// const 也不允许重复声明</span></span><br><span class="line"><span class="keyword">const</span> name = <span class="string">&#x27;Matt&#x27;</span>; </span><br><span class="line"><span class="keyword">const</span> name = <span class="string">&#x27;Nicholas&#x27;</span>; <span class="comment">// SyntaxError </span></span><br><span class="line"><span class="comment">// const 声明的作用域也是块</span></span><br><span class="line"><span class="keyword">const</span> name = <span class="string">&#x27;Matt&#x27;</span>; </span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123; </span><br><span class="line"> <span class="keyword">const</span> name = <span class="string">&#x27;Nicholas&#x27;</span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// Matt </span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>​    const 声明的限制只适用于它指向的变量的引用。换句话说，如果 const 变量引用的是一个对象，那么修改这个对象内部的属性并不违反 const 的限制。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;&#125;; </span><br><span class="line">person.name = <span class="string">&#x27;Matt&#x27;</span>; <span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><p>​    ECMAScript 有 6 种简单数据类型（也称为原始类型）：Undefined、Null、Boolean、Number、<br>String 和 Symbol。Symbol（符号）是 ECMAScript 6 新增的。还有一种复杂数据类型叫 Object（对<br>象）。</p>
+<p><strong>typeof 操作符</strong></p>
+<p>​    来确定任意变量的数据类型.  例：(typeof 95) =&gt; number</p>
+<h4 id="javascript中的‘for-each’，‘for-of’，和‘for-in’的区别"><a href="#javascript中的‘for-each’，‘for-of’，和‘for-in’的区别" class="headerlink" title="javascript中的‘for each’，‘for of’，和‘for in’的区别"></a>javascript中的‘for each’，‘for of’，和‘for in’的区别</h4><p><strong>1、forEach</strong><br>    它<strong>只能用在数组对象</strong>中。forEach接受一个回调函数，回调函数的参数包含三个变量，第一个参数是当前遍历数组中的某个元素，第二个参数是该元素在数组中的下标，第三个元素是数组本身。</p>
+<blockquote>
+<p>注：forEach有一个巨大的缺陷就是不能使用break或者return来中段循环。 </p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> number = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> obj = [&#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>&#125;,&#123;<span class="attr">c</span>:<span class="number">3</span>,<span class="attr">d</span>:<span class="number">4</span>&#125;];</span><br><span class="line"><span class="keyword">let</span> objec = &#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>,<span class="attr">c</span>:<span class="number">4</span>&#125;</span><br><span class="line">number.forEach(<span class="function">(<span class="params">num</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(num)</span><br><span class="line">&#125;);</span><br><span class="line">obj.forEach(<span class="function">(<span class="params">obj1</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(obj1)</span><br><span class="line">    <span class="built_in">console</span>.log(obj1.a,obj1.c)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// objec.forEach(element =&gt; &#123;  </span></span><br><span class="line"><span class="comment">//     console.log(element)     输出错误TypeError: objec.forEach is not a function</span></span><br><span class="line"><span class="comment">// &#125;);                          foreach不能处理对象</span></span><br></pre></td></tr></table></figure>
+
+<p>输出的结果依次是 <strong>1 2 3 4   { a:1,b:2 }  1 undefined  { c:3,d:4 }  undefined  3</strong></p>
+<p><strong>2, for in</strong></p>
+<p>  一般它被用来<strong>遍历一个对象的所有属性</strong>。通过for in 你可以很方便的访问到对象的属性的字符串类型的<strong>键</strong>。在JavaScript对象的属性自己也有一些内部属性，其中的一个内部属性就是[[Enumerbale]] 。只要当属性的内部属性[[Enumerbale]]值设置为true时，for in操作的时候才能读取到。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> number = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> obj = [&#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>&#125;,&#123;<span class="attr">c</span>:<span class="number">3</span>,<span class="attr">d</span>:<span class="number">4</span>&#125;,&#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>&#125;];</span><br><span class="line"><span class="keyword">let</span> objec = &#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>,<span class="attr">c</span>:<span class="number">4</span>&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> num <span class="keyword">in</span> number)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(num)      <span class="comment">//得到0,1,2,3,4</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> obj1 <span class="keyword">in</span> obj)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(obj1)     <span class="comment">//得到0,1,2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> obj2 <span class="keyword">in</span> objec)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(obj2)     <span class="comment">//得到a,b,c</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3, for of</strong></p>
+<p>​    在ES6中提供一种新的遍历集合对象的方式，不仅仅是数组可以使用，像Set, List以及其它自定义集合对象都可以使用。但前提是它所遍历的对象必须有 <strong>[Symbol.iterator] 属性</strong>，也就是我们所说的迭代器对象。并且for of操作符可以在for循环中使用break, continue和return来中段循环。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> number = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> obj = [&#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>&#125;,&#123;<span class="attr">c</span>:<span class="number">3</span>,<span class="attr">d</span>:<span class="number">4</span>&#125;,&#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>&#125;];</span><br><span class="line"><span class="keyword">let</span> objec = &#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>,<span class="attr">c</span>:<span class="number">4</span>&#125;</span><br><span class="line"><span class="keyword">for</span>(num <span class="keyword">of</span> number)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(num)   <span class="comment">//输出1,2,3,4,5</span></span><br><span class="line">&#125;                              </span><br><span class="line"><span class="keyword">for</span>(obj1 <span class="keyword">of</span> obj)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(obj1)</span><br><span class="line">	<span class="built_in">console</span>.log(obj1.a,obj1.b)</span><br><span class="line"> <span class="comment">//输出&#123; a: 1, b: 2 &#125; 1 2 &#123; c: 3, d: 4 &#125; undefined undefined &#123; a: 1, b: 2 &#125; 1 2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// for(obj2 of objec)&#123;</span></span><br><span class="line"><span class="comment">//     console.log(obj2)  出现错误 TypeError: objec is not iterable？？？？</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

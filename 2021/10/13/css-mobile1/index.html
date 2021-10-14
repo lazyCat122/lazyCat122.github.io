@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="视口视口(viewport)就是浏览器显示页面内容的屏幕区域。视口可以分为布局视口、视觉时刻、理想视口 一般按照理想视口设计的 理想视口 为了使网站在移动端有最理想的浏览和阅读宽度而设定 理想视口，对设备来讲，是最理想的视口尺寸 需要手动添加meta视口标签通知浏览器操作 meta视口标签的主要目的：布局视口的宽度应该与理想视口的宽度一致，即设备有多宽，我们布局的视口就有多宽  meta视口标签1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动端基础+流式布局">
+<meta property="og:url" content="http://example.com/2021/10/13/css-mobile1/index.html">
+<meta property="og:site_name" content="web">
+<meta property="og:description" content="视口视口(viewport)就是浏览器显示页面内容的屏幕区域。视口可以分为布局视口、视觉时刻、理想视口 一般按照理想视口设计的 理想视口 为了使网站在移动端有最理想的浏览和阅读宽度而设定 理想视口，对设备来讲，是最理想的视口尺寸 需要手动添加meta视口标签通知浏览器操作 meta视口标签的主要目的：布局视口的宽度应该与理想视口的宽度一致，即设备有多宽，我们布局的视口就有多宽  meta视口标签1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/10/13/css-mobile1/image/meta%E8%A7%86%E5%8F%A3%E6%A0%87%E7%AD%BE.png">
+<meta property="og:image" content="d:/myblog/source/image/物理像素比.png">
+<meta property="og:image" content="http://example.com/2021/10/13/css-mobile1/image/%E7%89%A9%E7%90%86%E5%83%8F%E7%B4%A0.png">
+<meta property="article:published_time" content="2021-10-13T12:10:46.000Z">
+<meta property="article:modified_time" content="2021-10-14T07:15:37.298Z">
+<meta property="article:author" content="lazycat">
+<meta property="article:tag" content="css">
+<meta property="article:tag" content="移动web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/10/13/css-mobile1/image/meta%E8%A7%86%E5%8F%A3%E6%A0%87%E7%AD%BE.png">
+
+
+<link rel="canonical" href="http://example.com/2021/10/13/css-mobile1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/10/13/css-mobile1/","path":"2021/10/13/css-mobile1/","title":"移动端基础+流式布局"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>移动端基础+流式布局 | web</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">web</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">20</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%8F%A3"><span class="nav-number">1.</span> <span class="nav-text">视口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%90%86%E6%83%B3%E8%A7%86%E5%8F%A3"><span class="nav-number">1.0.1.</span> <span class="nav-text">理想视口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#meta%E8%A7%86%E5%8F%A3%E6%A0%87%E7%AD%BE"><span class="nav-number">1.0.2.</span> <span class="nav-text">meta视口标签</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%80%8D%E5%9B%BE"><span class="nav-number">2.</span> <span class="nav-text">二倍图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%83%8F%E7%B4%A0-amp-%E7%89%A9%E7%90%86%E5%83%8F%E7%B4%A0%E6%AF%94"><span class="nav-number">2.0.1.</span> <span class="nav-text">物理像素&amp;物理像素比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E5%80%8D%E5%9B%BE-1"><span class="nav-number">2.0.2.</span> <span class="nav-text">二倍图</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E6%96%B9%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">移动端开发方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS%E5%88%9D%E5%A7%8B%E5%8C%96normalize-css"><span class="nav-number">4.</span> <span class="nav-text">CSS初始化normalize.css</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%B8%E8%A7%81%E5%B8%83%E5%B1%80"><span class="nav-number">5.</span> <span class="nav-text">移动端常见布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80%EF%BC%88%E7%99%BE%E5%88%86%E6%AF%94%E5%B8%83%E5%B1%80%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">流式布局（百分比布局）</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lazycat"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">lazycat</p>
+  <div class="site-description" itemprop="description">Notes on front-end learning</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/13/css-mobile1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          移动端基础+流式布局
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-13 20:10:46" itemprop="dateCreated datePublished" datetime="2021-10-13T20:10:46+08:00">2021-10-13</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-14 15:15:37" itemprop="dateModified" datetime="2021-10-14T15:15:37+08:00">2021-10-14</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="视口"><a href="#视口" class="headerlink" title="视口"></a>视口</h2><p>视口(viewport)就是浏览器显示页面内容的屏幕区域。视口可以分为布局视口、视觉时刻、<strong>理想视口</strong></p>
+<p><strong>一般按照理想视口设计的</strong></p>
+<h4 id="理想视口"><a href="#理想视口" class="headerlink" title="理想视口"></a>理想视口</h4><ul>
+<li>为了使网站在移动端有最理想的浏览和阅读宽度而设定</li>
+<li>理想视口，对设备来讲，是最理想的视口尺寸</li>
+<li>需要手动添加meta视口标签通知浏览器操作</li>
+<li>meta视口标签的主要目的：布局视口的宽度应该与理想视口的宽度一致，即设备有多宽，我们布局的视口就有多宽</li>
+</ul>
+<h4 id="meta视口标签"><a href="#meta视口标签" class="headerlink" title="meta视口标签"></a>meta视口标签</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 标准的viewport标签</span><br><span class="line">&lt;meta name=&#x27;viewport&#x27; content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="./image/meta%E8%A7%86%E5%8F%A3%E6%A0%87%E7%AD%BE.png" alt="meta视口标签"></p>
+<h2 id="二倍图"><a href="#二倍图" class="headerlink" title="二倍图"></a>二倍图</h2><h4 id="物理像素-amp-物理像素比"><a href="#物理像素-amp-物理像素比" class="headerlink" title="物理像素&amp;物理像素比"></a>物理像素&amp;物理像素比</h4><ul>
+<li>物理像素点指的是屏幕显示的最小颗粒，是物理真实存在的。这是厂商在出厂时就设置好的，比如苹果6\7\8 是 750*1334</li>
+<li>我们开发时候的1px不是一定等于1个物理像素的</li>
+<li>PC端页面，1个px等于一个物理像素的，但是移动端就不尽相同</li>
+<li>一个px的能显示的物理像素点的个数，称为物理像素比或屏幕像素比</li>
+</ul>
+<p><img src="D:\myblog\source\image\物理像素比.png" alt="物理像素比"></p>
+<p>上图是开发者工具中手机像素(css像素)，<code>375px</code> x <code>667px</code>，但是iPhone 6/7/8的物理像素是 <code>750px</code> x <code>1334px</code>，</p>
+<p>所以它的物理像素比是 2</p>
+<p><img src="./image/%E7%89%A9%E7%90%86%E5%83%8F%E7%B4%A0.png" alt="物理像素"></p>
+<h4 id="二倍图-1"><a href="#二倍图-1" class="headerlink" title="二倍图"></a>二倍图</h4><p>我们需要一个50*50像素(css像素)的图片，直接放到我们的iphone8里面会放大2倍，100*100就会模糊</p>
+<p>我们采取的是放一个100*100 的图片，然后手动的把这个图片缩小为50*50(css像素)</p>
+<p>我们准备的图片比我们实际需要的大小 大2倍，这中方式就是2倍图</p>
+<h2 id="移动端开发方案"><a href="#移动端开发方案" class="headerlink" title="移动端开发方案"></a>移动端开发方案</h2><ol>
+<li><p>单独制作移动端页面（主流）</p>
+<p>PC端页面和移动端页面是不同的，两个页面</p>
+<p>京东商城手机版   淘宝触屏版   苏宁易购手机版。。。</p>
+<p>通常情况下，网址域名前面加<strong>m(mobile)<strong>可以打开移动端。通过判断设备，如果是移动设备打开，则跳到</strong>移动端页面</strong>。比如m.taobao.com   m.jd.com</p>
+</li>
+<li><p>响应式页面兼容移动端（其次）</p>
+<p>三星手机官网</p>
+<p>通过判断屏幕宽度来改变样式，以适应不同终端。</p>
+<p>缺点：制作麻烦，需要花费很大的精力去调兼容性问题</p>
+</li>
+</ol>
+<h2 id="CSS初始化normalize-css"><a href="#CSS初始化normalize-css" class="headerlink" title="CSS初始化normalize.css"></a>CSS初始化normalize.css</h2><p>移动端CSS初始化推荐使用normalize.css</p>
+<ul>
+<li>Normalize.css：保护了有价值的默认值</li>
+<li>Normalize.css：修复了浏览器的bug</li>
+<li>Normalize.css：是模块化的</li>
+<li>Normalize.css：拥有详细的文档</li>
+</ul>
+<p>官方地址：<a target="_blank" rel="noopener" href="http://necolas.github.io/normalize.css/">http://necolas.github.io/normalize.css/</a></p>
+<h2 id="移动端常见布局"><a href="#移动端常见布局" class="headerlink" title="移动端常见布局"></a>移动端常见布局</h2><ol>
+<li>单独制作移动端页面（主流）<ul>
+<li>流式布局（百分比布局）</li>
+<li>flex弹性布局（强烈推荐）</li>
+<li>less+rem+媒体查询布局</li>
+<li>混合布局</li>
+</ul>
+</li>
+<li>响应式页面兼容移动端（其次）<ul>
+<li>媒体查询</li>
+<li>bootstarp</li>
+</ul>
+</li>
+</ol>
+<h2 id="流式布局（百分比布局）"><a href="#流式布局（百分比布局）" class="headerlink" title="流式布局（百分比布局）"></a>流式布局（百分比布局）</h2><ul>
+<li>流式布局，就是百分比布局，也称非固定像素布局</li>
+<li>通过盒子的宽度设置成百分比来根据屏幕的宽度来进行伸缩，不受固定像素的限制，内容向两侧填充</li>
+<li>流式布局方式是移动WEB开发使用的比较常见的布局方式</li>
+<li>max-width, min-width: 盒子伸缩的最大宽度和最小宽度</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">section</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">max-width</span>: <span class="number">980px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">min-width</span>: <span class="number">320</span>xp;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin</span>: <span class="number">0</span> auto;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">section</span> <span class="selector-tag">div</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">section</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>) &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: pink;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">section</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>) &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: purple;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>三种行内元素转为块级元素的方法：</p>
+<p>（1）display</p>
+<p>（2）float</p>
+<p>（3）position（absolute和fixed）</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/css/" rel="tag"># css</a>
+              <a href="/tags/%E7%A7%BB%E5%8A%A8web/" rel="tag"># 移动web</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/12/css-3D/" rel="prev" title="3D转换">
+                  <i class="fa fa-chevron-left"></i> 3D转换
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/10/14/css-mobile2/" rel="next" title="flex弹性布局">
+                  flex弹性布局 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lazycat</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

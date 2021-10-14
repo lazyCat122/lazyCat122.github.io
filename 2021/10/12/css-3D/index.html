@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="3D转换 x轴：水平向右（向右是正值） y轴：垂直向下（向下是正值） z轴：垂直屏幕（往外时正值，往里是负值）  主要知识：  3D位移：translate3d(x,y,z)  3D旋转：rotate3d(x,y,z)  透视：perspective(网页产生3D效果需要透视) 透视也被称为视距：视距就是人的眼睛到屏幕的距离  3D呈现：transfrom-style   3D移动transfor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3D转换">
+<meta property="og:url" content="http://example.com/2021/10/12/css-3D/index.html">
+<meta property="og:site_name" content="web">
+<meta property="og:description" content="3D转换 x轴：水平向右（向右是正值） y轴：垂直向下（向下是正值） z轴：垂直屏幕（往外时正值，往里是负值）  主要知识：  3D位移：translate3d(x,y,z)  3D旋转：rotate3d(x,y,z)  透视：perspective(网页产生3D效果需要透视) 透视也被称为视距：视距就是人的眼睛到屏幕的距离  3D呈现：transfrom-style   3D移动transfor">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/10/12/css-3D/image/3D%E8%BD%AC%E6%8D%A2.png">
+<meta property="article:published_time" content="2021-10-12T01:39:19.000Z">
+<meta property="article:modified_time" content="2021-10-13T08:14:52.522Z">
+<meta property="article:author" content="lazycat">
+<meta property="article:tag" content="css">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/10/12/css-3D/image/3D%E8%BD%AC%E6%8D%A2.png">
+
+
+<link rel="canonical" href="http://example.com/2021/10/12/css-3D/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/10/12/css-3D/","path":"2021/10/12/css-3D/","title":"3D转换"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>3D转换 | web</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">web</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">20</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3D%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.</span> <span class="nav-text">3D转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3D%E7%A7%BB%E5%8A%A8"><span class="nav-number">1.0.1.</span> <span class="nav-text">3D移动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3D%E6%97%8B%E8%BD%AC-rotate3D"><span class="nav-number">1.0.2.</span> <span class="nav-text">3D旋转 rotate3D</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3D%E8%BD%AC%E6%8D%A2-1"><span class="nav-number">1.0.3.</span> <span class="nav-text">3D转换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%81%E6%9C%89%E5%89%8D%E7%BC%80"><span class="nav-number">2.</span> <span class="nav-text">私有前缀</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lazycat"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">lazycat</p>
+  <div class="site-description" itemprop="description">Notes on front-end learning</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/12/css-3D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          3D转换
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-12 09:39:19" itemprop="dateCreated datePublished" datetime="2021-10-12T09:39:19+08:00">2021-10-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-13 16:14:52" itemprop="dateModified" datetime="2021-10-13T16:14:52+08:00">2021-10-13</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="3D转换"><a href="#3D转换" class="headerlink" title="3D转换"></a>3D转换</h2><ul>
+<li>x轴：水平向右（向右是正值）</li>
+<li>y轴：垂直向下（向下是正值）</li>
+<li>z轴：垂直屏幕（往外时正值，往里是负值）</li>
+</ul>
+<p>主要知识：</p>
+<ul>
+<li><p>3D位移：translate3d(x,y,z)</p>
+</li>
+<li><p>3D旋转：rotate3d(x,y,z)</p>
+</li>
+<li><p>透视：perspective(网页产生3D效果需要透视)</p>
+<p>透视也被称为视距：视距就是人的眼睛到屏幕的距离</p>
+</li>
+<li><p>3D呈现：transfrom-style</p>
+</li>
+</ul>
+<h4 id="3D移动"><a href="#3D移动" class="headerlink" title="3D移动"></a>3D移动</h4><p>transform: translateX(100px);</p>
+<p>transform: translateY(100px);</p>
+<p>transform: translateZ(100px);</p>
+<p>transform: translateX(100px) translateY(100px) translateZ(100px)</p>
+<p><strong>transform: translate3d(x,y,z);</strong></p>
+<p><strong>需要加上透视，向z轴移动才有效果</strong></p>
+<p><strong>透视：</strong>透视写到被观察元素的<strong>父盒子</strong>上面</p>
+<h4 id="3D旋转-rotate3D"><a href="#3D旋转-rotate3D" class="headerlink" title="3D旋转 rotate3D"></a>3D旋转 rotate3D</h4><p>3D旋转指可以让元素在三维平面内沿着x轴，y轴，z轴或者自定义轴进行旋转</p>
+<ul>
+<li>transfrom: rotateX(45deg)  ：沿着x轴旋转</li>
+<li>transfrom: rotate3D(x,y,z,deg) : 沿着自定义轴旋转deg为角度(了解即可)</li>
+</ul>
+<p><strong>左手准则</strong></p>
+<ul>
+<li>左手的手拇指指向x，y，z轴的正方向</li>
+<li>其余手指的弯曲方向就是该元素沿着x，y，z轴旋转的正方向</li>
+</ul>
+<p><img src="./image/3D%E8%BD%AC%E6%8D%A2.png" alt="3D转换"></p>
+<h4 id="3D转换-1"><a href="#3D转换-1" class="headerlink" title="3D转换"></a>3D转换</h4><p>3D呈现 <strong>transfrom-style</strong></p>
+<ul>
+<li>控制子元素是否开启三维立体环境</li>
+<li>transform-style: flat 子元素不开启3d立体空间 ，默认的</li>
+<li>transform-style：preserve-3d；子元素开启立体空间</li>
+<li>代码写给父级，但是影响的是子盒子</li>
+</ul>
+<h2 id="私有前缀"><a href="#私有前缀" class="headerlink" title="私有前缀"></a>私有前缀</h2><ul>
+<li>-moz- : 代表firefox浏览器私有属性</li>
+<li>-ms- ：代表ie浏览器私有属性</li>
+<li>-webkit-：代表safari，chrome私有属性</li>
+<li>-o-：代表Opera私有属性</li>
+</ul>
+<p><strong>提倡的写法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-moz-border-radius: 10px</span><br><span class="line">-webkit-border-radius: 10px</span><br><span class="line">-o-border-radius: 10px</span><br><span class="line">border-radius: 10px</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/css/" rel="tag"># css</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/12/css-2D/" rel="prev" title="2D转换+动画">
+                  <i class="fa fa-chevron-left"></i> 2D转换+动画
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/10/13/css-mobile1/" rel="next" title="移动端基础+流式布局">
+                  移动端基础+流式布局 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lazycat</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

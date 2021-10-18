@@ -20,29 +20,31 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="Notes on front-end learning">
+<meta name="description" content="rem基础123456789&#x2F;&#x2F; em 单位&#x2F;&#x2F; 父元素.father &amp;#123;    font-size: 12px;&amp;#125;&#x2F;&#x2F; 子元素.son &amp;#123;    width: 10em;  &#x2F;&#x2F; 相当于120px; 一个em为12px&amp;#125;    rem单位rem(root em) 是一个相对单位，类似于em，em是父元素字体大小 不同的是rem的基准是相对于html元素的字">
 <meta property="og:type" content="article">
-<meta property="og:title" content="rem布局">
+<meta property="og:title" content="rem适配布局">
 <meta property="og:url" content="http://example.com/2021/10/14/css-mobile3/index.html">
 <meta property="og:site_name" content="web">
-<meta property="og:description" content="Notes on front-end learning">
+<meta property="og:description" content="rem基础123456789&#x2F;&#x2F; em 单位&#x2F;&#x2F; 父元素.father &amp;#123;    font-size: 12px;&amp;#125;&#x2F;&#x2F; 子元素.son &amp;#123;    width: 10em;  &#x2F;&#x2F; 相当于120px; 一个em为12px&amp;#125;    rem单位rem(root em) 是一个相对单位，类似于em，em是父元素字体大小 不同的是rem的基准是相对于html元素的字">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/10/14/css-mobile3/image/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E5%BA%93.png">
 <meta property="article:published_time" content="2021-10-14T13:15:18.000Z">
-<meta property="article:modified_time" content="2021-10-14T14:26:29.294Z">
+<meta property="article:modified_time" content="2021-10-15T12:26:44.245Z">
 <meta property="article:author" content="lazycat">
 <meta property="article:tag" content="css">
 <meta property="article:tag" content="移动web">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/10/14/css-mobile3/image/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E5%BA%93.png">
 
 
 <link rel="canonical" href="http://example.com/2021/10/14/css-mobile3/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/10/14/css-mobile3/","path":"2021/10/14/css-mobile3/","title":"rem布局"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/10/14/css-mobile3/","path":"2021/10/14/css-mobile3/","title":"rem适配布局"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>rem布局 | web</title>
+<title>rem适配布局 | web</title>
   
 
 
@@ -87,8 +89,8 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">20</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">10</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">23</span></a></li>
   </ul>
 </nav>
 
@@ -106,7 +108,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -119,6 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rem%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">rem基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rem%E5%8D%95%E4%BD%8D"><span class="nav-number">1.0.1.</span> <span class="nav-text">rem单位</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.</span> <span class="nav-text">媒体查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E8%A7%84%E8%8C%83"><span class="nav-number">2.0.1.</span> <span class="nav-text">语法规范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2-rem%E5%AE%9E%E7%8E%B0%E5%85%83%E7%B4%A0%E5%8A%A8%E6%80%81%E5%A4%A7%E5%B0%8F%E5%8F%98%E5%8C%96"><span class="nav-number">2.0.2.</span> <span class="nav-text">媒体查询 + rem实现元素动态大小变化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E8%B5%84%E6%BA%90"><span class="nav-number">2.0.3.</span> <span class="nav-text">引入资源</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less%E5%9F%BA%E7%A1%80"><span class="nav-number">3.</span> <span class="nav-text">Less基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Less%E5%AE%89%E8%A3%85"><span class="nav-number">3.0.1.</span> <span class="nav-text">Less安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Less%E5%8F%98%E9%87%8F"><span class="nav-number">3.0.2.</span> <span class="nav-text">Less变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#less%E7%BC%96%E8%AF%91"><span class="nav-number">3.0.3.</span> <span class="nav-text">less编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Less%E5%B5%8C%E5%A5%97"><span class="nav-number">3.0.4.</span> <span class="nav-text">Less嵌套</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rem-%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88"><span class="nav-number">3.0.5.</span> <span class="nav-text">rem 适配方案</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -133,13 +136,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -191,7 +194,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          rem布局
+          rem适配布局
         </h1>
 
         <div class="post-meta-container">
@@ -201,10 +204,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-10-14 21:15:18 / 修改时间：22:26:29" itemprop="dateCreated datePublished" datetime="2021-10-14T21:15:18+08:00">2021-10-14</time>
+      <time title="创建时间：2021-10-14 21:15:18" itemprop="dateCreated datePublished" datetime="2021-10-14T21:15:18+08:00">2021-10-14</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-15 20:26:44" itemprop="dateModified" datetime="2021-10-15T20:26:44+08:00">2021-10-15</time>
+      </span>
 
   
 </div>
@@ -216,7 +225,148 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <h2 id="rem基础"><a href="#rem基础" class="headerlink" title="rem基础"></a>rem基础</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// <span class="selector-tag">em</span> 单位</span><br><span class="line">// 父元素</span><br><span class="line"><span class="selector-class">.father</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br><span class="line">// 子元素</span><br><span class="line"><span class="selector-class">.son</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10em</span>;  // 相当于<span class="number">120px</span>; 一个<span class="selector-tag">em</span>为<span class="number">12px</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="rem单位"><a href="#rem单位" class="headerlink" title="rem单位"></a>rem单位</h4><p>rem(root em) 是一个相对单位，类似于em，em是父元素字体大小</p>
+<p>不同的是rem的基准是相对于html元素的字体大小</p>
+<p>比如，根元素(html)设置font-size=12px；非根元素设置width：2rem；则换成px表示就是24px</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br><span class="line">// rem 相对于 <span class="selector-tag">html</span>元素的字体大小来计算的</span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10rem</span>;  // 相当于<span class="number">120px</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h2><p>媒体查询（Media Query）是CSS3新语法</p>
+<ul>
+<li>使用@media查询，可以针对不同的媒体类型定义不同的样式</li>
+<li><strong>@media可以针对不同的屏幕尺寸设置不同的样式</strong></li>
+<li>当你重置浏览器大小的过程中，页面也会根据浏览器的宽度和高度重新渲染页面</li>
+<li>目前针对很多苹果手机，Android手机，平板等设备都用得到媒体查询</li>
+</ul>
+<h4 id="语法规范"><a href="#语法规范" class="headerlink" title="语法规范"></a>语法规范</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@media mediatype and|not|only (media feature) &#123;</span><br><span class="line">	CSS-Code;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用@media开头，注意@符号</li>
+<li>mediatype 媒体类型</li>
+<li>关键字 and  not  only</li>
+<li>media feature 媒体特性，必须有小括号包含</li>
+</ul>
+<p><strong>1. mediatype媒体类型</strong></p>
+<p>将不同的终端设备划分为不同的类型，称为媒体类型</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>all</td>
+<td>用于所有设备</td>
+</tr>
+<tr>
+<td>print</td>
+<td>用于打印机和打印预览</td>
+</tr>
+<tr>
+<td>screen</td>
+<td>用于电脑屏幕，平板电脑，智能手机等</td>
+</tr>
+</tbody></table>
+<p><strong>2. 关键字</strong></p>
+<p>关键字将媒体类型或多个媒体特性连接到一起作为媒体查询的条件</p>
+<ul>
+<li>and：可以将多个媒体查询特性连接到一起，相当于“且”的意思</li>
+<li>ont：排除某个媒体类型，相当于“非”的意思，可以省略</li>
+<li>only：指定某个特定的媒体类型，可以省略</li>
+</ul>
+<p><strong>3. 媒体特性</strong></p>
+<p>每种媒体类型都具有各自不同的特性，根据不同媒体类型的媒体特性设置不同的展示风格。</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>width</td>
+<td>定义输出设备中页面可见区域的宽度</td>
+</tr>
+<tr>
+<td>min-width</td>
+<td>定义输出设备中页面最小可见区域宽度</td>
+</tr>
+<tr>
+<td>max-width</td>
+<td>定义输出设备中页面最大可见区域宽度</td>
+</tr>
+</tbody></table>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 小于540px, 页面的背景颜色变为蓝色 */</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">539px</span>) &#123;</span><br><span class="line">    <span class="selector-tag">body</span> &#123;</span><br><span class="line">        <span class="attribute">background-color</span>: blue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 540px ~ 970 , 页面的背景颜色变为绿色 */</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>: <span class="number">540px</span>) <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">969px</span>) &#123;</span><br><span class="line">    <span class="selector-tag">body</span> &#123;</span><br><span class="line">        <span class="attribute">background-color</span>: green;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 大于970px, 页面的背景颜色变为红色 */</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>: <span class="number">970px</span>) &#123;</span><br><span class="line">    <span class="selector-tag">body</span> &#123;</span><br><span class="line">        <span class="attribute">background-color</span>: red;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="媒体查询-rem实现元素动态大小变化"><a href="#媒体查询-rem实现元素动态大小变化" class="headerlink" title="媒体查询 + rem实现元素动态大小变化"></a>媒体查询 + rem实现元素动态大小变化</h4><p>rem单位是跟着html来走的，有了rem页面元素可以设置不同大小尺寸</p>
+<p>媒体查询可以根据不同设备宽度来修改样式</p>
+<p>媒体查询 + rem 就可以实现不同的设备宽度，实现页面元素大小的动态变化</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="comment">/* html &#123;</span></span></span><br><span class="line"><span class="comment"><span class="css">          font-size: 100px;</span></span></span><br><span class="line"><span class="comment"><span class="css">       &#125; </span></span></span><br><span class="line"><span class="comment"><span class="css">    */</span></span></span><br><span class="line"><span class="css">    <span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>: <span class="number">320px</span>) &#123;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">html</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">font-size</span>: <span class="number">50px</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>: <span class="number">640px</span>) &#123;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">html</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">font-size</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.top</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">1rem</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">font-size</span>: .<span class="number">5rem</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="css">        <span class="attribute">color</span>: <span class="number">#fff</span>;</span></span><br><span class="line"><span class="css">        <span class="comment">/* 文字居中 */</span></span></span><br><span class="line"><span class="css">        <span class="attribute">text-align</span>: center;</span></span><br><span class="line"><span class="css">        <span class="attribute">line-height</span>: <span class="number">1rem</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&#x27;top&#x27;</span>&gt;</span>页面1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="引入资源"><a href="#引入资源" class="headerlink" title="引入资源"></a>引入资源</h4><p>当样式比较繁多的时候，我们可以采用不同的媒体使用不同stylesheets（样式表）</p>
+<p>原理：就是直接在link中判断设备的尺寸，然后引用不同的css文件</p>
+<p>语法：<code>&lt;link rel=&quot;stylesheet&quot; media=&quot;mediatype and|not|only (media feature)&quot; href=&quot;mystylesheet.css&quot;&gt;</code></p>
+<p><strong>建议：我们媒体查询最好的方法是从小到大</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="xml"></span></span><br><span class="line"><span class="xml">	/*</span></span><br><span class="line"><span class="xml">    	当我们屏幕大于等于640px以上的，我们让div 一行显示2个</span></span><br><span class="line"><span class="xml">    	当我们屏幕小于640px, 我们让div 一行显示一个</span></span><br><span class="line"><span class="xml">    */</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;style320.css&quot;</span> <span class="attr">media</span>=<span class="string">&quot;screen and (min-width:320px)&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;style640.css&quot;</span> <span class="attr">media</span>=<span class="string">&quot;screen and (min-width:640px)&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>屏幕大于640px的css文件</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* style640.css 文件 */</span></span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left; // 不要忘记浮动</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50%</span>;  // 一行放两个<span class="selector-tag">div</span>盒子</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>) &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: pink;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>) &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: purple;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>屏幕大于320px的css文件</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* style320.css 文件 */</span></span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;  // 一行放一个<span class="selector-tag">div</span>盒子</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>) &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: pink;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>) &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: purple;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Less基础"><a href="#Less基础" class="headerlink" title="Less基础"></a>Less基础</h2><p>Less是一门CSS预处理语言，它扩展了CSS的动态特性</p>
+<h4 id="Less安装"><a href="#Less安装" class="headerlink" title="Less安装"></a>Less安装</h4><p><code>npm install -g less</code></p>
+<h4 id="Less变量"><a href="#Less变量" class="headerlink" title="Less变量"></a>Less变量</h4><p><code>@变量名: 值;</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* my.less 文件 */</span></span><br><span class="line"><span class="keyword">@color</span>: red;</span><br><span class="line"><span class="keyword">@font12</span>: <span class="number">12px</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: @color;</span><br><span class="line">    <span class="attribute">font-size</span>: @font12;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：我们需要吧less文件，编译成css文件，这样html页面才可以使用</strong></p>
+<h4 id="less编译"><a href="#less编译" class="headerlink" title="less编译"></a>less编译</h4><p>vscode插件：Easy LESS 插件用来把less文件编译为css文件。保存less文件后，自动生成css文件</p>
+<h4 id="Less嵌套"><a href="#Less嵌套" class="headerlink" title="Less嵌套"></a>Less嵌套</h4><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.header</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="selector-tag">a</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>: red;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.nav</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>: green;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果遇见（交集|伪类|伪元素选择器）</p>
+<ul>
+<li>内层选择器的前面没有<code>&amp;</code>符号，则它被解析为父选择器的后代</li>
+<li>如果加上<code>&amp;</code>符号，它就被解析为父元素自身或父元素的伪类</li>
+</ul>
+<h4 id="rem-适配方案"><a href="#rem-适配方案" class="headerlink" title="rem 适配方案"></a>rem 适配方案</h4><ol>
+<li>让一些不能等比例自适应的元素，达到当设备尺寸发生改变的时候，等比例适配当前设备</li>
+<li>使用媒体查询根据不同设备按比例设置html的字体大小，然后页面元素使用rem做尺寸单位，当html字体大小变化，元素尺寸也会发生变化，从而达到等比例缩放的适配</li>
+</ol>
+<p><strong>技术方案1</strong></p>
+<ul>
+<li>less</li>
+<li>媒体查询</li>
+<li>rem</li>
+</ul>
+<p>元素大小取值方法：</p>
+<ol>
+<li>页面元素的rem值 = 页面元素值(px) / (屏幕宽度 / 划分的份数)</li>
+<li>屏幕宽度 / 划分的份数  就是html font-size的大小</li>
+<li>或者：页面元素的rem值 = 页面元素(px) / html font-size 字体大小</li>
+</ol>
+<p>流程：1. 首先选一套标准尺寸 750px为准(尺寸不定)</p>
+<p>​            2.我们用屏幕尺寸 除以 我们划分的份数 得到了 html 里面的文字大小，但是我们知道不同屏幕下得          到的文字大小是不一样的</p>
+<p>​            3.页面元素的rem值 = 页面元素在 750像素下的px值 / html 里面的文字大小</p>
+<p><strong>技术方案2（推荐）</strong></p>
+<ul>
+<li>flexible.js</li>
+<li>rem</li>
+</ul>
+<p><img src="./image/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E5%BA%93.png" alt="移动端适配库"></p>
+<p>flexible.js 下载地址：</p>
+<p>github地址：<a target="_blank" rel="noopener" href="https://github.com/amfe/lib-flexible">https://github.com/amfe/lib-flexible</a></p>
+<p>总结：1. 两种方案现在都存在。</p>
+<pre><code>        2. 方案2更简单
+</code></pre>
+<hr>
+<p>css定义中的用<code>!important</code>限定的定义是优先级最高的</p>
+<hr>
+
     </div>
 
     
@@ -238,6 +388,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2021/10/15/css-mobile4/" rel="next" title="响应式布局">
+                  响应式布局 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

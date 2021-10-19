@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="jquery 事件注册element.事件(function()&amp;#123;&amp;#125;) $(&quot;div&quot;).click(function()&amp;#123; 事件处理程序 &amp;#125;) 其他事件和原生基本一致 比如：mouseover, mouseout, blur, focus, change, keydown, keyup, resize, scroll等 jquery 事">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery事件">
+<meta property="og:url" content="http://example.com/2021/10/19/jQuery3/index.html">
+<meta property="og:site_name" content="web">
+<meta property="og:description" content="jquery 事件注册element.事件(function()&amp;#123;&amp;#125;) $(&quot;div&quot;).click(function()&amp;#123; 事件处理程序 &amp;#125;) 其他事件和原生基本一致 比如：mouseover, mouseout, blur, focus, change, keydown, keyup, resize, scroll等 jquery 事">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/10/19/jQuery3/image/jquery-%E6%8B%B7%E8%B4%9D.png">
+<meta property="og:image" content="http://example.com/2021/10/19/jQuery3/image/jquery-%E6%B7%B1%E6%8B%B7%E8%B4%9D.png">
+<meta property="article:published_time" content="2021-10-19T06:57:36.000Z">
+<meta property="article:modified_time" content="2021-10-19T12:21:31.295Z">
+<meta property="article:author" content="lazycat">
+<meta property="article:tag" content="jQuery">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/10/19/jQuery3/image/jquery-%E6%8B%B7%E8%B4%9D.png">
+
+
+<link rel="canonical" href="http://example.com/2021/10/19/jQuery3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/10/19/jQuery3/","path":"2021/10/19/jQuery3/","title":"jQuery事件"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>jQuery事件 | web</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">web</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">10</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jquery-%E4%BA%8B%E4%BB%B6%E6%B3%A8%E5%86%8C"><span class="nav-number">1.</span> <span class="nav-text">jquery 事件注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jquery-%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">jquery 事件处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86-off-%E8%A7%A3%E7%BB%91%E4%BA%8B%E4%BB%B6"><span class="nav-number">2.0.1.</span> <span class="nav-text">事件处理  off()解绑事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6"><span class="nav-number">2.0.2.</span> <span class="nav-text">自动触发事件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jquery-%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">jquery 事件对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jquery%E5%AF%B9%E8%B1%A1%E6%8B%B7%E8%B4%9D"><span class="nav-number">4.</span> <span class="nav-text">jquery对象拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jquery-%E6%8F%92%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">jquery 插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bootstrap-JS%E6%8F%92%E4%BB%B6"><span class="nav-number">5.0.1.</span> <span class="nav-text">bootstrap JS插件</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lazycat"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">lazycat</p>
+  <div class="site-description" itemprop="description">Notes on front-end learning</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/19/jQuery3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          jQuery事件
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-10-19 14:57:36 / 修改时间：20:21:31" itemprop="dateCreated datePublished" datetime="2021-10-19T14:57:36+08:00">2021-10-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="jquery-事件注册"><a href="#jquery-事件注册" class="headerlink" title="jquery 事件注册"></a>jquery 事件注册</h2><p><code>element.事件(function()&#123;&#125;)</code></p>
+<p><code>$(&quot;div&quot;).click(function()&#123; 事件处理程序 &#125;)</code></p>
+<p>其他事件和原生基本一致</p>
+<p>比如：mouseover, mouseout, blur, focus, change, keydown, keyup, resize, scroll等</p>
+<h2 id="jquery-事件处理"><a href="#jquery-事件处理" class="headerlink" title="jquery 事件处理"></a>jquery 事件处理</h2><p>on() 方法在匹配元素上绑定一个或多个事件的事件处理函数</p>
+<p><code>element.on(events, [selector], fn)</code></p>
+<ol>
+<li>events: 一个或多个用空格分隔符的事件类型，如 “click”或”keydown”</li>
+<li>selector：元素的子元素选择器</li>
+<li>fn回调函数</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 可以绑定多个事件，多个处理事件处理程序</span><br><span class="line">$(&quot;div&quot;).on(&#123;</span><br><span class="line">	mouseenter: function()&#123;</span><br><span class="line">		$(this).css(&quot;background&quot;, &quot;blue&quot;);</span><br><span class="line">	&#125;,</span><br><span class="line">	click: function()&#123;  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 如果事件处理程序相同</span><br><span class="line">$(&quot;div&quot;).on(&quot;mouseover mouseleave&quot;, function()&#123;</span><br><span class="line">	$(this).toggleClass(&quot;current&quot;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>on() 方法优势二</strong></p>
+<p>可以事件委派操作：就是把原来给子元素身上的事件绑定到父元素身上，就是把事件委派给父元素</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 触发事件是li，会冒泡到ul身上</span><br><span class="line">$(&quot;ul&quot;).on(&quot;click&quot;, &quot;li&quot;, function()&#123;</span><br><span class="line">	alert(&quot;123&quot;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>案例：文本发布</strong></p>
+<ol>
+<li>点击发布按钮，动态创建一个li，放到文本框的内容和删除按钮，并且添加到ul中</li>
+<li>点击删除按钮，可以删除当前的留言</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">boby</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span> <span class="attr">id</span>=<span class="string">&quot;wenben&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>文本发布<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;txt&quot;</span> <span class="attr">cols</span>=<span class="string">&quot;30&quot;</span> <span class="attr">rows</span>=<span class="string">&quot;10&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>发布<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">boby</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">sctipt</span>&gt;</span></span><br><span class="line">$(function()&#123;</span><br><span class="line">	$(&quot;.btn&quot;).on(&quot;click&quot;, function()&#123;</span><br><span class="line">    	var li = $(&quot;<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span>&quot;)</span><br><span class="line">    	li.html($(&quot;.txt&quot;).val() + &quot;<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#x27;javascript:;&#x27;</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">a</span>&gt;</span>&quot;);</span><br><span class="line">    	$(&quot;ul&quot;).prepend(li);</span><br><span class="line">    	li.slideDown();</span><br><span class="line">    	$(&quot;.txt&quot;).val(&quot;&quot;);</span><br><span class="line">    &#125;)	</span><br><span class="line">    // 点击删除按钮，可以删除当前的留言li</span><br><span class="line">    //$(&quot;ul a&quot;).click(function()&#123;  // 此时的click不能给动态创建的a添加事件</span><br><span class="line">    //	alert(123);</span><br><span class="line">    //&#125;)</span><br><span class="line">    // on()可以给未来动态创建的元素添加事件</span><br><span class="line">    $(&quot;ul&quot;).on(&quot;click&quot;, &quot;a&quot;, function()&#123;</span><br><span class="line">    	//$(this).parent().remove();</span><br><span class="line">    	$(this).parent.slideUp(function()&#123;  // slideUp上拉</span><br><span class="line">    		$(this).remove;</span><br><span class="line">    	&#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">sctipt</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="事件处理-off-解绑事件"><a href="#事件处理-off-解绑事件" class="headerlink" title="事件处理  off()解绑事件"></a>事件处理  off()解绑事件</h4><p>off()方法可以移除，通过on()方法添加事件处理程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;p&quot;).off()  // 解绑p元素所有事件处理程序</span><br><span class="line">$(&quot;p&quot;).off(&quot;click&quot;)  // 解绑p元素上面的点击事件</span><br><span class="line">$(&quot;ul&quot;).off(&quot;click&quot;, &quot;li&quot;)  // 解绑事件委托</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果事件只触发一次，可以使用one()来绑定事件。</strong> </p>
+<h4 id="自动触发事件"><a href="#自动触发事件" class="headerlink" title="自动触发事件"></a>自动触发事件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;div&quot;).click();  // 会触发元素默认行为</span><br><span class="line">$(&quot;div&quot;).trigger(&quot;click&quot;);  // 会触发元素默认行为</span><br><span class="line">$(&quot;div&quot;).triggerHandler(&quot;click&quot;); // 不会触发元素默认行为</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="jquery-事件对象"><a href="#jquery-事件对象" class="headerlink" title="jquery 事件对象"></a>jquery 事件对象</h2><p><code>$(&quot;div&quot;).on(&quot;click&quot;, function(e)&#123;  &#125;)  // e 就是事件对象</code></p>
+<p>语法：<code>element.on(events, [selector], function(event) &#123;&#125;)</code></p>
+<p>阻止默认行为：event.preventDefault()  或者 return false</p>
+<p>阻止冒泡：event.stopPropagation()</p>
+<p>可以参照WEB API来使用</p>
+<h2 id="jquery对象拷贝"><a href="#jquery对象拷贝" class="headerlink" title="jquery对象拷贝"></a>jquery对象拷贝</h2><p>把某个对象拷贝（合并）给另一个对象使用，可以用$.extend()方法</p>
+<p><code>$.extend([deep], target, object1, [objectN])</code></p>
+<ol>
+<li>deep：如果设为true为深拷贝，默认为false浅拷贝</li>
+<li>target：要拷贝的目标对象</li>
+<li>object1：待拷贝到第一个对象的对象</li>
+<li>objectN：待拷贝到第N个对象的对象</li>
+<li>浅拷贝是把拷贝的对象<strong>复杂数据类型中的地址</strong>拷贝给目标对象，修改目标对象<strong>会影响</strong>被拷贝对象</li>
+<li>深拷贝，完全克隆(拷贝的是对象，而不是地址)，修改目标对象<strong>不会影响</strong>被拷贝对象</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">浅拷贝就是把复杂数据类型的地址拷贝过去</span><br><span class="line">var targetObj = &#123; id: 0 &#125;;</span><br><span class="line">var obj = &#123;</span><br><span class="line">	id: 1;</span><br><span class="line">	name: &quot;my&quot;,</span><br><span class="line">	msg: &#123;</span><br><span class="line">		age: 18</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">$.extend(targetObj, obj);  // 会覆盖targetObj里面原来的数据</span><br></pre></td></tr></table></figure>
+
+<p><strong>浅拷贝会把原来对象里面的复杂数据类型地址拷贝给目标对象</strong></p>
+<p><img src="./image/jquery-%E6%8B%B7%E8%B4%9D.png" alt="jquery-浅拷贝"></p>
+<p><strong>深拷贝把里面的数据完全复制一份给目标对象，如果里面有不冲突的属性，会合并到一起</strong></p>
+<p><img src="./image/jquery-%E6%B7%B1%E6%8B%B7%E8%B4%9D.png" alt="jquery-深拷贝"></p>
+<h2 id="jquery-插件"><a href="#jquery-插件" class="headerlink" title="jquery 插件"></a>jquery 插件</h2><p>jquery功能有限，想要更复杂的特效效果，可以借助jquery插件完成</p>
+<p><strong>jquery插件常用的网站</strong></p>
+<ol>
+<li>jquery插件库 <a target="_blank" rel="noopener" href="http://www.jq22.com/">http://www.jq22.com/</a></li>
+<li>jquery之家 <a target="_blank" rel="noopener" href="http://www.htmleaf.com/">http://www.htmleaf.com/</a></li>
+</ol>
+<p>插件使用步骤：</p>
+<ol>
+<li>引入相关文件</li>
+<li>复制相关html、css、js (调用插件)</li>
+</ol>
+<p><strong>插件的使用：</strong></p>
+<p>图片懒加载：图片使用延迟加载可提高网页下载速度，也能帮助减轻服务器负载。当我们页面滑到可视区域，再显示图片</p>
+<h4 id="bootstrap-JS插件"><a href="#bootstrap-JS插件" class="headerlink" title="bootstrap JS插件"></a>bootstrap JS插件</h4><p>bootstrap框架也是依赖于jquery开发的，因此里面的js插件的使用，也必须引入jquery文件</p>
+<p>到bootstrap官网上使用一些效果</p>
+<p>需要引入三个文件：</p>
+<ol>
+<li>bootstrap/css/bootstrap.min.css</li>
+<li>bootstrap/js/jquery.min.js</li>
+<li>bootstrap/js/bootstrap.min.js</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/jQuery/" rel="tag"># jQuery</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/18/jQuery2/" rel="prev" title="jQuery2">
+                  <i class="fa fa-chevron-left"></i> jQuery2
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lazycat</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

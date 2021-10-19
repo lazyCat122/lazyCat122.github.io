@@ -84,7 +84,7 @@
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">10</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">23</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a></li>
   </ul>
 </nav>
 
@@ -129,7 +129,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -164,6 +164,212 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/10/css1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/10/css1/" class="post-title-link" itemprop="url">css笔记1</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-10-10 08:15:00 / 修改时间：18:24:23" itemprop="dateCreated datePublished" datetime="2021-10-10T08:15:00+08:00">2021-10-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="CSS基础选择器"><a href="#CSS基础选择器" class="headerlink" title="CSS基础选择器"></a>CSS基础选择器</h2><p><em><em>标签选择器、类选择器、id选择器、通配符选择器(</em> {})</em>*</p>
+<ol>
+<li><p>类选择器(class)，可以有多个名字，同一个名字可以被多人使用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&#x27;name&#x27;</span>&gt;</span>name<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&#x27;name&#x27;</span>&gt;</span>zhangsan<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>id选择器，唯一，不能重复</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;name&#x27;</span>&gt;</span>name<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;name&#x27;</span>&gt;</span>zhangsan<span class="tag">&lt;/<span class="name">div</span>&gt;</span> // 错误，id名不能重复</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="CSS字体属性"><a href="#CSS字体属性" class="headerlink" title="CSS字体属性"></a>CSS字体属性</h2><h4 id="字体粗细"><a href="#字体粗细" class="headerlink" title="字体粗细"></a>字体粗细</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">	<span class="attribute">font-weight</span>: bold;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">属性值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">normal</td>
+<td align="left">默认值(不加粗的)</td>
+</tr>
+<tr>
+<td align="left">bold</td>
+<td align="left">定义粗体(加粗的)</td>
+</tr>
+<tr>
+<td align="left">100-900</td>
+<td align="left">400等同于normal，700等同于bold</td>
+</tr>
+</tbody></table>
+<h4 id="文字样式"><a href="#文字样式" class="headerlink" title="文字样式"></a>文字样式</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">	<span class="attribute">font-style</span>: normal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>normal</td>
+<td>默认值，浏览器会显示标准的字体样式</td>
+</tr>
+<tr>
+<td>italic</td>
+<td>浏览器会显示斜体的字体样式</td>
+</tr>
+</tbody></table>
+<p><strong>注意：平时很少给字体加斜体，反而要给斜体标签(em, i)改为不倾斜字体</strong></p>
+<p><strong>复合属性：</strong>简写的方式</p>
+<p><code>font: font-style font-weight font-size/line-height font-family;</code></p>
+<p><code>font: italic 700 16px/12px &#39;Microsoft yahei&#39;</code></p>
+<ul>
+<li>使用<code>font</code>属性，不能更改顺序，以空格隔开</li>
+<li>不需要的属性可以省略。但必须保留<code>font-size, font-family</code>，否则font属性将不起作用</li>
+</ul>
+<h2 id="CSS文本属性"><a href="#CSS文本属性" class="headerlink" title="CSS文本属性"></a>CSS文本属性</h2><h4 id="对齐文本"><a href="#对齐文本" class="headerlink" title="对齐文本"></a>对齐文本</h4><p><code>text-align</code>属性用于设置<strong>元素内文本内容的水平对齐方式</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">	// 本质是让<span class="selector-tag">h1</span>盒子里面的文字水平居中对齐</span><br><span class="line">	<span class="attribute">text-align</span>: center;  // <span class="attribute">left</span> <span class="attribute">right</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="装饰文本"><a href="#装饰文本" class="headerlink" title="装饰文本"></a>装饰文本</h4><p><code>text-decoration</code>文本的修饰，给文本添加下划线、删除线、上划线等</p>
+<p>四个属性值：none ,  underline , overline , line-through</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">	<span class="attribute">text-decoration</span>: underline;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="文本缩进"><a href="#文本缩进" class="headerlink" title="文本缩进"></a>文本缩进</h4><p><code>text-indent</code>属性用来指定文本的第一行的缩进，通常是将<strong>段落首行缩进</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">text-indent</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">	<span class="attribute">text-indent</span>: <span class="number">2em</span>;  // 缩进两个文字大小</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>em是一个相对单位，就是当前元素(font-size)<strong>一个文字的大小</strong>, 如果当前元素没有设置大小，则会按照父元素的1个文字大小</p>
+<h4 id="行间距"><a href="#行间距" class="headerlink" title="行间距"></a>行间距</h4><p><code>line-height</code>设置行间的距离, 不改变文字大小，只改变上下间距</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">	<span class="attribute">line-height</span>: <span class="number">26px</span>;  // 字体默认是<span class="number">16px</span>, 所以上下间距各<span class="number">5px</span>像素</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="./image/%E8%A1%8C%E9%97%B4%E8%B7%9D.png" alt="行间距"></p>
+<h2 id="Emmet语法"><a href="#Emmet语法" class="headerlink" title="Emmet语法"></a>Emmet语法</h2><h4 id="快速生成HTML结构语法"><a href="#快速生成HTML结构语法" class="headerlink" title="快速生成HTML结构语法"></a>快速生成HTML结构语法</h4><ol>
+<li>生成标签，输入标签名按tab键即可， div 然后按tab键</li>
+<li>生成多个相同标签，div*3 然后tab键，就可以快速生成3个div</li>
+<li>生成父子级关系的标签，用 <code>&gt;</code>  比如 ul&gt;li</li>
+<li>生成兄弟关系的标签，用 <code>+</code> 就可以 ，div+p</li>
+<li>生成带有类名或id名字的，直接 <code>.demo 或 #two</code> ，tab键就可以了</li>
+<li>如果生成的div类名是有顺序的，可以用自增符号 <code>$</code> 比如 <code>.demo$*5</code></li>
+</ol>
+<h4 id="快速格式化代码"><a href="#快速格式化代码" class="headerlink" title="快速格式化代码"></a>快速格式化代码</h4><p><strong>vscode快速格式化代码：shift+alt+f</strong></p>
+<p><strong>也可以设置当我们保存页面的时候自动格式化代码：</strong></p>
+<ol>
+<li><p>文件–首选项–设置</p>
+</li>
+<li><p>搜索 emmet.include;</p>
+</li>
+<li><p>在settings.json下的【用户】中添加以下语句：</p>
+<p>“editor.formatOnType”:true,</p>
+<p>“editor.formatOnSave”:true</p>
+<p>只需要设置一次即可，以后都可以自动保存格式化代码</p>
+</li>
+</ol>
+<p><strong>注：新版本搜format后勾选 On Save即可</strong></p>
+<h2 id="CSS的复合选择器"><a href="#CSS的复合选择器" class="headerlink" title="CSS的复合选择器"></a>CSS的复合选择器</h2><ol>
+<li>后代选择器： 元素1  元素2  {  }</li>
+<li>子选择器：     元素1&gt;元素2  {  }</li>
+<li>并级选择器：  元素1，元素2  {  }</li>
+</ol>
+<h4 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h4><p><strong>伪类选择器</strong>用于向某些选择器添加特殊的效果，比如给链接添加特殊效果，或选择第一个，的n个元素</p>
+<p><strong>链接伪类选择器：</strong></p>
+<ol>
+<li>a:link           // 选择所有未被访问的链接</li>
+<li>a:visited      //  选择所有已被访问的链接</li>
+<li>a:hover       //  选择鼠标指针位于其上的链接</li>
+<li>a:active       //  选择活动链接（鼠标按下未弹起的链接）</li>
+</ol>
+<p>注意：需要按照顺序书写<strong>LVHA</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 例子</span><br><span class="line"><span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#369</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: underline;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>:focus伪类选择器：</strong></p>
+<p>用于选取获得焦点的表单元素</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:focus</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: pink;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;<span class="selector-tag">input</span> type=&quot;text&quot;&gt; </span><br></pre></td></tr></table></figure>
+
+<h2 id="CSS的元素显示模式"><a href="#CSS的元素显示模式" class="headerlink" title="CSS的元素显示模式"></a>CSS的元素显示模式</h2><h4 id="行内元素"><a href="#行内元素" class="headerlink" title="行内元素"></a>行内元素</h4><p>常见的行内元素&lt;a&gt; , &lt;strong&gt; , &lt;b&gt; , &lt;em&gt; , &lt;i&gt; , &lt;del&gt; , &lt;s&gt; , &lt;ins&gt; , &lt;u&gt; , &lt;span&gt;等</p>
+<ol>
+<li>相邻行内元素在一行上</li>
+<li><strong>宽和高直接设置是无效的</strong></li>
+<li>默认宽度就是他本身内容的宽度</li>
+<li>行内元素只能容纳文本或其他行内元素</li>
+</ol>
+<p>注意：链接中不能再放链接，链接&lt;a&gt;可以放块级元素</p>
+<h4 id="行内块元素"><a href="#行内块元素" class="headerlink" title="行内块元素"></a>行内块元素</h4><p>&lt;img /&gt;  &lt;input /&gt;  &lt;td&gt;</p>
+<ol>
+<li>一行可以显示多个(行内元素特点)</li>
+<li>默认宽度就是它本身内容的宽度(行内元素特点)</li>
+<li>宽，高，内边距，外边距都可以控制(块级元素特点)</li>
+</ol>
+<h4 id="显示模式的转换"><a href="#显示模式的转换" class="headerlink" title="显示模式的转换"></a>显示模式的转换</h4><p><strong>转化为块级元素</strong></p>
+<p><code>display: block;</code></p>
+<p><strong>转化为行内元素</strong></p>
+<p><code>display: inline;</code></p>
+<p><strong>转化为行内块级元素</strong></p>
+<p><code>display: inline-block;</code></p>
+<h4 id="snipaste小工具的使用"><a href="#snipaste小工具的使用" class="headerlink" title="snipaste小工具的使用"></a>snipaste小工具的使用</h4><p>Snipaste是一个简单但强大的截图工具，也可以让你将截图贴回到屏幕上。</p>
+<p>常用快捷方式：</p>
+<ol>
+<li>F1 可以截图，同时测量大小，设置箭头，书写文字等</li>
+<li>F3 在桌面置顶显示</li>
+<li>点击图片，alt可以取色 (按下 shift 可以切换色模式)</li>
+<li>按下esc取消图片显示</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1261,109 +1467,6 @@
 
 <p><code>arr</code> 隶属于 <code>Object</code> 类。因为从原型上来讲，<code>Array</code> 是继承自 <code>Object</code> 的。</p>
 <p>通常，<code>instanceof</code> 在检查中会将原型链考虑在内。 </p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/02/js3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lazycat">
-      <meta itemprop="description" content="Notes on front-end learning">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="web">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/02/js3/" class="post-title-link" itemprop="url">js变量类型与计算</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-10-02 17:21:39" itemprop="dateCreated datePublished" datetime="2021-10-02T17:21:39+08:00">2021-10-02</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-10-18 21:05:38" itemprop="dateModified" datetime="2021-10-18T21:05:38+08:00">2021-10-18</time>
-      </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="值类型与引用类型的区别"><a href="#值类型与引用类型的区别" class="headerlink" title="值类型与引用类型的区别"></a>值类型与引用类型的区别</h2><p>​    值类型占用空间比较少，直接放入栈中，对性能造成不了多大影响</p>
-<p>​    引用类型：比如一个json，对象，会非常大，直接放到栈中占用空间很大，不好管理。2.在复制时直接复制值，会非常慢</p>
-<h4 id="值类型"><a href="#值类型" class="headerlink" title="值类型"></a>值类型</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">100</span></span><br><span class="line"><span class="keyword">let</span> b = a</span><br><span class="line">a = <span class="number">200</span></span><br><span class="line"><span class="built_in">console</span>.log(b)  <span class="comment">//100</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="./image/%E5%80%BC%E7%B1%BB%E5%9E%8B.png" alt="值类型1"></p>
-<p><img src="./image/%E5%80%BC%E7%B1%BB%E5%9E%8B1.png" alt="值类型2"></p>
-<h4 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123; <span class="attr">age</span>: <span class="number">20</span> &#125;</span><br><span class="line"><span class="keyword">let</span> b = a</span><br><span class="line">b.age = <span class="number">21</span></span><br><span class="line"><span class="built_in">console</span>.log(a.age)  <span class="comment">//21</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="./image/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B.png" alt="引用类型1"></p>
-<p><img src="./image/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B1.png" alt="引用类型2"></p>
-<h4 id="typeof-运算符"><a href="#typeof-运算符" class="headerlink" title="typeof 运算符"></a>typeof 运算符</h4><ol>
-<li> 识别所有值类型</li>
-<li> 识别函数</li>
-<li> 只能判断是不是引用类型（不可再细分判断出null，数组，对象）</li>
-</ol>
-<h2 id="js-深拷贝"><a href="#js-深拷贝" class="headerlink" title="js 深拷贝"></a>js 深拷贝</h2><h4 id="递归拷贝"><a href="#递归拷贝" class="headerlink" title="递归拷贝"></a>递归拷贝</h4><p><strong>实现原理：</strong>对变量中的每个元素进行获取，若遇到<code>基本类型值</code>，直接获取；若遇到<code>引用类型值</code>， 则继续对该值的内部每个元素进行获取</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">age</span>: <span class="number">20</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;xxx&#x27;</span>,</span><br><span class="line">    <span class="attr">address</span>: &#123;<span class="attr">city</span>:<span class="string">&#x27;beijing&#x27;</span>&#125;,</span><br><span class="line">    <span class="attr">arr</span>: [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 浅拷贝</span></span><br><span class="line"><span class="keyword">const</span> obj2 = obj1 </span><br><span class="line">obj2.address.city = <span class="string">&#x27;shanghai&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(obj1.address.city) <span class="comment">//shanghai</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//深拷贝</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">obj = &#123;&#125;</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(type obj != <span class="string">&#x27;object&#x27;</span> || obj == <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="comment">// obj 是 null, 或者不是对象和数组，直接返回</span></span><br><span class="line">        <span class="keyword">return</span> obj</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 初始化返回结果</span></span><br><span class="line">    <span class="keyword">let</span> result</span><br><span class="line">    <span class="keyword">if</span>(obj <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123;</span><br><span class="line">        result = []</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        result = &#123;&#125;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">        <span class="keyword">if</span>(obj.hasOwnProperty(key))&#123;   <span class="comment">//保证key是obj自己的属性,不是原型中的属性</span></span><br><span class="line">            result[key] = deepClone(obj[key])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回结果</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> obj2 = deepClone(obj1)</span><br><span class="line">obj2.address.city = <span class="string">&#x27;shanghai&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(obj1.address.city) <span class="comment">//beijing</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="利用json函数进行深拷贝"><a href="#利用json函数进行深拷贝" class="headerlink" title="利用json函数进行深拷贝"></a>利用json函数进行深拷贝</h4><p><strong>实现原理:</strong> 将变量的值转变成字符串形式， 然后再转化成对象赋值给新的变量</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;</span><br><span class="line">    <span class="attr">age</span>: <span class="number">20</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;xxx&#x27;</span>,</span><br><span class="line">    <span class="attr">address</span>: &#123;<span class="attr">city</span>:<span class="string">&#x27;beijing&#x27;</span>&#125;,</span><br><span class="line">    <span class="attr">arr</span>: [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> b = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(a))</span><br><span class="line"><span class="comment">//变量b 已经完全独立存在了， 无论变量a 怎么变， 变量b 都保持不变了</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="变量计算"><a href="#变量计算" class="headerlink" title="变量计算"></a>变量计算</h2><h4 id="运算符"><a href="#运算符" class="headerlink" title="==运算符"></a>==运算符</h4><p>==运算符：就是尽量让他们类型转换之后去相等（会做隐式的类型转换）</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">100</span> == <span class="string">&#x27;100&#x27;</span>  <span class="comment">//true</span></span><br><span class="line"><span class="number">0</span> == <span class="string">&#x27;&#x27;</span>       <span class="comment">//true</span></span><br><span class="line"><span class="number">0</span> == <span class="literal">false</span>    <span class="comment">//true</span></span><br><span class="line"><span class="literal">false</span> == <span class="string">&#x27;&#x27;</span>   <span class="comment">//true</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>  <span class="comment">//true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>除了  <u>== null</u> 之外，其他的都一律用 ===</strong> </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">x</span>:<span class="number">100</span> &#125;</span><br><span class="line"><span class="keyword">if</span>(obj.a == <span class="literal">null</span>) &#123; &#125;</span><br><span class="line"><span class="comment">//相当于if(obj.a === null || obj.a === undefined) &#123; &#125;</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
 
       
     </div>

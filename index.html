@@ -83,8 +83,8 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">10</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">26</span></a></li>
   </ul>
 </nav>
 
@@ -129,13 +129,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -173,6 +173,214 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/02/diary-blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/11/02/diary-blog/" class="post-title-link" itemprop="url">diary_blog</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-11-02 16:51:19 / 修改时间：21:57:32" itemprop="dateCreated datePublished" datetime="2021-11-02T16:51:19+08:00">2021-11-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>下载代码和软件<a target="_blank" rel="noopener" href="http://www.lazycat122.com/download/%EF%BC%8C%E4%B8%8B%E8%BD%BDdiary_blog.zip%E5%92%8Csoftware.zip">http://www.lazycat122.com/download/，下载diary_blog.zip和software.zip</a></strong></p>
+<ol>
+<li><p>去阿里云买服务器，能获得一个公网IP，有了这个IP地址，别人就能访问了。</p>
+<p>操作系统装Linux的就好，CentOS 7或8都是ok的、然后到我们购买的服务器页面中，配置安全组放通服务器的80端口和mysql端口（自行看阿里云的liunx系统教程）</p>
+<p>然后自己电脑安装Xshell，Xftp，SQLyog</p>
+<p>使用Xshell，Xftp连接服务器：主机填公网ip，用户名填root，密码时创建服务器时设置的密码，端口22</p>
+<p>用xftp在把存放代码的那个文件夹，解压过的(diary_blog)传输到/home目录下</p>
+</li>
+<li><p>使用xshell连接服务器，安装mysql和SQLyog远程连接，点击链接看教程。</p>
+<p><a target="_blank" rel="noopener" href="https://lazycat122.github.io/2021/10/09/mysql-install/">https://lazycat122.github.io/2021/10/09/mysql-install/</a></p>
+</li>
+<li><p>使用xshell连接服务器，安装nodejs。依次输入</p>
+<p>wget <a target="_blank" rel="noopener" href="https://nodejs.org/dist/v14.17.4/node-v14.17.4-linux-x64.tar.xz">https://nodejs.org/dist/v14.17.4/node-v14.17.4-linux-x64.tar.xz</a></p>
+<p>ls  （可以看到，多了一个node-v14.17.4-linux-x64.tar.xz文件，这是一个压缩包）</p>
+<p>tar -xvf node-v14.17.4-linux-x64.tar.xz</p>
+<p>mv node-v14.17.4-linux-x64 nodejs</p>
+<p>ln -s /home/nodejs/bin/npm /usr/local/bin/</p>
+<p>ln -s /home/nodejs/bin/node /usr/local/bin/</p>
+<p>然后分别输入如下指令，如果都能显示版本号，证明node.js安装成功：node -v  npm -v</p>
+</li>
+<li><p>使用SQLyog连接到服务器的mysql后，打开diary_blog文件夹下的diary.sql。这样就相当于把数据添加到了数据库中了。<strong>打开user表，可以更改和添加登录的用户名和密码。打开diary表，可以添加和删除数据</strong></p>
+</li>
+<li><p>在xshell中输入指令</p>
+<p>cd /home/diary_blog/model/</p>
+<p>vim model.js</p>
+<p>按键盘上的<code>a</code>进入编辑命令，按键盘上的上下左右控制光标，找到<code>host: &#39;47.96.228.137&#39;</code>,把<code>47.96.228.137</code>改为你的公网ip，<code>password: &#39;123456789...&#39;</code>中的密码也需要改为你mysql数据库的密码，然后按<code>esc</code>，再按<code>:wq</code>就可以了</p>
+</li>
+<li><p>在xshell中输入指令</p>
+<p>cd /home/diary_blog/</p>
+<p>vim index.js</p>
+<p>按键盘上的<code>a</code>进入编辑命令，按键盘上的上下左右控制光标，找到<code>app.listen(3000)</code>,把3000改成80</p>
+</li>
+<li><p>在xshell中输入指令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install pm2 -g</span><br><span class="line">cd /home/diary_blog</span><br><span class="line">pm2 start index.js</span><br></pre></td></tr></table></figure></li>
+<li><p>再浏览器上输入你的公网ip就可以访问到了</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/21/vue%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/21/vue%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">vue模板语法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-10-21 19:39:09 / 修改时间：21:08:04" itemprop="dateCreated datePublished" datetime="2021-10-21T19:39:09+08:00">2021-10-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="vue基本使用"><a href="#vue基本使用" class="headerlink" title="vue基本使用"></a>vue基本使用</h2><p>vue的基本使用步骤：</p>
+<ol>
+<li>需要提供标签用于填充数据</li>
+<li>引入vue.js库文件</li>
+<li>可以使用vue的语法做功能了</li>
+<li>把vue提供的数据填充到标签里面</li>
+</ol>
+<p>到这个地址下载vue.js库文件：<a target="_blank" rel="noopener" href="https://vuejs.org/v2/guide/installation.html">https://vuejs.org/v2/guide/installation.html</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 差值表达式 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">// el 告诉vue要把数据填充到哪里</span></span></span><br><span class="line"><span class="javascript">            <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line"><span class="javascript">            <span class="attr">data</span>: &#123;</span></span><br><span class="line"><span class="javascript">                <span class="attr">msg</span>: <span class="string">&#x27;hello vue&#x27;</span></span></span><br><span class="line"><span class="javascript">            &#125;</span></span><br><span class="line"><span class="javascript">        &#125;);</span></span><br><span class="line"><span class="javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>实例参数分析</strong></p>
+<ul>
+<li>el：元素的挂载位置（值可以是CSS选择器或DOM元素）</li>
+<li>data：模型数据（值是一个对象）</li>
+</ul>
+<p><strong>差值表达式用法</strong></p>
+<ul>
+<li>将数据填充到HTML标签中</li>
+<li>差值表达式支持基本的计算操作。比如：3  undefined---111</li>
+</ul>
+<p><strong>vue代码运行原理分析</strong></p>
+<ul>
+<li>概述编译过程的概念（vue语法 -&gt; 原生语法）</li>
+</ul>
+<h2 id="vue模板语法"><a href="#vue模板语法" class="headerlink" title="vue模板语法"></a>vue模板语法</h2><p>前端渲染：把数据填充到HTML标签中</p>
+<p><strong>前端渲染方式</strong></p>
+<ol>
+<li><p>原生js拼接字符串</p>
+</li>
+<li><p>使用前端模板引擎</p>
+</li>
+<li><p>使用vue特有的模板引擎</p>
+</li>
+</ol>
+<p><strong>模板语法概述</strong></p>
+<ul>
+<li>差值表达式</li>
+<li>指令</li>
+<li>事件绑定(处理)</li>
+<li>属性绑定(处理)</li>
+<li>样式绑定(处理)</li>
+<li>分支循环结构</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/19/jQuery3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -198,7 +406,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-10-19 14:57:36 / 修改时间：20:21:31" itemprop="dateCreated datePublished" datetime="2021-10-19T14:57:36+08:00">2021-10-19</time>
+      <time title="创建时间：2021-10-19 14:57:36 / 修改时间：20:46:26" itemprop="dateCreated datePublished" datetime="2021-10-19T14:57:36+08:00">2021-10-19</time>
     </span>
 
   
@@ -250,6 +458,12 @@
 <p>阻止默认行为：event.preventDefault()  或者 return false</p>
 <p>阻止冒泡：event.stopPropagation()</p>
 <p>可以参照WEB API来使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 获得按键值</span><br><span class="line">$(document).on(&#x27;keydown&#x27;, function(e)&#123;</span><br><span class="line">	console.log(e.keyCode);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h2 id="jquery对象拷贝"><a href="#jquery对象拷贝" class="headerlink" title="jquery对象拷贝"></a>jquery对象拷贝</h2><p>把某个对象拷贝（合并）给另一个对象使用，可以用$.extend()方法</p>
 <p><code>$.extend([deep], target, object1, [objectN])</code></p>
 <ol>
@@ -1501,277 +1715,6 @@
 
 
 
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/12/css-2D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lazycat">
-      <meta itemprop="description" content="Notes on front-end learning">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="web">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/12/css-2D/" class="post-title-link" itemprop="url">2D转换+动画</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2021-10-12 09:38:26 / 修改时间：22:41:46" itemprop="dateCreated datePublished" datetime="2021-10-12T09:38:26+08:00">2021-10-12</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li>移动：translate</li>
-<li>旋转：rotate</li>
-<li>缩放：scale</li>
-</ul>
-<h2 id="2D转换"><a href="#2D转换" class="headerlink" title="2D转换"></a>2D转换</h2><h4 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h4><p>对行内元素没有效果</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 语法  transform:变换   translate:转换</span><br><span class="line">transform: translate(x,y); 或者分开写</span><br><span class="line">transform: translateX(n);</span><br><span class="line">transform: translateY(n);</span><br><span class="line">// 百分比是按照盒子自身的宽度或者高度来对比的 </span><br><span class="line">transform: translateY(50%);</span><br></pre></td></tr></table></figure>
-
-<p><strong>优点：不会影响其他元素的位置</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">// 让p元素居中显示</span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">div</span> &#123;</span></span><br><span class="line"><span class="css">         <span class="attribute">position</span>: relative;</span></span><br><span class="line"><span class="css">         <span class="attribute">width</span>: <span class="number">500px</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">height</span>: <span class="number">500px</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">233</span>, <span class="number">19</span>, <span class="number">19</span>);</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">p</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">position</span>: absolute;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">top</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">left</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="css">        <span class="comment">/*margin-left: -50px;</span></span></span><br><span class="line"><span class="comment"><span class="css">        margin-top: -50px;*/</span></span></span><br><span class="line"><span class="css">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>,-<span class="number">50%</span>)</span></span><br><span class="line"><span class="css">        background-color: aqua;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="旋转-过渡"><a href="#旋转-过渡" class="headerlink" title="旋转+过渡"></a>旋转+过渡</h4><p><code>transform: rotate(度数)</code></p>
-<p>默认旋转的中心点是元素的中心点</p>
-<p><strong>过渡口诀：</strong>过渡写到本身上，谁做动画给谁加</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">三种行内元素转为块级元素的方法：display   float  position（absolute和fixed）</span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&#x27;./pic.jpg&#x27;</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">img</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">transition</span>: all <span class="number">0.3s</span>  // 过渡</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">img</span><span class="selector-pseudo">:hover</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">360deg</span>);</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>2D转换中心点</strong></p>
-<p><code>transform-origin: x y</code></p>
-<p><strong>x,y默认的中心点是元素的中心点(50%  50%)</strong></p>
-<h4 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h4><p><code>transform: scale(x,y)</code></p>
-<p>优点：放大缩小不影响其他盒子</p>
-<h4 id="2D转换综合写法"><a href="#2D转换综合写法" class="headerlink" title="2D转换综合写法"></a>2D转换综合写法</h4><ul>
-<li>同时使用多个转换，其格式：transform:translate()  rotate()  scale()….等</li>
-<li>其顺序会影响转换的效果。（先旋转会改变坐标轴方向）</li>
-<li><strong>当我们同时有位移和其他属性的时候，记得要将位移放到最前</strong></li>
-</ul>
-<h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><p>动画相比较过渡，动画可以实现更多变化，更多控制，连续自动播放等效果</p>
-<h4 id="动画的基本使用"><a href="#动画的基本使用" class="headerlink" title="动画的基本使用"></a>动画的基本使用</h4><p>制作动画分两步：</p>
-<ol>
-<li>先定义动画</li>
-<li>再使用（调用）动画</li>
-</ol>
-<p>动画序列：</p>
-<ol>
-<li>0%是动画的开始，100%是动画的完成。这样的规则就是动画序列</li>
-<li>在**@keyframes**中规定某项CSS样式，就能创建由当前样式逐渐改为新样式的动画效果</li>
-<li>动画是使元素从一种样式逐渐变化为另一种样式的效果。你可以改变任意多的样式，任意多的次数</li>
-<li>请用百分比来规定变化发生的时间，或用关键词**’from’<strong>和</strong>‘to’<strong>，等同于</strong>0%<strong>和</strong>100%**</li>
-</ol>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 定义动画</span><br><span class="line"><span class="keyword">@keyframes</span> 动画名称 &#123;</span><br><span class="line">    <span class="number">0%</span> &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">0px</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">50%</span> &#123;</span><br><span class="line">        transfrom: <span class="built_in">translateX</span>(<span class="number">400px</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span> &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">1000px</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">2</span>. 调用动画</span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    bakground-<span class="attribute">color</span>: aqua;</span><br><span class="line">    <span class="attribute">animation-name</span>: 动画名称;    <span class="comment">/* 调用动画 */</span></span><br><span class="line">    <span class="attribute">animation-duration</span>: 持续时间;   <span class="comment">/* 持续时间 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用多个动画格式：<code>animation: move 1s , step 1s</code></p>
-<p><img src="./image/%E5%8A%A8%E7%94%BB.png" alt="动画"></p>
-<p><strong>速度曲线细节</strong></p>
-<p>animation-timing-function: 规定动画的速度曲线，默认是’ease’</p>
-<p><img src="./image/%E9%80%9F%E5%BA%A6%E6%9B%B2%E7%BA%BF.png" alt="速度曲线"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/10/css2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lazycat">
-      <meta itemprop="description" content="Notes on front-end learning">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="web">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/10/css2/" class="post-title-link" itemprop="url">HTML5+CSS3</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-10-10 18:31:33" itemprop="dateCreated datePublished" datetime="2021-10-10T18:31:33+08:00">2021-10-10</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-10-11 22:26:45" itemprop="dateModified" datetime="2021-10-11T22:26:45+08:00">2021-10-11</time>
-      </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h2><h4 id="H5新增语义化标签"><a href="#H5新增语义化标签" class="headerlink" title="H5新增语义化标签"></a>H5新增语义化标签</h4><ul>
-<li>&lt;header&gt;: 头部标签</li>
-<li>&lt;nav&gt;: 导航标签</li>
-<li>&lt;article&gt;: 内容标签</li>
-<li>&lt;section&gt;: 块级标签</li>
-<li>&lt;footer&gt;: 尾部标签</li>
-</ul>
-<p>注意：1. 在IE9中需要转换为块级元素</p>
-<p>​            2. 更喜欢在移动端使用</p>
-<p><img src="./image/%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE.png" alt="语义化标签"></p>
-<h4 id="H5新增多媒体标签"><a href="#H5新增多媒体标签" class="headerlink" title="H5新增多媒体标签"></a>H5新增多媒体标签</h4><h4 id="音频标签"><a href="#音频标签" class="headerlink" title="音频标签"></a>音频标签</h4><p>&lt;audio&gt; 音频标签</p>
-<p><code>&lt;audio src=&#39;文件地址&#39; controls=&#39;controls&#39;&gt;&lt;/audio&gt;</code></p>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>autoplay</td>
-<td>autoplay</td>
-<td>音频在就绪后马上播放</td>
-</tr>
-<tr>
-<td>controls</td>
-<td>controls</td>
-<td>向用户显示控件，比如播放按钮</td>
-</tr>
-<tr>
-<td>loop</td>
-<td>loop</td>
-<td>每当音频结束时重新开始播放</td>
-</tr>
-<tr>
-<td>src</td>
-<td>url</td>
-<td>要播放音频的URL</td>
-</tr>
-</tbody></table>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 因为浏览器支持不同格式的音频，所以我们给这个音频准备多个格式</span><br><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">controls</span>=<span class="string">&#x27;controls&#x27;</span>&gt;</span></span><br><span class="line">    // 先执行第一句，如果支持mp3格式，就播放，不支持就执行下一句，如果支持ogg格式，就播放。不支持就执行下一句，即在浏览器上打印这一句话</span><br><span class="line">	<span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&#x27;media/mv.mp3&#x27;</span> <span class="attr">type</span>=<span class="string">&#x27;audio/mpeg&#x27;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&#x27;media/mv.ogg&#x27;</span> <span class="attr">type</span>=<span class="string">&#x27;audio/ogg&#x27;</span>&gt;</span></span><br><span class="line">    您的浏览器太low了，不支持audio播放</span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="视频标签"><a href="#视频标签" class="headerlink" title="视频标签"></a>视频标签</h4><p><code>&lt;video src=&#39;文件地址&#39; controls=&#39;controls&#39; muted=&#39;muted&#39;&gt;&lt;/video&gt;</code></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 兼容性写法</span><br><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">controls</span>=<span class="string">&#x27;controls&#x27;</span> <span class="attr">width</span>=<span class="string">&#x27;300&#x27;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&#x27;move.ogg&#x27;</span> <span class="attr">type</span>=<span class="string">&#x27;video/ogg&#x27;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&#x27;move.mp4&#x27;</span> <span class="attr">type</span>=<span class="string">&#x27;video/mp4&#x27;</span>&gt;</span></span><br><span class="line">    您的浏览器太low了，不支持vidio播放</span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="./image/video.png" alt="video"></p>
-<h4 id="H5新增的input表单、表单属性"><a href="#H5新增的input表单、表单属性" class="headerlink" title="H5新增的input表单、表单属性"></a>H5新增的input表单、表单属性</h4><p><img src="./image/form.png" alt="form"></p>
-<p><strong>新增的type属性</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&#x27;&#x27;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>网址: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;url&#x27;</span> /&gt;</span> <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>手机号: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;tel&#x27;</span> /&gt;</span> <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;submit&#x27;</span> <span class="attr">value</span>=<span class="string">&#x27;提交&#x27;</span> /&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="./image/form1.png" alt="form1"></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&#x27;&#x27;</span>&gt;</span></span><br><span class="line">    用户名: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text&#x27;</span> <span class="attr">required</span>=<span class="string">&#x27;required&#x27;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;file&#x27;</span> <span class="attr">name</span>=<span class="string">&#x27;&#x27;</span> <span class="attr">multiple</span>=<span class="string">&#x27;multiple&#x27;</span> /&gt;</span> // 可以一次选多个文件</span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;submit&#x27;</span> <span class="attr">value</span>=<span class="string">&#x27;提交&#x27;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h2><h4 id="CSS3属性选择器"><a href="#CSS3属性选择器" class="headerlink" title="CSS3属性选择器"></a>CSS3属性选择器</h4><p><img src="./image/%E5%B1%9E%E6%80%A7%E9%80%89%E6%8B%A9%E5%99%A8.png" alt="属性选择器"></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"> </span></span><br><span class="line"><span class="css">    <span class="selector-tag">input</span><span class="selector-attr">[type=<span class="string">&#x27;text&#x27;</span>]</span> &#123;&#125;   // 选中第一个</span></span><br><span class="line"><span class="css">    <span class="selector-tag">input</span><span class="selector-attr">[type^=<span class="string">&#x27;text&#x27;</span>]</span>     //  选中text开头的元素，即都选中</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text&#x27;</span> <span class="attr">name</span>=<span class="string">&#x27;&#x27;</span> <span class="attr">id</span>=<span class="string">&#x27;&#x27;</span> <span class="attr">value</span>=<span class="string">&#x27;文本框&#x27;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text1&#x27;</span> <span class="attr">name</span>=<span class="string">&#x27;&#x27;</span> <span class="attr">id</span>=<span class="string">&#x27;&#x27;</span> <span class="attr">value</span>=<span class="string">&#x27;文本框&#x27;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text2&#x27;</span> <span class="attr">name</span>=<span class="string">&#x27;&#x27;</span> <span class="attr">id</span>=<span class="string">&#x27;&#x27;</span> <span class="attr">value</span>=<span class="string">&#x27;文本框&#x27;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text3&#x27;</span> <span class="attr">name</span>=<span class="string">&#x27;&#x27;</span> <span class="attr">id</span>=<span class="string">&#x27;&#x27;</span> <span class="attr">value</span>=<span class="string">&#x27;文本框&#x27;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="结构伪类选择器"><a href="#结构伪类选择器" class="headerlink" title="结构伪类选择器"></a>结构伪类选择器</h4><p><img src="./image/%E7%BB%93%E6%9E%84%E4%BC%AA%E7%B1%BB.png" alt="结构伪类"></p>
-<h4 id="css的权重和优先级"><a href="#css的权重和优先级" class="headerlink" title="css的权重和优先级"></a>css的权重和优先级</h4><p>共分为4个等级：</p>
-<ul>
-<li>第一等：代表内联样式，如: style=”xxx”，权值为<strong>1000</strong>。</li>
-<li>第二等：代表ID选择器，如：#content，权值为<strong>100</strong>。</li>
-<li>第三等：代表类选择器，伪类选择器和属性选择器，如.content，:hover，[attribute]，权值为<strong>10</strong>。</li>
-<li>第四等：代表元素选择器和伪元素选择器，如div，p，权值为<strong>1</strong>。</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#content</span> <span class="selector-tag">div</span><span class="selector-id">#main-content</span> <span class="selector-tag">h2</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>:red;</span><br><span class="line">&#125;</span><br><span class="line">//    <span class="number">100</span>(<span class="selector-id">#content</span>) + <span class="number">1</span>(<span class="selector-tag">div</span>) + <span class="number">100</span>(<span class="selector-id">#main-content</span>) + <span class="number">1</span>(<span class="selector-tag">h2</span>) = <span class="number">202</span></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">div</span> <span class="selector-tag">span</span><span class="selector-pseudo">:first</span>-of-type &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line">// <span class="number">1</span>(<span class="selector-tag">div</span>) + <span class="number">1</span>(<span class="selector-tag">span</span>) + <span class="number">10</span>(<span class="selector-pseudo">:first</span>-of-type) = <span class="number">12</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="伪元素选择器"><a href="#伪元素选择器" class="headerlink" title="伪元素选择器"></a>伪元素选择器</h4><table>
-<thead>
-<tr>
-<th>选择符</th>
-<th>简介</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>::before</td>
-<td>在元素内部的前面插入内容</td>
-</tr>
-<tr>
-<td>::after</td>
-<td>在元素内部的后面插入内容</td>
-</tr>
-</tbody></table>
-<p><strong>注意：</strong></p>
-<ul>
-<li>before和after必须有<strong>content</strong>属性</li>
-<li>before在内容的前面，after在内容的后面</li>
-<li>before和after创建一个元素，但是属于行内元素</li>
-<li>因为dom里面看不见刚才创建的元素，所以我们称为伪元素</li>
-<li>伪元素和标签选择器一样，权重为一</li>
-</ul>
 
       
     </div>

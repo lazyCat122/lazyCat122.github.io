@@ -83,8 +83,8 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">10</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">26</span></a></li>
   </ul>
 </nav>
 
@@ -129,13 +129,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -164,6 +164,246 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/04/js5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/04/js5/" class="post-title-link" itemprop="url">作用域和闭包</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-04 16:20:41" itemprop="dateCreated datePublished" datetime="2021-10-04T16:20:41+08:00">2021-10-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-05 16:46:08" itemprop="dateModified" datetime="2021-10-05T16:46:08+08:00">2021-10-05</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ol>
+<li>this 的不同场景，如何取值</li>
+<li>手写bind函数（改变this指向）</li>
+<li>实际开发中闭包的应用场景，举例说明</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 题目：创建10个&lt;a&gt;标签，点击的时候弹出来对应的序号</span></span><br><span class="line"><span class="keyword">let</span> a</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123; <span class="comment">// 把let i 放到for循环中，每次循环都会形成块级作用域</span></span><br><span class="line">    a = <span class="built_in">document</span>.createElement(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    a.innerHTML = i + <span class="string">&#x27;&lt;br&gt;&#x27;</span></span><br><span class="line">    a.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">        e.preventDefault()</span><br><span class="line">        alert(i)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><ol>
+<li>全局作用域</li>
+<li>函数作用域</li>
+<li>块级作用域</li>
+</ol>
+<h2 id="自由变量"><a href="#自由变量" class="headerlink" title="自由变量"></a>自由变量</h2><ul>
+<li>一个变量在当前作用域没有定义，但被使用</li>
+<li>向上级作用域，一层一层依次寻找，直到找到为止</li>
+<li>如果到全局作用域都没有找到，会报错xx is not defined</li>
+</ul>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><ul>
+<li>作用域应用的特殊情况，有两种表现：</li>
+<li>函数作为参数被传递</li>
+<li>函数作为返回值被返回                                                                                                                                                                                                                  </li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数作为返回值</span></span><br><span class="line"><span class="comment">// 定义之后返回再执行</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">100</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a)   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">create()   <span class="comment">// 得到 function()&#123; console.log(a) &#125;</span></span><br><span class="line"><span class="keyword">let</span> fn = create() <span class="comment">// 相当于 fn = function()&#123; console.log(a) &#125;</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">200</span></span><br><span class="line">fn()    <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数作为参数</span></span><br><span class="line"><span class="comment">// 定义之后，通过参数传进去，然后执行</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">200</span></span><br><span class="line">    fn()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> a = <span class="number">100</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a) <span class="comment">// 在函数定义的地方，向上级作用域查找</span></span><br><span class="line">&#125;</span><br><span class="line">print(fn)   <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>所有的自由变量的查找，是在函数定义的地方，向上级作用域查找，不是在执行的地方</p>
+</blockquote>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p>this的应用场景比较多：</p>
+<ol>
+<li>作为普通函数被调用                  //  window</li>
+<li>使用call apply bind 被调用      //  传入什么，绑定的就是什么</li>
+<li>作为对象方法被调用                 //  返回对象本身</li>
+<li>在class方法中被调用                //  当前实例本身</li>
+<li>箭头函数                                    //  找上级作用域this的值</li>
+</ol>
+<blockquote>
+<p>this 取什么值，是在函数执行的时候确认的，不是在函数定义的时候确认的</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>)</span><br><span class="line">&#125;</span><br><span class="line">fn1()   <span class="comment">// window  作为普通函数被调用</span></span><br><span class="line">fn1.call(&#123; <span class="attr">x</span>: <span class="number">100</span> &#125;)  <span class="comment">// &#123; x: 100 &#125;</span></span><br><span class="line"><span class="comment">// 通过bind调用，bind也可以改变this指向。bind会返回一个新的函数去执行</span></span><br><span class="line"><span class="keyword">const</span> fn2 = fn1.bind(&#123; <span class="attr">x</span>: <span class="number">200</span> &#125;)</span><br><span class="line">fn2()   <span class="comment">// &#123; x: 200 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zhangsan = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">    <span class="function"><span class="title">sayHi</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>) <span class="comment">//this 即当前对象  作为对象方法被调用</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">wait</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="comment">// 这个函数被执行，是setTimeout本身触发的执行，不是zhangsan.sayHi()这样触发的执行</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="built_in">this</span>) <span class="comment">// this === window</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zhangsan = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">    <span class="function"><span class="title">sayHi</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>) <span class="comment">//this 即当前对象  作为对象方法被调用: zhangsan.sayHi()</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">waitAgain</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// console.log(this)</span></span><br><span class="line">        <span class="comment">// 如果是在waitAgain()直接打印this，那就和sayHi()中的this是一样的</span></span><br><span class="line">        <span class="comment">// 箭头函数的this是取决于它上级作用域的this，它本身不会决定this的值</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>) <span class="comment">// this 即当前对象</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name</span><br><span class="line">        <span class="built_in">this</span>.age = <span class="number">20</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">sayHi</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> zhangsan = <span class="keyword">new</span> People(<span class="string">&#x27;张三&#x27;</span>)</span><br><span class="line"><span class="comment">// 在class方法中被调用，谁调用this就指向谁</span></span><br><span class="line">zhangsan.sayHi()  <span class="comment">// 打印出 zhangsan  this指向zhangsan这个对象</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="手写bind函数"><a href="#手写bind函数" class="headerlink" title="手写bind函数"></a>手写bind函数</h4><p><strong>bind函数的用法</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params">a, b, c</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;this&#x27;</span>, <span class="built_in">this</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(a, b)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;this is fn1&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 第一个参数就是我们的this,其他参数对应a b c</span></span><br><span class="line"><span class="keyword">const</span> fn2 = fn1.bind(&#123; <span class="attr">x</span>: <span class="number">100</span> &#125;, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>) </span><br><span class="line"><span class="keyword">const</span> res = fn2()</span><br><span class="line"><span class="built_in">console</span>.log(res)   <span class="comment">// this &#123;x: 100&#125; , 10 20 30 , this is fn1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="./image/bind%E5%87%BD%E6%95%B0.jpg" alt="bind函数"></p>
+<h2 id="实际开发中闭包的应用"><a href="#实际开发中闭包的应用" class="headerlink" title="实际开发中闭包的应用"></a>实际开发中闭包的应用</h2><ol>
+<li>隐藏数据</li>
+<li>如做一个简单的<code>cache</code>工具</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 闭包隐藏数据，只提供API</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCache</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> data = &#123;&#125;   <span class="comment">// 闭包中的数据被隐藏，不被外界访问</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">set</span>: <span class="function"><span class="keyword">function</span>(<span class="params">key, val</span>) </span>&#123;</span><br><span class="line">            data[key] = val</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="attr">get</span>: <span class="function"><span class="keyword">function</span>(<span class="params">key</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> data[key]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> c = createCache()</span><br><span class="line">c.set(<span class="string">&#x27;a&#x27;</span>, <span class="number">100</span>)</span><br><span class="line"><span class="built_in">console</span>.log(c.get(<span class="string">&#x27;a&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/04/js4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/04/js4/" class="post-title-link" itemprop="url">原型和原型链</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-04 12:34:27" itemprop="dateCreated datePublished" datetime="2021-10-04T12:34:27+08:00">2021-10-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-05 11:57:49" itemprop="dateModified" datetime="2021-10-05T11:57:49+08:00">2021-10-05</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ol>
+<li>如何判断一个变量是不是数组</li>
+<li>手写一个简易的jQuery，考虑插件和扩展性</li>
+<li>class的圆形本质，怎样理解？</li>
+<li>class和继承</li>
+<li>类型判断instanceof</li>
+<li>原型和原型链</li>
+</ol>
+<h2 id="class"><a href="#class" class="headerlink" title="class"></a>class</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父类 默认继承Object</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">eat</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>eat something`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//通过 new 一个对象（实例）</span></span><br><span class="line"><span class="keyword">const</span> xiaoming = <span class="keyword">new</span> People(<span class="string">&#x27;小明&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(xiaoming.name)   <span class="comment">// 小明</span></span><br><span class="line">xiaoming.eat()             <span class="comment">// 小明eat something</span></span><br><span class="line">xiaoming.__proto__.eat()   <span class="comment">// undefined eat something</span></span><br></pre></td></tr></table></figure>
+
+<p>xiaoming.eat()的eat方法是从原型链中得到的，xiaoming._<em>proto</em>_.eat()。name是本身的，xiaoming.name 得到的是 小明</p>
+<p>然而xiaoming._<em>proto，原型中是没有name值的，xiaoming._<em>proto</em></em>.name是undefined</p>
+<h2 id="用class实现继承"><a href="#用class实现继承" class="headerlink" title="用class实现继承"></a>用class实现继承</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name,number</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>(name)</span><br><span class="line">        <span class="built_in">this</span>.number = number</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">sayHi</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`姓名<span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span> 学号<span class="subst">$&#123;<span class="built_in">this</span>.number&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> xialuo = <span class="keyword">new</span> Student(<span class="string">&#x27;xialuo&#x27;</span>,<span class="number">100</span>)</span><br><span class="line"><span class="built_in">console</span>.log(xialuo.name,xialuo.number)<span class="comment">//xialuo 100</span></span><br><span class="line">xialuo.sayHi()        <span class="comment">//姓名xialuo学号100</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="类型判断-instanceof"><a href="#类型判断-instanceof" class="headerlink" title="类型判断-instanceof"></a>类型判断-instanceof</h2><h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// class 实际上是原型，可见是语法糖</span></span><br><span class="line"><span class="keyword">typeof</span> Student  <span class="comment">// function</span></span><br><span class="line"><span class="keyword">typeof</span> People      <span class="comment">// function</span></span><br><span class="line"><span class="comment">// 隐式原型和显示原型</span></span><br><span class="line"><span class="built_in">console</span>.log(xialuo.__proto__)</span><br><span class="line"><span class="built_in">console</span>.log(Student.prototype)</span><br><span class="line"><span class="built_in">console</span>.log(xialuo.__proto__ === Student.prototype) <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="./image/%E5%8E%9F%E5%9E%8B.png" alt="原型"></p>
+<ol>
+<li>每个class都有显示原型prototype</li>
+<li>每个实例都有隐式原型_<em>proto</em>_</li>
+<li>实例的__proto__指向对应的class的prototype</li>
+</ol>
+<h4 id="基于原型的执行规则"><a href="#基于原型的执行规则" class="headerlink" title="基于原型的执行规则"></a>基于原型的执行规则</h4><ol>
+<li>获取属性xialuo.name或执行方法xialuo.sayHi()时</li>
+<li>先在自身属性和方法寻找</li>
+<li>如果找不到则自动去__proto__中查找</li>
+</ol>
+<h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><p><img src="./image/%E5%8E%9F%E5%9E%8B%E9%93%BE.png" alt="原型链"></p>
+<h4 id="instansof"><a href="#instansof" class="headerlink" title="instansof"></a>instansof</h4><p>语法：</p>
+<p><code>obj instanceof Class</code></p>
+<p>如果 <code>obj</code> 隶属于 <code>Class</code> 类（或 <code>Class</code> 类的衍生类），则返回 <code>true</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> xialuo = <span class="keyword">new</span> Student();</span><br><span class="line"></span><br><span class="line"><span class="comment">// xialuo 是 Student class 的对象吗？</span></span><br><span class="line">alert( xialuo <span class="keyword">instanceof</span> Student ); <span class="comment">// true</span></span><br><span class="line"><span class="comment">// Student 继承自 People</span></span><br><span class="line">alert( xialuo <span class="keyword">instanceof</span> People );  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>标准的逻辑是</strong>：使用 <code>obj instanceOf Class</code> 检查 <code>Class.prototype</code> 是否等于 <code>obj</code> 的原型链中的原型之一</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">obj.__proto__ === Class.prototype?</span><br><span class="line">obj.__proto__.__proto__ === Class.prototype?</span><br><span class="line">obj.__proto__.__proto__.__proto__ === Class.prototype?</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 如果任意一个的答案为 true，则返回 true</span></span><br><span class="line"><span class="comment">// 否则，如果我们已经检查到了原型链的尾端，则返回 false</span></span><br></pre></td></tr></table></figure>
+
+<p>与诸如 <code>Array</code> 之类的内建 class 一起使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">alert( arr <span class="keyword">instanceof</span> <span class="built_in">Array</span> ); <span class="comment">// true</span></span><br><span class="line">alert( arr <span class="keyword">instanceof</span> <span class="built_in">Object</span> ); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p><code>arr</code> 隶属于 <code>Object</code> 类。因为从原型上来讲，<code>Array</code> 是继承自 <code>Object</code> 的。</p>
+<p>通常，<code>instanceof</code> 在检查中会将原型链考虑在内。 </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

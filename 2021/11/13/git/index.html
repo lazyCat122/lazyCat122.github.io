@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="GitGit 是一个版本管理控制系统，他可以在任何地点，将文档的状态(内容)作为更新记录保存起来，也可以在任何时间点，将更新记录恢复回来 下载Git：https:&#x2F;&#x2F;git-scm.com&#x2F;downloads git 基本工作流程   git 仓库 暂存区 工作目录    用于存放提交记录 临时存放被修改文件 被git管理的项目目录   每次在存储项目状态时，只存储那些被修改过的文件，没有修改过的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git">
+<meta property="og:url" content="http://example.com/2021/11/13/git/index.html">
+<meta property="og:site_name" content="web">
+<meta property="og:description" content="GitGit 是一个版本管理控制系统，他可以在任何地点，将文档的状态(内容)作为更新记录保存起来，也可以在任何时间点，将更新记录恢复回来 下载Git：https:&#x2F;&#x2F;git-scm.com&#x2F;downloads git 基本工作流程   git 仓库 暂存区 工作目录    用于存放提交记录 临时存放被修改文件 被git管理的项目目录   每次在存储项目状态时，只存储那些被修改过的文件，没有修改过的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-13T10:14:19.000Z">
+<meta property="article:modified_time" content="2021-11-14T13:48:32.451Z">
+<meta property="article:author" content="lazycat">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/11/13/git/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/11/13/git/","path":"2021/11/13/git/","title":"git"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>git | web</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">web</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">14</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">34</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git"><span class="nav-number">1.</span> <span class="nav-text">Git</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git-%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.0.1.</span> <span class="nav-text">git 基本工作流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.0.2.</span> <span class="nav-text">git的使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%94%AF"><span class="nav-number">2.</span> <span class="nav-text">分支</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E7%BB%86%E8%8A%82"><span class="nav-number">2.0.1.</span> <span class="nav-text">分支细节</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E5%91%BD%E4%BB%A4"><span class="nav-number">2.0.2.</span> <span class="nav-text">分支命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9A%82%E6%97%B6%E4%BF%9D%E5%AD%98%E6%9B%B4%E6%94%B9"><span class="nav-number">2.0.3.</span> <span class="nav-text">暂时保存更改</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#github"><span class="nav-number">3.</span> <span class="nav-text">github</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%8A%E5%BD%93%E5%89%8D-master-%E5%88%86%E6%94%AF%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E5%BA%93"><span class="nav-number">3.0.1.</span> <span class="nav-text">把当前 master 分支推送到远程库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%8B%E9%9A%86%E4%BB%93%E5%BA%93"><span class="nav-number">3.0.2.</span> <span class="nav-text">克隆仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%B8%AD%E6%9C%80%E6%96%B0%E7%9A%84%E7%89%88%E6%9C%AC-%E5%86%85%E5%AE%B9"><span class="nav-number">3.0.3.</span> <span class="nav-text">拉取远程仓库中最新的版本(内容)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81"><span class="nav-number">3.0.4.</span> <span class="nav-text">解决冲突</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E4%B8%8D%E6%98%AFgithub%E6%88%90%E5%91%98%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8C%E6%80%8E%E6%A0%B7%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0%E5%88%AB%E4%BA%BA%E7%9A%84github%E4%BB%93%E5%BA%93%E4%B8%AD"><span class="nav-number">3.0.5.</span> <span class="nav-text">在不是github成员的情况下，怎样提交代码到别人的github仓库中</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssh-%E5%85%8D%E7%99%BB%E5%BD%95"><span class="nav-number">4.</span> <span class="nav-text">ssh 免登录</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lazycat"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">lazycat</p>
+  <div class="site-description" itemprop="description">Notes on front-end learning</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/13/git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-13 18:14:19" itemprop="dateCreated datePublished" datetime="2021-11-13T18:14:19+08:00">2021-11-13</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-14 21:48:32" itemprop="dateModified" datetime="2021-11-14T21:48:32+08:00">2021-11-14</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><p>Git 是一个版本管理控制系统，他可以在任何地点，将文档的状态(内容)作为更新记录保存起来，也可以在任何时间点，将更新记录恢复回来</p>
+<p>下载Git：<a target="_blank" rel="noopener" href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></p>
+<h4 id="git-基本工作流程"><a href="#git-基本工作流程" class="headerlink" title="git 基本工作流程"></a>git 基本工作流程</h4><table>
+<thead>
+<tr>
+<th>git 仓库</th>
+<th>暂存区</th>
+<th>工作目录</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用于存放提交记录</td>
+<td>临时存放被修改文件</td>
+<td>被git管理的项目目录</td>
+</tr>
+</tbody></table>
+<p>每次在存储项目状态时，只存储那些被修改过的文件，没有修改过的文件是不进行存储的</p>
+<p>开发人员需要把被修改过的文件，需要被提交的文件，先通过工作目录添加到暂存区，这样暂存区的文件就是被修改过的文件，然后再把暂存区的文件提交到git仓库就可以了</p>
+<h4 id="git的使用"><a href="#git的使用" class="headerlink" title="git的使用"></a>git的使用</h4><p><strong>git使用前配置：</strong></p>
+<p>再使用 git 前，需要告诉git你是谁，再向git仓库中提交时需要用到</p>
+<ol>
+<li>配置提交人姓名：<code>git config --global user.name 提交人姓名</code></li>
+<li>配置提交人姓名：<code>git config --global user.email 提交人邮箱</code></li>
+<li>查看git配置信息：<code>git config --list</code></li>
+</ol>
+<p>注意：如果要对配置信息进行修改，重复上述命令即可</p>
+<p><strong>提交步骤：</strong></p>
+<ol>
+<li><p><code>git init</code>    初始化git仓库</p>
+</li>
+<li><p><code>git status</code>    查看文件状态</p>
+</li>
+<li><p><code>git add 文件列表</code>    追踪文件（添加到暂存区）</p>
+<p><code>git add . </code> 会把本地所有untrack的文件都加入暂存区，并且会根据<code>.gitignore</code>做过滤</p>
+</li>
+<li><p><code>git commit -m 提交信息</code>    向仓库中提交代码</p>
+</li>
+<li><p><code>git log</code>    查看提交记录</p>
+</li>
+</ol>
+<p><strong>撤销：</strong></p>
+<ul>
+<li><p>用暂存区中的文件覆盖工作目录中的文件：<code>git checkout 文件</code></p>
+</li>
+<li><p>将文件从暂存区中删除：<code>git rm --cached 文件</code></p>
+</li>
+<li><p>将git仓库中指定的更新记录恢复出来，并且覆盖暂存区和工作目录：<code>git reset --hard commitID</code></p>
+<p>commitID: git log查看</p>
+</li>
+</ul>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>为了便于理解，大家暂时可以认为分支就是当前工作目录中代码的一份副本</p>
+<p>使用分支，可以让我们从开发主线上分离出来，以免影响开发主线</p>
+<h4 id="分支细节"><a href="#分支细节" class="headerlink" title="分支细节"></a>分支细节</h4><ol>
+<li><p>主分支（master）：第一次向git仓库中提交更新记录时自动产生的一个分支</p>
+</li>
+<li><p>开发分支（develop）：作为开发的分支，基于master分支创建</p>
+</li>
+<li><p>功能分支（feature）：作为开发具体功能的分支，基于开发分支创建</p>
+</li>
+</ol>
+<p>功能分支-&gt;开发分支-&gt;主分支</p>
+<h4 id="分支命令"><a href="#分支命令" class="headerlink" title="分支命令"></a>分支命令</h4><ul>
+<li><code>git branch</code>  查看分支</li>
+<li><code>git branch 分支名称</code>  创建分支</li>
+<li><code>git checkout 分支名称</code>  切换分支</li>
+<li><code>git merge 来源分支</code>  合并分支（主分支上操作）</li>
+<li><code>git branch -d 分支名称</code>  删除分支（分支被合并后才允许删除）（-D强制删除）</li>
+</ul>
+<p><strong>注意：在切换分支之前，当前分支上的工作一定要提交到 git 仓库中，要保持当前分支上的工作区是完全干净的状态，不然会把当前分支上的内容携带到其他分支上。也可以暂时保存更改后切换分支</strong></p>
+<h4 id="暂时保存更改"><a href="#暂时保存更改" class="headerlink" title="暂时保存更改"></a>暂时保存更改</h4><p>在git中，可以暂时提取分支上所有的改动并存储，让开发人员得到一个干净的工作副本，临时转向其他工作。</p>
+<p>分支临时切换：</p>
+<ul>
+<li>存储临时改动额：<code>git stash</code></li>
+<li>恢复改动：<code>git stash pop</code></li>
+</ul>
+<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><p><strong>多人合作</strong></p>
+<ul>
+<li><p>A在github中创建远程仓库</p>
+</li>
+<li><p>A将本地仓库推送到远程仓库</p>
+</li>
+<li><p>B克隆远程仓库到本地进行开发</p>
+</li>
+<li><p>B将本地仓库中开发的内容推送到远程仓库（需要A添加B为collaborators）</p>
+<p>A添加B为collaborators后，会得到一个邀请链接(invite link)，B在登录github账号后，访问这个邀请链接，并且接受邀请</p>
+</li>
+<li><p>A将远程仓库中的最新内容拉去到本地</p>
+</li>
+</ul>
+<h4 id="把当前-master-分支推送到远程库"><a href="#把当前-master-分支推送到远程库" class="headerlink" title="把当前 master 分支推送到远程库"></a>把当前 master 分支推送到远程库</h4><p>向本地仓库中提交代码后(git commit -m 提交信息)，才能<code>git push</code></p>
+<ol>
+<li><p>git push 远程仓库地址  分支名称 <code>git push https://github.com/lazyCat122/git-demo.git master </code></p>
+</li>
+<li><p>git push 远程仓库地址别名  分支名称</p>
+</li>
+<li><p>git push -u 远程仓库地址别名  分支名称</p>
+<p>-u 记住推送地址及分支，下次推送只需要输入<code>git push</code>即可</p>
+</li>
+<li><p>git remote add 远程仓库地址别名 远程仓库地址</p>
+<p>给远程仓库起一个别名：<code>git remote add rename https://github.com/lazyCat122/git-demo.git</code></p>
+</li>
+</ol>
+<h4 id="克隆仓库"><a href="#克隆仓库" class="headerlink" title="克隆仓库"></a>克隆仓库</h4><p><code>git clone 仓库地址</code></p>
+<h4 id="拉取远程仓库中最新的版本-内容"><a href="#拉取远程仓库中最新的版本-内容" class="headerlink" title="拉取远程仓库中最新的版本(内容)"></a>拉取远程仓库中最新的版本(内容)</h4><p><code>git pull 远程仓库地址 分支名称</code></p>
+<p><strong>clone是本地没有repository时，将远程repository整个下载过来。</strong></p>
+<p><strong>pull是本地有repository时，将远程repository里新的commit数据(如有的话)下载过来，并且与本地代码merge。</strong></p>
+<h4 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h4><p>在多人同时开发一个项目时，如果两个人修改了<strong>同一个文件的同一个地方</strong>，就会发生冲突，冲突需要人为解决</p>
+<p>解决：需要先拉取远程仓库中最新的版本，<code>git pull https://github.com/lazyCat122/git-demo.git master</code>，打开冲突的文件，然后把冲突的地方删除。然后添加到暂存区 <code>git add index.html</code>，再添加到本地仓库 <code>git commit -m 解决冲突</code>，最后发送到远程仓库 <code>git push https://github.com/lazyCat122/git-demo.git master</code> 就可以了</p>
+<h4 id="在不是github成员的情况下，怎样提交代码到别人的github仓库中"><a href="#在不是github成员的情况下，怎样提交代码到别人的github仓库中" class="headerlink" title="在不是github成员的情况下，怎样提交代码到别人的github仓库中"></a>在不是github成员的情况下，怎样提交代码到别人的github仓库中</h4><ol>
+<li><p>在别人的仓库中，点击 <code>Fork</code>后，这个仓库你就得到了</p>
+</li>
+<li><p>把得到的仓库克隆到本地，在本地进行修改，然后再发送到远程仓库中(自己的github仓库中)</p>
+</li>
+<li><p>推送给原仓库作者：</p>
+<ul>
+<li>点击<code>Pull requests</code> 按钮，然后点击<code>New pull request</code>和<code>Create pull request</code>创建新的request请求</li>
+<li>然后在<code>editor</code>框中添加一些说明的内容，然后点击<code>Create pull request</code>，就会把我们修改的代码，以及我们编辑的说明内容都会发给原作者</li>
+</ul>
+</li>
+</ol>
+<p><strong>在原作者仓库下：</strong></p>
+<p>点击<code>Pull requests</code></p>
+<p>在<code>Conversation</code>下会看到其他人发过来的内容，可以进行回复，点击<code>Merge pull request</code>进行合并</p>
+<p>在<code>Commits</code>下能看到修改的内容</p>
+<p>在<code>Files changed</code>下能看到完全的内容</p>
+<h2 id="ssh-免登录"><a href="#ssh-免登录" class="headerlink" title="ssh 免登录"></a>ssh 免登录</h2><p>使用 ssh路径 代替 https路径可以免登录</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/11/13/Vuex/" rel="prev" title="Vuex">
+                  <i class="fa fa-chevron-left"></i> Vuex
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lazycat</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

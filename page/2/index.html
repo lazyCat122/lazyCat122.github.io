@@ -83,8 +83,8 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">31</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">14</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">34</span></a></li>
   </ul>
 </nav>
 
@@ -129,13 +129,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -164,6 +164,560 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/19/jQuery3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/19/jQuery3/" class="post-title-link" itemprop="url">jQuery事件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-10-19 14:57:36 / 修改时间：20:46:26" itemprop="dateCreated datePublished" datetime="2021-10-19T14:57:36+08:00">2021-10-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="jquery-事件注册"><a href="#jquery-事件注册" class="headerlink" title="jquery 事件注册"></a>jquery 事件注册</h2><p><code>element.事件(function()&#123;&#125;)</code></p>
+<p><code>$(&quot;div&quot;).click(function()&#123; 事件处理程序 &#125;)</code></p>
+<p>其他事件和原生基本一致</p>
+<p>比如：mouseover, mouseout, blur, focus, change, keydown, keyup, resize, scroll等</p>
+<h2 id="jquery-事件处理"><a href="#jquery-事件处理" class="headerlink" title="jquery 事件处理"></a>jquery 事件处理</h2><p>on() 方法在匹配元素上绑定一个或多个事件的事件处理函数</p>
+<p><code>element.on(events, [selector], fn)</code></p>
+<ol>
+<li>events: 一个或多个用空格分隔符的事件类型，如 “click”或”keydown”</li>
+<li>selector：元素的子元素选择器</li>
+<li>fn回调函数</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 可以绑定多个事件，多个处理事件处理程序</span><br><span class="line">$(&quot;div&quot;).on(&#123;</span><br><span class="line">	mouseenter: function()&#123;</span><br><span class="line">		$(this).css(&quot;background&quot;, &quot;blue&quot;);</span><br><span class="line">	&#125;,</span><br><span class="line">	click: function()&#123;  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 如果事件处理程序相同</span><br><span class="line">$(&quot;div&quot;).on(&quot;mouseover mouseleave&quot;, function()&#123;</span><br><span class="line">	$(this).toggleClass(&quot;current&quot;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>on() 方法优势二</strong></p>
+<p>可以事件委派操作：就是把原来给子元素身上的事件绑定到父元素身上，就是把事件委派给父元素</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 触发事件是li，会冒泡到ul身上</span><br><span class="line">$(&quot;ul&quot;).on(&quot;click&quot;, &quot;li&quot;, function()&#123;</span><br><span class="line">	alert(&quot;123&quot;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>案例：文本发布</strong></p>
+<ol>
+<li>点击发布按钮，动态创建一个li，放到文本框的内容和删除按钮，并且添加到ul中</li>
+<li>点击删除按钮，可以删除当前的留言</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">boby</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span> <span class="attr">id</span>=<span class="string">&quot;wenben&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>文本发布<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;txt&quot;</span> <span class="attr">cols</span>=<span class="string">&quot;30&quot;</span> <span class="attr">rows</span>=<span class="string">&quot;10&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>发布<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">boby</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">sctipt</span>&gt;</span></span><br><span class="line">$(function()&#123;</span><br><span class="line">	$(&quot;.btn&quot;).on(&quot;click&quot;, function()&#123;</span><br><span class="line">    	var li = $(&quot;<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span>&quot;)</span><br><span class="line">    	li.html($(&quot;.txt&quot;).val() + &quot;<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#x27;javascript:;&#x27;</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">a</span>&gt;</span>&quot;);</span><br><span class="line">    	$(&quot;ul&quot;).prepend(li);</span><br><span class="line">    	li.slideDown();</span><br><span class="line">    	$(&quot;.txt&quot;).val(&quot;&quot;);</span><br><span class="line">    &#125;)	</span><br><span class="line">    // 点击删除按钮，可以删除当前的留言li</span><br><span class="line">    //$(&quot;ul a&quot;).click(function()&#123;  // 此时的click不能给动态创建的a添加事件</span><br><span class="line">    //	alert(123);</span><br><span class="line">    //&#125;)</span><br><span class="line">    // on()可以给未来动态创建的元素添加事件</span><br><span class="line">    $(&quot;ul&quot;).on(&quot;click&quot;, &quot;a&quot;, function()&#123;</span><br><span class="line">    	//$(this).parent().remove();</span><br><span class="line">    	$(this).parent.slideUp(function()&#123;  // slideUp上拉</span><br><span class="line">    		$(this).remove;</span><br><span class="line">    	&#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">sctipt</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="事件处理-off-解绑事件"><a href="#事件处理-off-解绑事件" class="headerlink" title="事件处理  off()解绑事件"></a>事件处理  off()解绑事件</h4><p>off()方法可以移除，通过on()方法添加事件处理程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;p&quot;).off()  // 解绑p元素所有事件处理程序</span><br><span class="line">$(&quot;p&quot;).off(&quot;click&quot;)  // 解绑p元素上面的点击事件</span><br><span class="line">$(&quot;ul&quot;).off(&quot;click&quot;, &quot;li&quot;)  // 解绑事件委托</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果事件只触发一次，可以使用one()来绑定事件。</strong> </p>
+<h4 id="自动触发事件"><a href="#自动触发事件" class="headerlink" title="自动触发事件"></a>自动触发事件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;div&quot;).click();  // 会触发元素默认行为</span><br><span class="line">$(&quot;div&quot;).trigger(&quot;click&quot;);  // 会触发元素默认行为</span><br><span class="line">$(&quot;div&quot;).triggerHandler(&quot;click&quot;); // 不会触发元素默认行为</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="jquery-事件对象"><a href="#jquery-事件对象" class="headerlink" title="jquery 事件对象"></a>jquery 事件对象</h2><p><code>$(&quot;div&quot;).on(&quot;click&quot;, function(e)&#123;  &#125;)  // e 就是事件对象</code></p>
+<p>语法：<code>element.on(events, [selector], function(event) &#123;&#125;)</code></p>
+<p>阻止默认行为：event.preventDefault()  或者 return false</p>
+<p>阻止冒泡：event.stopPropagation()</p>
+<p>可以参照WEB API来使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 获得按键值</span><br><span class="line">$(document).on(&#x27;keydown&#x27;, function(e)&#123;</span><br><span class="line">	console.log(e.keyCode);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="jquery对象拷贝"><a href="#jquery对象拷贝" class="headerlink" title="jquery对象拷贝"></a>jquery对象拷贝</h2><p>把某个对象拷贝（合并）给另一个对象使用，可以用$.extend()方法</p>
+<p><code>$.extend([deep], target, object1, [objectN])</code></p>
+<ol>
+<li>deep：如果设为true为深拷贝，默认为false浅拷贝</li>
+<li>target：要拷贝的目标对象</li>
+<li>object1：待拷贝到第一个对象的对象</li>
+<li>objectN：待拷贝到第N个对象的对象</li>
+<li>浅拷贝是把拷贝的对象<strong>复杂数据类型中的地址</strong>拷贝给目标对象，修改目标对象<strong>会影响</strong>被拷贝对象</li>
+<li>深拷贝，完全克隆(拷贝的是对象，而不是地址)，修改目标对象<strong>不会影响</strong>被拷贝对象</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">浅拷贝就是把复杂数据类型的地址拷贝过去</span><br><span class="line">var targetObj = &#123; id: 0 &#125;;</span><br><span class="line">var obj = &#123;</span><br><span class="line">	id: 1;</span><br><span class="line">	name: &quot;my&quot;,</span><br><span class="line">	msg: &#123;</span><br><span class="line">		age: 18</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">$.extend(targetObj, obj);  // 会覆盖targetObj里面原来的数据</span><br></pre></td></tr></table></figure>
+
+<p><strong>浅拷贝会把原来对象里面的复杂数据类型地址拷贝给目标对象</strong></p>
+<p><img src="./image/jquery-%E6%8B%B7%E8%B4%9D.png" alt="jquery-浅拷贝"></p>
+<p><strong>深拷贝把里面的数据完全复制一份给目标对象，如果里面有不冲突的属性，会合并到一起</strong></p>
+<p><img src="./image/jquery-%E6%B7%B1%E6%8B%B7%E8%B4%9D.png" alt="jquery-深拷贝"></p>
+<h2 id="jquery-插件"><a href="#jquery-插件" class="headerlink" title="jquery 插件"></a>jquery 插件</h2><p>jquery功能有限，想要更复杂的特效效果，可以借助jquery插件完成</p>
+<p><strong>jquery插件常用的网站</strong></p>
+<ol>
+<li>jquery插件库 <a target="_blank" rel="noopener" href="http://www.jq22.com/">http://www.jq22.com/</a></li>
+<li>jquery之家 <a target="_blank" rel="noopener" href="http://www.htmleaf.com/">http://www.htmleaf.com/</a></li>
+</ol>
+<p>插件使用步骤：</p>
+<ol>
+<li>引入相关文件</li>
+<li>复制相关html、css、js (调用插件)</li>
+</ol>
+<p><strong>插件的使用：</strong></p>
+<p>图片懒加载：图片使用延迟加载可提高网页下载速度，也能帮助减轻服务器负载。当我们页面滑到可视区域，再显示图片</p>
+<h4 id="bootstrap-JS插件"><a href="#bootstrap-JS插件" class="headerlink" title="bootstrap JS插件"></a>bootstrap JS插件</h4><p>bootstrap框架也是依赖于jquery开发的，因此里面的js插件的使用，也必须引入jquery文件</p>
+<p>到bootstrap官网上使用一些效果</p>
+<p>需要引入三个文件：</p>
+<ol>
+<li>bootstrap/css/bootstrap.min.css</li>
+<li>bootstrap/js/jquery.min.js</li>
+<li>bootstrap/js/bootstrap.min.js</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/18/jQuery2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/18/jQuery2/" class="post-title-link" itemprop="url">jQuery2</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-18 18:21:48" itemprop="dateCreated datePublished" datetime="2021-10-18T18:21:48+08:00">2021-10-18</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-19 14:56:19" itemprop="dateModified" datetime="2021-10-19T14:56:19+08:00">2021-10-19</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="jquery属性操作"><a href="#jquery属性操作" class="headerlink" title="jquery属性操作"></a>jquery属性操作</h2><ol>
+<li><p>获取属性语法</p>
+<p><code>prop(&quot;属性&quot;)</code></p>
+<p>例：$(“a”).prop(“href”);</p>
+</li>
+<li><p>设置属性语法</p>
+<p><code>prop(&quot;属性&quot;, &quot;属性值&quot;)</code></p>
+</li>
+<li><p>元素的自定义属性，通过attr()获取属性</p>
+<p><code>$(&quot;div&quot;).attr(&quot;属性&quot;)</code></p>
+</li>
+</ol>
+<h4 id="数据缓存"><a href="#数据缓存" class="headerlink" title="数据缓存"></a>数据缓存</h4><p>数据缓存data()， 这个里面的数据是存放在元素的内存里面</p>
+<p><code>data(&quot;name&quot;, &quot;value&quot;)  // 向被选中元素附加数据</code></p>
+<p><code>data(&quot;name&quot;)  // 向被选元素获取数据</code></p>
+<h4 id="案例-全选、全不选"><a href="#案例-全选、全不选" class="headerlink" title="案例  全选、全不选"></a>案例  全选、全不选</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">&quot;checkbox&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;checkall&quot;</span> name=<span class="string">&quot;&quot;</span> checked&gt;</span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 全选，全不选功能模块</span></span><br><span class="line">    <span class="comment">// 全选按钮checkall，小按钮j-checkbox</span></span><br><span class="line">    <span class="comment">// change()是check状态发生改变执行里面的函数</span></span><br><span class="line">    $(<span class="string">&quot;.checkall&quot;</span>).change(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        $(<span class="string">&quot;.j-checkbox&quot;</span>).prop(<span class="string">&quot;checked&quot;</span>, $(<span class="built_in">this</span>).prop(<span class="string">&quot;checked&quot;</span>))</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 如果小复选框被选中的个数等于3，就应该吧全选按钮选上，否则全选按钮不选</span></span><br><span class="line">    <span class="comment">// :checked选择器， :checked查找被选中的表单元素</span></span><br><span class="line">    $(<span class="string">&quot;.j-checkbox&quot;</span>).change(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>($(<span class="string">&quot;.j-checkbox:checked&quot;</span>).length ===<span class="number">3</span>)&#123;</span><br><span class="line">            $(<span class="string">&quot;.checkall&quot;</span>).prop(<span class="string">&quot;checked&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            $(<span class="string">&quot;.checkall&quot;</span>).prop(<span class="string">&quot;checked&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="jquery内容文本值"><a href="#jquery内容文本值" class="headerlink" title="jquery内容文本值"></a>jquery内容文本值</h2><ol>
+<li><p>普通元素内容html()  (相当于原生innerHTML)</p>
+<p><code>html()   // 获取元素的内容</code></p>
+<p><code>html(&quot;内容&quot;)  // 设置元素的内容</code></p>
+</li>
+<li><p>普通元素<strong>文本内容</strong>  text() （相当于原生 innerText）</p>
+<p><code>text()</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt; &lt;span&gt;内容&lt;/span&gt; &lt;/div&gt;</span><br><span class="line">&lt;input type=&quot;text&quot;&gt;</span><br><span class="line"></span><br><span class="line">console.log($(&quot;div&quot;).html())  // 得到 &lt;span&gt;内容&lt;/span&gt;</span><br><span class="line">console.log($(&quot;div&quot;).text())  // 得到 内容</span><br><span class="line">$(&quot;div&quot;).text(&quot;123&quot;); $(&quot;div&quot;).html(&quot;123&quot;);  // 会把 &lt;span&gt;内容&lt;/span&gt;改为 123</span><br><span class="line"></span><br><span class="line">$(&quot;input&quot;).val();</span><br><span class="line">$(&quot;input&quot;).val(&quot;123&quot;);</span><br></pre></td></tr></table></figure></li>
+<li><p>获取表单值</p>
+<p><code>val()</code></p>
+</li>
+</ol>
+<h2 id="jquery元素操作"><a href="#jquery元素操作" class="headerlink" title="jquery元素操作"></a>jquery元素操作</h2><p>主要是遍历、创建、添加、删除元素操作</p>
+<h4 id="遍历元素"><a href="#遍历元素" class="headerlink" title="遍历元素"></a>遍历元素</h4><p>jquery隐式迭代是对同一类元素做了同样的操作。如果想要给同一类元素做不同操作，就需要用到遍历</p>
+<p>两个语法：</p>
+<p><code>$(&quot;div&quot;).each( function(index, domEle) &#123; xxx; &#125; )</code></p>
+<p><code>$.each(object, function(index, element) &#123; xxx; &#125; )</code></p>
+<ol>
+<li>each() 方法遍历匹配的每一个元素，主要是用DOM处理。</li>
+<li>each每一个里面的回调函数有两个参数：index是每个元素的索引号；demEle是每个DOM元素对象，不是jquery对象</li>
+<li>所以要想使用jquery方法，需要给这个DOM元素转换为jquery对象 $(domEle)</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;<span class="number">1</span>&lt;/div&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>];</span><br><span class="line">    <span class="comment">// 如果针对于同一类元素做不同操作，需要用到遍历元素（类似for，但比for强大）</span></span><br><span class="line">    $(<span class="string">&quot;div&quot;</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">i, dimEle</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 回调函数第一个参数一定是索引号，可以自己指定索引号名称</span></span><br><span class="line">        <span class="comment">// 第二个参数一定是dom元素对象,需要转换为jquery对象($(domEle))</span></span><br><span class="line">        $(domEle).css(<span class="string">&quot;color&quot;</span>, arr[i]);</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    $.each($(<span class="string">&quot;div&quot;</span>), <span class="function"><span class="keyword">function</span>(<span class="params">i, dimEle</span>)</span>&#123;  &#125;)</span><br><span class="line">    $.each(arr, <span class="function"><span class="keyword">function</span>(<span class="params">i, ele</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i);   <span class="comment">// 0,1,2</span></span><br><span class="line">        <span class="built_in">console</span>.log(ele); <span class="comment">// red, green, blue</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建元素"><a href="#创建元素" class="headerlink" title="创建元素"></a>创建元素</h4><p><code>$(&quot;&lt;li&gt;&lt;/li&gt;&quot;);  // 动态创建一个&lt;li&gt;标签</code></p>
+<ol>
+<li><p>创建元素</p>
+</li>
+<li><p>添加元素</p>
+<p>内部添加( 添加到元素内部 )</p>
+<p><code>element.append(&quot;内容&quot;) // 把内容放入匹配元素内部最后面，类似原生appendChild</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt; &lt;/ul&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line">	var li = $(&quot;&lt;li&gt;创建li标签&lt;/li&gt;&quot;);</span><br><span class="line">	$(&quot;ul&quot;).append(li);   // 内部添加并且放到内容的最后面</span><br><span class="line">	$(&quot;ul&quot;).prepend(li);  // 内部添加并且放到内容的最前面</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>外部添加</p>
+<p><code>element.after(&quot;内容&quot;)  // 把内容放到目标元素后面</code></p>
+<p><code>element.before(&quot;内容&quot;)  // 把内容放到目标元素后面 </code> </p>
+<p><strong>内部添加元素，生成之后，它们是父子关系</strong></p>
+<p><strong>外部添加元素，生成之后，它们是兄弟关系</strong></p>
+</li>
+<li><p>删除元素</p>
+<p><code>element.remove()  // 删除匹配的元素（自身）</code></p>
+<p><code>element.empty()  // 删除匹配的元素集合中所有的子节点</code></p>
+<p><code>element.html()  // 清空匹配的元素内容。和empty()效果一样</code></p>
+</li>
+</ol>
+<h2 id="jquery尺寸、位置操作"><a href="#jquery尺寸、位置操作" class="headerlink" title="jquery尺寸、位置操作"></a>jquery尺寸、位置操作</h2><h4 id="jquery尺寸"><a href="#jquery尺寸" class="headerlink" title="jquery尺寸"></a>jquery尺寸</h4><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>width() / height()</td>
+<td>取的匹配元素宽度和高度值  只算width / height</td>
+</tr>
+<tr>
+<td>innerWidth() / innerHeight()</td>
+<td>取的匹配元素宽度和高度值 包含padding</td>
+</tr>
+<tr>
+<td>outerWidht() / outerHeight()</td>
+<td>取的匹配元素宽度和高度值 包含padding、border</td>
+</tr>
+<tr>
+<td>outerWidth(true) outerHeight(true)</td>
+<td>取的匹配元素宽度和高度值 包含padding、border、margin</td>
+</tr>
+</tbody></table>
+<p><strong>注意：以上参数为空，则是获取相应值，返回的是数字型</strong></p>
+<p>​           <strong>如果参数为数字，则是修改相应值，参数可以不用写单位</strong></p>
+<h4 id="jquery位置"><a href="#jquery位置" class="headerlink" title="jquery位置"></a>jquery位置</h4><p>offset()   position()   scrollTop/scrollLeft()</p>
+<ol>
+<li><p>offset()设置或获取元素偏移</p>
+<p>offset()方法设置或返回被选元素，相对于文档的偏移坐标，跟父级没有关系</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;.div&quot;).offset(&#123; top:200, left:200 &#125;)</span><br><span class="line">$(&quot;.div&quot;).offset().top</span><br></pre></td></tr></table></figure></li>
+<li><p>position()获取元素偏移</p>
+<p>position()方法用于返回被选元素相对于<strong>带有定位的父级</strong>偏移坐标，如果父级都没有定位，则以文档为准  </p>
+</li>
+<li><p>scrollTop/scrollLeft()设置或获取元素被卷去的头部和左侧</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/17/jQuery1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/17/jQuery1/" class="post-title-link" itemprop="url">jQuery1</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-17 15:16:25" itemprop="dateCreated datePublished" datetime="2021-10-17T15:16:25+08:00">2021-10-17</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-18 18:20:09" itemprop="dateModified" datetime="2021-10-18T18:20:09+08:00">2021-10-18</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="jQuery的基本使用"><a href="#jQuery的基本使用" class="headerlink" title="jQuery的基本使用"></a>jQuery的基本使用</h2><p>jQuery是一个快速简单的Javascript库</p>
+<p>jQuery库就是对原生Javascript的封装，内部都是用Javascript实现的</p>
+<p>j 就是 Javascript；Query查询；</p>
+<p>jQuery的下载：</p>
+<p>进入官网：<a target="_blank" rel="noopener" href="https://jquery.com/">https://jquery.com/</a></p>
+<p>点击：Download the compressed,production jQuery 3.6.0</p>
+<p>进入后复制粘贴，然后引用</p>
+<h4 id="jQuery的入口函数"><a href="#jQuery的入口函数" class="headerlink" title="jQuery的入口函数"></a>jQuery的入口函数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 一样的功能</span><br><span class="line">$(function () &#123;</span><br><span class="line">	...    // 此处是页面DOM加载完成的入口</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">$(document).ready(function () &#123;</span><br><span class="line">	...    // 此处是页面DOM加载完成的入口</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>等着DOM结构渲染完毕即可执行内部代码，不必等到所有外部资源加载完毕，jQuery帮我们完成了封装</li>
+<li>相当于原生js中的DOMContentLoaded</li>
+<li>不同于原生js中的load事件是等页面文档，外部的js文件，css文件，图片加载完毕才执行内部代码</li>
+</ul>
+<p><strong>$是jQuery的别称。即$符号可以用jQuery代替</strong></p>
+<h4 id="jquery对象和DOM对象"><a href="#jquery对象和DOM对象" class="headerlink" title="jquery对象和DOM对象"></a>jquery对象和DOM对象</h4><ol>
+<li><p>DOM对象：用原生js获取过来的对象就是DOM对象</p>
+<p><code>var mydiv = document.querySelector(&#39;div&#39;);</code>  mydiv是DOM对象</p>
+</li>
+<li><p>jquery对象：用jquery方式获取过来的对象是jquery对象。本质：通过$把DOM元素进行了包装</p>
+<p><code>$(&#39;div&#39;);</code> $(‘div’)是一个jquery对象</p>
+</li>
+<li><p>jquery对象只能使用jquery方法，DOM对象则使用原生的JavaScript属性和方法</p>
+</li>
+</ol>
+<h4 id="jquery对象和DOM对象的转换"><a href="#jquery对象和DOM对象的转换" class="headerlink" title="jquery对象和DOM对象的转换"></a>jquery对象和DOM对象的转换</h4><p>因为jquery对象没有对所有的原生js进行封装，所以需要转换</p>
+<ol>
+<li><p>DOM对象转换为jquery对象</p>
+<p><code>$(DOM对象)</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var video = document.querySelector(&#x27;video&#x27;);</span><br><span class="line">$(video)</span><br></pre></td></tr></table></figure></li>
+<li><p>jquery对象转换为DOM对象（两种方式）</p>
+<p>jquery对象是一个伪数组的形式存储的，完全可以通过数组的形式调用</p>
+<p><code>$(&#39;div&#39;[index])  index是索引号</code></p>
+<p><code>$(&#39;div&#39;).get(index)  index是索引号</code></p>
+</li>
+</ol>
+<h2 id="jquery常用的API"><a href="#jquery常用的API" class="headerlink" title="jquery常用的API"></a>jquery常用的API</h2><h2 id="jquery选择器"><a href="#jquery选择器" class="headerlink" title="jquery选择器"></a>jquery选择器</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;</span><br><span class="line">	$(&#x27;.color&#x27;)</span><br><span class="line">	$(&#x27;#color&#x27;)</span><br><span class="line">	$(&#x27;ul li&#x27;)</span><br><span class="line">	$(&#x27;div&#x27;).css(&#x27;color&#x27;,&#x27;red&#x27;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="jquery筛选选择器"><a href="#jquery筛选选择器" class="headerlink" title="jquery筛选选择器"></a>jquery筛选选择器</h4><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>用法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:first</td>
+<td>$(‘li:first’)</td>
+<td>获取第一个li元素</td>
+</tr>
+<tr>
+<td>:last</td>
+<td>$(‘li:last’)</td>
+<td>获取最后一个li元素</td>
+</tr>
+<tr>
+<td>:eq(index)</td>
+<td>$(‘li:eq(2)’)</td>
+<td>获取索引号为2的li元素</td>
+</tr>
+<tr>
+<td>:odd</td>
+<td>$(‘li:odd’)</td>
+<td>获取索引号为奇数的元素</td>
+</tr>
+<tr>
+<td>:even</td>
+<td>$(‘li:even’)</td>
+<td>获取索引号为偶数的元素</td>
+</tr>
+</tbody></table>
+<h4 id="jquery筛选选择器-1"><a href="#jquery筛选选择器-1" class="headerlink" title="jquery筛选选择器"></a>jquery筛选选择器</h4><p><img src="./image/jquery%E7%AD%9B%E9%80%89%E6%96%B9%E6%B3%95.png" alt="jquery筛选方法"></p>
+<p><strong>下拉菜单案例：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.nav</span>&gt;<span class="selector-tag">ul</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">display</span>: none;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;nav&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#x27;#&#x27;</span>&gt;</span>微博<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span>&gt;</span>私信<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span>&gt;</span>评论<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span>&gt;</span>@我<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">// 鼠标经过</span></span><br><span class="line">	$(<span class="string">&quot;.nav&gt;li&quot;</span>).mouseover(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="comment">// $(this)  jquery当前元素  this不加引号</span></span><br><span class="line">		<span class="comment">// show()显示元素  hide()隐藏元素</span></span><br><span class="line">		$(<span class="built_in">this</span>).children(<span class="string">&quot;ul&quot;</span>).show();</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="comment">// 鼠标离开</span></span><br><span class="line">	$(<span class="string">&quot;.nav&gt;li&quot;</span>).mouseout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		$(<span class="built_in">this</span>).children(<span class="string">&quot;ul&quot;</span>).hide();</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="jquery里面的排他思想"><a href="#jquery里面的排他思想" class="headerlink" title="jquery里面的排他思想"></a>jquery里面的排他思想</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span>&gt;</span>快速<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span>&gt;</span>快速<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span>&gt;</span>快速<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span>&gt;</span>快速<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span>&gt;</span>快速<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span>&gt;</span>快速<span class="tag">&lt;/<span class="name">button</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 第一种方法</span></span></span><br><span class="line"><span class="javascript">	$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 1.隐式迭代 给所有的按钮都绑定了点击事件</span></span></span><br><span class="line"><span class="javascript">        $(<span class="string">&quot;button&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">// 2.当前的元素变化背景颜色</span></span></span><br><span class="line"><span class="javascript">            $(<span class="built_in">this</span>).css(<span class="string">&quot;background&quot;</span>,<span class="string">&quot;red&quot;</span>);</span></span><br><span class="line"><span class="javascript">            <span class="comment">// 3.其余的兄弟去掉背景颜色</span></span></span><br><span class="line"><span class="javascript">            $(<span class="built_in">this</span>).siblings(<span class="string">&quot;button&quot;</span>).css(<span class="string">&quot;background&quot;</span>,<span class="string">&quot;&quot;</span>)</span></span><br><span class="line"><span class="javascript">        &#125;)</span></span><br><span class="line"><span class="javascript">    &#125;)</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 第二种方法</span></span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 1.隐式迭代 给所有的按钮都绑定了点击事件</span></span></span><br><span class="line"><span class="javascript">        $(<span class="string">&quot;button&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">// 2.当前的元素添加类  其余的兄弟去掉类</span></span></span><br><span class="line"><span class="javascript">            $(<span class="built_in">this</span>).addClass(<span class="string">&quot;current&quot;</span>).siblings().removeClass(<span class="string">&quot;current&quot;</span>);</span></span><br><span class="line"><span class="javascript">        &#125;)</span></span><br><span class="line"><span class="javascript">    &#125;)</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.current</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: red;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><ol>
+<li>核心原理：鼠标经过左侧盒子某个小<code>li</code>，就让内容区盒子相对应图片显示，其余的图片隐藏</li>
+<li>需要得到当前小<code>li</code>的索引号，就可以显示对应索引号的图片</li>
+<li>jQuery得到当前元素索引号<code>$(this).index()</code></li>
+<li>中间对应的图片，可以通过<code>eq(index)</code>方法去选择</li>
+<li>显示元素show()，隐藏元素hide()</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">	$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 1. 鼠标经过左侧的小li</span></span></span><br><span class="line"><span class="javascript">        $(<span class="string">&quot;#left li&quot;</span>).mouseover(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">// 2. 得到当前小li的索引号</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> index = $(<span class="built_in">this</span>).index();</span></span><br><span class="line"><span class="javascript">            <span class="comment">// 3. 让我们右侧的盒子相应索引号的图片显示出来</span></span></span><br><span class="line"><span class="javascript">            $(<span class="string">&quot;#content div&quot;</span>).eq(index).show();</span></span><br><span class="line"><span class="javascript">            <span class="comment">// 4. 让其他的图片隐藏起来</span></span></span><br><span class="line"><span class="javascript">            $(<span class="string">&quot;#content div&quot;</span>).eq(index).siblings().hide();</span></span><br><span class="line"><span class="javascript">            <span class="comment">// 可以放到一起写</span></span></span><br><span class="line"><span class="javascript">            <span class="comment">// $(&quot;#content div&quot;).eq(index).show().siblings().hide();</span></span></span><br><span class="line"><span class="javascript">        &#125;)</span></span><br><span class="line"><span class="javascript">    &#125;)</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="jquery样式操作"><a href="#jquery样式操作" class="headerlink" title="jquery样式操作"></a>jquery样式操作</h2><h4 id="操作css方法"><a href="#操作css方法" class="headerlink" title="操作css方法"></a>操作css方法</h4><ol>
+<li><p>参数只写属性名，则是返回属性值</p>
+<p><code>$(this).css(&quot;color&quot;);</code></p>
+</li>
+<li><p>修改样式，逗号分隔</p>
+<p><code>$(this).css(&quot;color&quot;,&quot;red&quot;);</code></p>
+</li>
+<li><p>参数可以是对象形式，方便设置多组样式。属性名和属性值用冒号隔开，属性可以不加引号</p>
+<p><code>$(this).css(&#123;&quot;color&quot;:&quot;white&quot; , &quot;font-size&quot;:&quot;20px&quot;&#125;);</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 如果是复合属性则必须采取驼峰式命名法，如果值不是数字，则需要加引号</span><br><span class="line">$(&quot;div&quot;).css(&#123;</span><br><span class="line">	width: 299,</span><br><span class="line">	height: 233,</span><br><span class="line">	backgroundColor: &quot;red&quot;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="设置类样式方法"><a href="#设置类样式方法" class="headerlink" title="设置类样式方法"></a>设置类样式方法</h4><ol>
+<li><p>添加类</p>
+<p><code>$(&quot;div&quot;).addClass(&quot;current&quot;);</code></p>
+</li>
+<li><p>移除类</p>
+<p><code>$(&quot;div&quot;).removeClass(&quot;current&quot;);</code></p>
+</li>
+<li><p>切换类 (如果有这个类，就取消，没有，就加上)</p>
+<p><code>$(&quot;div&quot;).toggleClass(&quot;current&quot;);</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;div&quot;).click(function()&#123;</span><br><span class="line">	$(this).togglesClass(&quot;current&quot;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="类操作和className的区别"><a href="#类操作和className的区别" class="headerlink" title="类操作和className的区别"></a>类操作和className的区别</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 受用原生js，className会覆盖原先的类名</span></span><br><span class="line"><span class="keyword">var</span> one = <span class="built_in">document</span>.querySelector(<span class="string">&quot;.one&quot;</span>);</span><br><span class="line">one.className = <span class="string">&quot;two&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个addClass相当于追加类名，不影响以前的类名</span></span><br><span class="line">$(<span class="string">&quot;.one&quot;</span>).addClass(<span class="string">&quot;two&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="jquery效果"><a href="#jquery效果" class="headerlink" title="jquery效果"></a>jquery效果</h2><h4 id="显示、隐藏、下滑、上滑、切换效果"><a href="#显示、隐藏、下滑、上滑、切换效果" class="headerlink" title="显示、隐藏、下滑、上滑、切换效果"></a>显示、隐藏、下滑、上滑、切换效果</h4><p><code>show([speed,[eading],[fn]])</code></p>
+<p><code>hide([speed,[eading],[fn]])</code></p>
+<p><code>slideDown([speed,[eading],[fn]])</code></p>
+<p><code>slideUp([speed,[eading],[fn]])</code></p>
+<p><code>slideToggle([speed,[eading],[fn]])</code></p>
+<p>显示参数：</p>
+<ol>
+<li>参数都可以省略，无动画直接显示</li>
+<li>speed：三种预定速度之一的字符串(“slow”, “normal”, “fast”)或表示动画时长的毫秒数值</li>
+<li>easing：（Optional）用来指定切换效果(匀速或加速)，默认是”swing”，可用参数”linear”</li>
+<li>fn: 回调函数，在动画完成时执行的函数，每个元素执行一次</li>
+</ol>
+<p><strong>案例：接上面的滑动下拉菜单</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式一</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">// 鼠标经过</span></span><br><span class="line">	$(<span class="string">&quot;.nav&gt;li&quot;</span>).mouseover(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="comment">// $(this)  jquery当前元素  this不加引号</span></span><br><span class="line">		<span class="comment">// show()显示元素  hide()隐藏元素</span></span><br><span class="line">		<span class="comment">// $(this).children(&quot;ul&quot;).show();</span></span><br><span class="line">        $(<span class="built_in">this</span>).children(<span class="string">&quot;ul&quot;</span>).slideDown();</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="comment">// 鼠标离开</span></span><br><span class="line">	$(<span class="string">&quot;.nav&gt;li&quot;</span>).mouseout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="comment">// $(this).children(&quot;ul&quot;).hide();</span></span><br><span class="line">        $(<span class="built_in">this</span>).children(<span class="string">&quot;ul&quot;</span>).slideUp();</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式二</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    $(<span class="string">&quot;.nav&gt;li&quot;</span>).hover(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        $(<span class="built_in">this</span>).children(<span class="string">&quot;ul&quot;</span>).slideDown();</span><br><span class="line">    &#125;), <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        $(<span class="built_in">this</span>).children(<span class="string">&quot;ul&quot;</span>).slideUp();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式三</span></span><br><span class="line"><span class="comment">// 事件切换 hover 如果只写一个函数，那么鼠标经过和鼠标离开都会触发一个函数</span></span><br><span class="line">$(<span class="string">&quot;.nav&gt;li&quot;</span>).hover(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    $(<span class="built_in">this</span>).children(<span class="string">&quot;ul&quot;</span>).slideToggle();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="事件切换"><a href="#事件切换" class="headerlink" title="事件切换"></a>事件切换</h4><p><code>hover([over,]out)</code></p>
+<ol>
+<li>over: 鼠标移到元素上要触发的函数（相当于mouseenter）</li>
+<li>out: 鼠标移出元素要触发的函数（相当于mouseleave）</li>
+</ol>
+<h4 id="动画队列及其停止排队方法"><a href="#动画队列及其停止排队方法" class="headerlink" title="动画队列及其停止排队方法"></a>动画队列及其停止排队方法</h4><ol>
+<li><p>动画或效果排队</p>
+<p>动画一旦触发就会执行，如果多次触发，就造成多个动画或者排队执行</p>
+</li>
+<li><p>停止排队</p>
+<p><code>stop()</code></p>
+<ol>
+<li><p>stop()方法用于停止动画或效果</p>
+</li>
+<li><p>注意：stop()写到动画或者效果的前面，相当于停止结束上一次的动画</p>
+<p><code>$(this).children(&quot;ul&quot;).stop().slideToggle()</code></p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="淡入淡出"><a href="#淡入淡出" class="headerlink" title="淡入淡出"></a>淡入淡出</h4><ol>
+<li>fadeIn()</li>
+<li>fadeOut()</li>
+<li>fadeToggle()</li>
+</ol>
+<h4 id="自定义动画"><a href="#自定义动画" class="headerlink" title="自定义动画"></a>自定义动画</h4><p><code>animate(params, [speed], [easing], [fn])</code></p>
+<ol>
+<li><p>params: 想要修改的样式属性，以对象形式传递，必须写。<strong>属性名可以不用带引号，如果是复合属性则需要采用驼峰式命名法borderLeft。</strong>其余参数都可以省略</p>
+</li>
+<li><p>速度</p>
+</li>
+<li><p>easing</p>
+</li>
+<li><p>回调函数</p>
+</li>
+</ol>
+<p>例如：<code>$(&quot;div&quot;).animate(&#123; left: 500, opacity: .4 &#125;);</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1224,486 +1778,6 @@
 <li>因为dom里面看不见刚才创建的元素，所以我们称为伪元素</li>
 <li>伪元素和标签选择器一样，权重为一</li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/10/css1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lazycat">
-      <meta itemprop="description" content="Notes on front-end learning">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="web">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/10/css1/" class="post-title-link" itemprop="url">css笔记1</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2021-10-10 08:15:00 / 修改时间：18:24:23" itemprop="dateCreated datePublished" datetime="2021-10-10T08:15:00+08:00">2021-10-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="CSS基础选择器"><a href="#CSS基础选择器" class="headerlink" title="CSS基础选择器"></a>CSS基础选择器</h2><p><em><em>标签选择器、类选择器、id选择器、通配符选择器(</em> {})</em>*</p>
-<ol>
-<li><p>类选择器(class)，可以有多个名字，同一个名字可以被多人使用</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&#x27;name&#x27;</span>&gt;</span>name<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&#x27;name&#x27;</span>&gt;</span>zhangsan<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>id选择器，唯一，不能重复</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;name&#x27;</span>&gt;</span>name<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;name&#x27;</span>&gt;</span>zhangsan<span class="tag">&lt;/<span class="name">div</span>&gt;</span> // 错误，id名不能重复</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="CSS字体属性"><a href="#CSS字体属性" class="headerlink" title="CSS字体属性"></a>CSS字体属性</h2><h4 id="字体粗细"><a href="#字体粗细" class="headerlink" title="字体粗细"></a>字体粗细</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">	<span class="attribute">font-weight</span>: bold;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th align="left">属性值</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">normal</td>
-<td align="left">默认值(不加粗的)</td>
-</tr>
-<tr>
-<td align="left">bold</td>
-<td align="left">定义粗体(加粗的)</td>
-</tr>
-<tr>
-<td align="left">100-900</td>
-<td align="left">400等同于normal，700等同于bold</td>
-</tr>
-</tbody></table>
-<h4 id="文字样式"><a href="#文字样式" class="headerlink" title="文字样式"></a>文字样式</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">	<span class="attribute">font-style</span>: normal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>normal</td>
-<td>默认值，浏览器会显示标准的字体样式</td>
-</tr>
-<tr>
-<td>italic</td>
-<td>浏览器会显示斜体的字体样式</td>
-</tr>
-</tbody></table>
-<p><strong>注意：平时很少给字体加斜体，反而要给斜体标签(em, i)改为不倾斜字体</strong></p>
-<p><strong>复合属性：</strong>简写的方式</p>
-<p><code>font: font-style font-weight font-size/line-height font-family;</code></p>
-<p><code>font: italic 700 16px/12px &#39;Microsoft yahei&#39;</code></p>
-<ul>
-<li>使用<code>font</code>属性，不能更改顺序，以空格隔开</li>
-<li>不需要的属性可以省略。但必须保留<code>font-size, font-family</code>，否则font属性将不起作用</li>
-</ul>
-<h2 id="CSS文本属性"><a href="#CSS文本属性" class="headerlink" title="CSS文本属性"></a>CSS文本属性</h2><h4 id="对齐文本"><a href="#对齐文本" class="headerlink" title="对齐文本"></a>对齐文本</h4><p><code>text-align</code>属性用于设置<strong>元素内文本内容的水平对齐方式</strong></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">	// 本质是让<span class="selector-tag">h1</span>盒子里面的文字水平居中对齐</span><br><span class="line">	<span class="attribute">text-align</span>: center;  // <span class="attribute">left</span> <span class="attribute">right</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="装饰文本"><a href="#装饰文本" class="headerlink" title="装饰文本"></a>装饰文本</h4><p><code>text-decoration</code>文本的修饰，给文本添加下划线、删除线、上划线等</p>
-<p>四个属性值：none ,  underline , overline , line-through</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">	<span class="attribute">text-decoration</span>: underline;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="文本缩进"><a href="#文本缩进" class="headerlink" title="文本缩进"></a>文本缩进</h4><p><code>text-indent</code>属性用来指定文本的第一行的缩进，通常是将<strong>段落首行缩进</strong></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">text-indent</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">	<span class="attribute">text-indent</span>: <span class="number">2em</span>;  // 缩进两个文字大小</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>em是一个相对单位，就是当前元素(font-size)<strong>一个文字的大小</strong>, 如果当前元素没有设置大小，则会按照父元素的1个文字大小</p>
-<h4 id="行间距"><a href="#行间距" class="headerlink" title="行间距"></a>行间距</h4><p><code>line-height</code>设置行间的距离, 不改变文字大小，只改变上下间距</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">	<span class="attribute">line-height</span>: <span class="number">26px</span>;  // 字体默认是<span class="number">16px</span>, 所以上下间距各<span class="number">5px</span>像素</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="./image/%E8%A1%8C%E9%97%B4%E8%B7%9D.png" alt="行间距"></p>
-<h2 id="Emmet语法"><a href="#Emmet语法" class="headerlink" title="Emmet语法"></a>Emmet语法</h2><h4 id="快速生成HTML结构语法"><a href="#快速生成HTML结构语法" class="headerlink" title="快速生成HTML结构语法"></a>快速生成HTML结构语法</h4><ol>
-<li>生成标签，输入标签名按tab键即可， div 然后按tab键</li>
-<li>生成多个相同标签，div*3 然后tab键，就可以快速生成3个div</li>
-<li>生成父子级关系的标签，用 <code>&gt;</code>  比如 ul&gt;li</li>
-<li>生成兄弟关系的标签，用 <code>+</code> 就可以 ，div+p</li>
-<li>生成带有类名或id名字的，直接 <code>.demo 或 #two</code> ，tab键就可以了</li>
-<li>如果生成的div类名是有顺序的，可以用自增符号 <code>$</code> 比如 <code>.demo$*5</code></li>
-</ol>
-<h4 id="快速格式化代码"><a href="#快速格式化代码" class="headerlink" title="快速格式化代码"></a>快速格式化代码</h4><p><strong>vscode快速格式化代码：shift+alt+f</strong></p>
-<p><strong>也可以设置当我们保存页面的时候自动格式化代码：</strong></p>
-<ol>
-<li><p>文件–首选项–设置</p>
-</li>
-<li><p>搜索 emmet.include;</p>
-</li>
-<li><p>在settings.json下的【用户】中添加以下语句：</p>
-<p>“editor.formatOnType”:true,</p>
-<p>“editor.formatOnSave”:true</p>
-<p>只需要设置一次即可，以后都可以自动保存格式化代码</p>
-</li>
-</ol>
-<p><strong>注：新版本搜format后勾选 On Save即可</strong></p>
-<h2 id="CSS的复合选择器"><a href="#CSS的复合选择器" class="headerlink" title="CSS的复合选择器"></a>CSS的复合选择器</h2><ol>
-<li>后代选择器： 元素1  元素2  {  }</li>
-<li>子选择器：     元素1&gt;元素2  {  }</li>
-<li>并级选择器：  元素1，元素2  {  }</li>
-</ol>
-<h4 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h4><p><strong>伪类选择器</strong>用于向某些选择器添加特殊的效果，比如给链接添加特殊效果，或选择第一个，的n个元素</p>
-<p><strong>链接伪类选择器：</strong></p>
-<ol>
-<li>a:link           // 选择所有未被访问的链接</li>
-<li>a:visited      //  选择所有已被访问的链接</li>
-<li>a:hover       //  选择鼠标指针位于其上的链接</li>
-<li>a:active       //  选择活动链接（鼠标按下未弹起的链接）</li>
-</ol>
-<p>注意：需要按照顺序书写<strong>LVHA</strong></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 例子</span><br><span class="line"><span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#369</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: underline;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>:focus伪类选择器：</strong></p>
-<p>用于选取获得焦点的表单元素</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:focus</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: pink;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;<span class="selector-tag">input</span> type=&quot;text&quot;&gt; </span><br></pre></td></tr></table></figure>
-
-<h2 id="CSS的元素显示模式"><a href="#CSS的元素显示模式" class="headerlink" title="CSS的元素显示模式"></a>CSS的元素显示模式</h2><h4 id="行内元素"><a href="#行内元素" class="headerlink" title="行内元素"></a>行内元素</h4><p>常见的行内元素&lt;a&gt; , &lt;strong&gt; , &lt;b&gt; , &lt;em&gt; , &lt;i&gt; , &lt;del&gt; , &lt;s&gt; , &lt;ins&gt; , &lt;u&gt; , &lt;span&gt;等</p>
-<ol>
-<li>相邻行内元素在一行上</li>
-<li><strong>宽和高直接设置是无效的</strong></li>
-<li>默认宽度就是他本身内容的宽度</li>
-<li>行内元素只能容纳文本或其他行内元素</li>
-</ol>
-<p>注意：链接中不能再放链接，链接&lt;a&gt;可以放块级元素</p>
-<h4 id="行内块元素"><a href="#行内块元素" class="headerlink" title="行内块元素"></a>行内块元素</h4><p>&lt;img /&gt;  &lt;input /&gt;  &lt;td&gt;</p>
-<ol>
-<li>一行可以显示多个(行内元素特点)</li>
-<li>默认宽度就是它本身内容的宽度(行内元素特点)</li>
-<li>宽，高，内边距，外边距都可以控制(块级元素特点)</li>
-</ol>
-<h4 id="显示模式的转换"><a href="#显示模式的转换" class="headerlink" title="显示模式的转换"></a>显示模式的转换</h4><p><strong>转化为块级元素</strong></p>
-<p><code>display: block;</code></p>
-<p><strong>转化为行内元素</strong></p>
-<p><code>display: inline;</code></p>
-<p><strong>转化为行内块级元素</strong></p>
-<p><code>display: inline-block;</code></p>
-<h4 id="snipaste小工具的使用"><a href="#snipaste小工具的使用" class="headerlink" title="snipaste小工具的使用"></a>snipaste小工具的使用</h4><p>Snipaste是一个简单但强大的截图工具，也可以让你将截图贴回到屏幕上。</p>
-<p>常用快捷方式：</p>
-<ol>
-<li>F1 可以截图，同时测量大小，设置箭头，书写文字等</li>
-<li>F3 在桌面置顶显示</li>
-<li>点击图片，alt可以取色 (按下 shift 可以切换色模式)</li>
-<li>按下esc取消图片显示</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/09/nodejs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lazycat">
-      <meta itemprop="description" content="Notes on front-end learning">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="web">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/09/nodejs/" class="post-title-link" itemprop="url">nodejs创建服务器</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-10-09 16:14:39" itemprop="dateCreated datePublished" datetime="2021-10-09T16:14:39+08:00">2021-10-09</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-10-22 20:56:12" itemprop="dateModified" datetime="2021-10-22T20:56:12+08:00">2021-10-22</time>
-      </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="nodejs创建服务器"><a href="#nodejs创建服务器" class="headerlink" title="nodejs创建服务器"></a>nodejs创建服务器</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件： index.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入http模块</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="comment">// 创建服务器</span></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 完成发送请求，并向页面响应指定的内容</span></span><br><span class="line">    res.end(<span class="string">&#x27;hello Node&#x27;</span>)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 服务监听</span></span><br><span class="line">server.listen(<span class="number">3000</span>,<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>,<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;服务器运行&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p> <code>node index.js </code> 启动服务器</p>
-<p>在浏览器中访问：<code>http://127.0.0.1:3000</code></p>
-<h4 id="加载页面"><a href="#加载页面" class="headerlink" title="加载页面"></a>加载页面</h4><p><strong>加载页面需要用到 fs 模块</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.writeHead(<span class="number">200</span>,&#123;<span class="string">&#x27;Content-Type&#x27;</span>:<span class="string">&#x27;text/html;charset=utf-8&#x27;</span>&#125;)</span><br><span class="line">    fs.readFile(<span class="string">&#x27;./index.html&#x27;</span>,<span class="function">(<span class="params">err,data</span>)=&gt;</span>&#123;</span><br><span class="line">        res.end(data)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><strong>在html页面中，如果引用了css，js ，图片，那就需要把它们都加载出来</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 与 index.js 同一个路径下的 style.css和style.js</span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./style.css&#x27;</span>,<span class="function">(<span class="params">err,data</span>)=&gt;</span>&#123;</span><br><span class="line">        res.end(data)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">&#x27;./public.js&#x27;</span>,<span class="function">(<span class="params">err,data</span>)=&gt;</span>&#123;</span><br><span class="line">        res.end(data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="url-的详细信息"><a href="#url-的详细信息" class="headerlink" title="url 的详细信息"></a>url 的详细信息</h4><p>假如访问的是<code>http://127.0.0.1:3000/index?name=zyh&amp;age=18</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">&#x27;url&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> localhost = <span class="string">&#x27;127.0.0.1&#x27;</span></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">    res.statusCode = <span class="number">200</span></span><br><span class="line">    res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>,<span class="string">&#x27;text/html;charset=utf-8&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">console</span>.log(req.url)   <span class="comment">// 得到 /index?name=jj&amp;age=12</span></span><br><span class="line">    <span class="keyword">let</span> myUrl = url.parse(req.url) <span class="comment">// 将 URL 字符串转成 URL 对象</span></span><br><span class="line">    <span class="built_in">console</span>.log(myUrl)     <span class="comment">// 得到 </span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        Url &#123;</span></span><br><span class="line"><span class="comment">          protocol: null, slashes: null, auth: null, host: null, port: null, hostname: null, hash: null,</span></span><br><span class="line"><span class="comment">          search: &#x27;?name=jj&amp;age=12&#x27;, query: &#x27;name=jj&amp;age=12&#x27;, pathname: &#x27;/index&#x27;, </span></span><br><span class="line"><span class="comment">          path: &#x27;/index?name=jj&amp;age=12&#x27;, href: &#x27;/index?name=jj&amp;age=12&#x27;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">// 获取参数, 将数据字符串转换成 URLSearchParams 对象</span></span><br><span class="line">    <span class="keyword">let</span> params = <span class="keyword">new</span> URLSearchParams(myUrl.query)</span><br><span class="line">    <span class="comment">// 遍历参数</span></span><br><span class="line">    <span class="built_in">console</span>.log(params)   <span class="comment">// URLSearchParams &#123; &#x27;name&#x27; =&gt; &#x27;jj&#x27;, &#x27;age&#x27; =&gt; &#x27;12&#x27; &#125;</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">console</span>.log(params.get(<span class="string">&#x27;age&#x27;</span>))  <span class="comment">// 12</span></span><br><span class="line">    </span><br><span class="line">    params.forEach(<span class="function">(<span class="params">param</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(param)   <span class="comment">// jj 12</span></span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    params.forEach(<span class="function">(<span class="params">value,key</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(value)</span><br><span class="line">        <span class="built_in">console</span>.log(key)    <span class="comment">//  jj name  12 age</span></span><br><span class="line">        res.write(<span class="string">`&lt;h1&gt;参数：<span class="subst">$&#123;key&#125;</span> = <span class="subst">$&#123;value&#125;</span>&lt;/h1&gt;`</span>)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    res.end()</span><br><span class="line">&#125;)</span><br><span class="line">server.listen(<span class="number">8080</span>,localhost,<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;服务器正在运行&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><strong>url.parse(req.url, true): 第二个参数为true，query属性会生成一个对象，默认为false</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url.parse(req.url, <span class="literal">true</span>).query <span class="comment">//[Object: null prototype] &#123;name:&#x27;jj&#x27;, age:&#x27;12&#x27;&#125;</span></span><br><span class="line">url.parse(req.url, <span class="literal">true</span>).query.age   <span class="comment">// 得到 12</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="EJS模块"><a href="#EJS模块" class="headerlink" title="EJS模块"></a>EJS模块</h2><p><code>npm i ejs --save</code></p>
-<h4 id="模板的渲染"><a href="#模板的渲染" class="headerlink" title="模板的渲染"></a>模板的渲染</h4><p><strong>ejs</strong> 模板的后缀名为 <strong><code>.ejs</code></strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 文件名: temp.ejs--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        &lt;% users.forEach(user =&gt; &#123; %&gt;</span><br><span class="line">         <span class="tag">&lt;<span class="name">li</span>&gt;</span>&lt;%= user %&gt; <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        &lt;% &#125;) %&gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 ejs 模块</span></span><br><span class="line"><span class="keyword">const</span> ejs = <span class="built_in">require</span>(<span class="string">&#x27;ejs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.writeHead(<span class="number">200</span>, &#123; <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;text/html;charset=utf-8&#x27;</span> &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 读取模板并渲染</span></span><br><span class="line">    ejs.renderFile(<span class="string">&#x27;./temp.ejs&#x27;</span>,&#123;<span class="attr">users</span>:[<span class="string">&#x27;张三&#x27;</span>,<span class="string">&#x27;李四&#x27;</span>,<span class="string">&#x27;王五&#x27;</span>]&#125;,<span class="function">(<span class="params">err,data</span>)=&gt;</span>&#123;</span><br><span class="line">        res.end(data)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;).listen(<span class="number">3000</span>, <span class="string">&#x27;127.0.0.1&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>脚本标签</strong></p>
-<p><code>&lt;% JavaScript脚本 %&gt;</code></p>
-<p><strong>输出标签</strong></p>
-<p><code>&lt;%=变量%&gt;</code></p>
-<p><strong>导入模板</strong></p>
-<p><code>&lt;%- include(&#39;header&#39;) -%&gt;</code></p>
-<h2 id="Express"><a href="#Express" class="headerlink" title="Express"></a>Express</h2><p><code>npm i express</code></p>
-<p>​    Express 是一个简洁而灵活的 node.js Web应用框架, 提供了一系列强大特性帮助你创建各种 Web 应用，和丰富的 HTTP 工具。使用 Express 可以快速地搭建一个完整功能的网站。</p>
-<h4 id="创建应用"><a href="#创建应用" class="headerlink" title="创建应用"></a>创建应用</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 express 模块</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="comment">// 创建应用</span></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="comment">// 路由</span></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// 向页面发送信息</span></span><br><span class="line">    res.send(<span class="string">&#x27;Hello Express&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 监听3000端口</span></span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
-
-<h4 id="相应数据"><a href="#相应数据" class="headerlink" title="相应数据"></a>相应数据</h4><p><strong>向网页发送各种类型的响应： res.send(….)</strong></p>
-<p><strong>响应文件</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件路径必须为绝对路径</span></span><br><span class="line">res.sendFile(<span class="string">`<span class="subst">$&#123;__dirname&#125;</span>/index.html`</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>响应JSON数据</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接响应JSON</span></span><br><span class="line">res.json(&#123;<span class="attr">name</span>:<span class="string">&#x27;张三&#x27;</span>,<span class="attr">age</span>:<span class="number">20</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 响应JSON文件</span></span><br><span class="line">res.sendFile(<span class="string">`<span class="subst">$&#123;__dirname&#125;</span>/data.json`</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>重定向</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式一</span></span><br><span class="line">res.redirect(<span class="string">&#x27;/index.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式二</span></span><br><span class="line">res.redirect(<span class="number">302</span>,<span class="string">&#x27;/index.html&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>结束响应</strong></p>
-<p><code>res.end()</code></p>
-<h4 id="获取参数"><a href="#获取参数" class="headerlink" title="获取参数"></a>获取参数</h4><p><strong>GET请求参数获取</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求网址：http://127.0.0.1:3000/?id=10</span></span><br><span class="line">app.get(<span class="string">&#x27;/index&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(req.query.id) <span class="comment">// 输出：10</span></span><br><span class="line">    res.end()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 请求网址：http://127.0.0.1:3000/index/10</span></span><br><span class="line"> app.get(<span class="string">&#x27;/index/:id&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(req.params.id) <span class="comment">// 输出：10</span></span><br><span class="line">    res.end()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><strong>POST请求参数获取</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取普通参数</span></span><br><span class="line">app.use(express.urlencoded(&#123;<span class="attr">extended</span>:<span class="literal">true</span>&#125;))</span><br><span class="line">app.post(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(req.body.id)</span><br><span class="line">    res.end()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取JSON格式的参数</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>)</span><br><span class="line">app.use(bodyParser.json())</span><br><span class="line">app.use(express.urlencoded(&#123; <span class="attr">extended</span>: <span class="literal">true</span> &#125;))</span><br><span class="line">app.post(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(req.body.id)</span><br><span class="line">    res.end()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="静态资源加载"><a href="#静态资源加载" class="headerlink" title="静态资源加载"></a>静态资源加载</h4><p>当静态文件在 static/css/style.css, 使用了静态资源加载<code>app.use(express.static(&#39;static&#39;))</code>, 就可以在html文件中直接引用<code>&lt;link rel=&quot;stylesheet&quot; href=&quot;css/style.css&quot;&gt;</code>,  在<code>res.sendFile</code> 发送页面时，就可以自动加载 <code>.css、.js</code>这种静态资源</p>
-<p>优化了代码, 就不需要<code>fs.readFile</code> 一个一个加载静态资源</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(<span class="string">&#x27;.css/style.css&#x27;</span>,<span class="function">(<span class="params">err,data</span>)=&gt;</span>&#123;</span><br><span class="line">        res.end(data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 express 模块</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="comment">// 创建应用</span></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line"><span class="comment">// static 为静态资源所在的目录</span></span><br><span class="line"><span class="comment">// $&#123;__dirname&#125;为当前文件(index.js)所在路径</span></span><br><span class="line">app.use(express.static(<span class="string">&#x27;static&#x27;</span>))</span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.sendFile(<span class="string">`<span class="subst">$&#123;__dirname&#125;</span>/index.html`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="EJS模板渲染"><a href="#EJS模板渲染" class="headerlink" title="EJS模板渲染"></a>EJS模板渲染</h4><p><strong>加载并渲染模板</strong><br>模板路径：/views/index.ejs</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置模板引擎类型</span></span><br><span class="line">app.set(<span class="string">&#x27;view engine&#x27;</span>,<span class="string">&#x27;ejs&#x27;</span>)</span><br><span class="line"><span class="comment">// 设置模板所在的目录</span></span><br><span class="line">app.set(<span class="string">&#x27;views&#x27;</span>,<span class="string">`<span class="subst">$&#123;__dirname&#125;</span>/views`</span>)</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 渲染模板并发送给客户端</span></span><br><span class="line">    res.render(<span class="string">&#x27;index&#x27;</span>,&#123;<span class="attr">msg</span>:<span class="string">&#x27;EJS&#x27;</span>&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><strong>将模板文件的后缀改为 .html</strong><br>模板路径：/views/index.html</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.set(<span class="string">&#x27;view engine&#x27;</span>, <span class="string">&#x27;html&#x27;</span>)</span><br><span class="line">app.set(<span class="string">&#x27;views&#x27;</span>, <span class="string">`<span class="subst">$&#123;__dirname&#125;</span>/views`</span>)</span><br><span class="line">app.engine(<span class="string">&#x27;html&#x27;</span>, <span class="built_in">require</span>(<span class="string">&#x27;ejs&#x27;</span>).renderFile)</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 渲染模板并发送给客户端</span></span><br><span class="line">    res.render(<span class="string">&#x27;index&#x27;</span>,&#123;<span class="attr">msg</span>:<span class="string">&#x27;EJS&#x27;</span>&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>初始化网站</strong></p>
-<ol>
-<li>npm init</li>
-<li>npm i express</li>
-<li>npm i ejs</li>
-</ol>
-<p><strong>入口程序 index.js</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="comment">//创建主应用</span></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line"><span class="comment">//模板引擎的设置</span></span><br><span class="line"><span class="comment">// 设置模板引擎类型</span></span><br><span class="line">app.set(<span class="string">&#x27;view engine&#x27;</span>, <span class="string">&#x27;html&#x27;</span>)</span><br><span class="line"><span class="comment">// 设置模板所在的目录</span></span><br><span class="line">app.set(<span class="string">&#x27;views&#x27;</span>, <span class="string">`<span class="subst">$&#123;__dirname&#125;</span>/views`</span>)</span><br><span class="line">app.engine(<span class="string">&#x27;html&#x27;</span>, <span class="built_in">require</span>(<span class="string">&#x27;ejs&#x27;</span>).renderFile)</span><br><span class="line"></span><br><span class="line"><span class="comment">//静态资源配置</span></span><br><span class="line">app.use(express.static(<span class="string">&#x27;static&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用首页子应用</span></span><br><span class="line">app.use(<span class="regexp">/\/(index)?/</span>,<span class="built_in">require</span>(<span class="string">&#x27;./router/index&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">//监听服务器</span></span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>子应用</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  /router/index.js</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> indexApp = express()</span><br><span class="line"></span><br><span class="line">indexApp.get(<span class="string">&#x27;/&#x27;</span>,  <span class="function">(<span class="params">req,res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.render(<span class="string">&#x27;index&#x27;</span>, &#123; <span class="attr">msg</span>:<span class="string">&#x27;EJS&#x27;</span> &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = indexApp</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/09/mysql-install/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lazycat">
-      <meta itemprop="description" content="Notes on front-end learning">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="web">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/09/mysql-install/" class="post-title-link" itemprop="url">mysql的安装和远程连接</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2021-10-09 14:41:49 / 修改时间：20:49:02" itemprop="dateCreated datePublished" datetime="2021-10-09T14:41:49+08:00">2021-10-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="linux下安装mysql"><a href="#linux下安装mysql" class="headerlink" title="linux下安装mysql"></a>linux下安装mysql</h2><ol>
-<li><p>新建文件夹/opt/mysql，并cd进去</p>
-</li>
-<li><p>运行wget <a target="_blank" rel="noopener" href="http://dev.mysql.com/get/mysql-5.7.26-1.el7.x86_64.rpm-bundle.tar%EF%BC%8C%E4%B8%8B%E8%BD%BDmysql%E5%AE%89%E8%A3%85%E5%8C%85">http://dev.mysql.com/get/mysql-5.7.26-1.el7.x86_64.rpm-bundle.tar，下载mysql安装包</a></p>
-<blockquote>
-<p>centos7.6自带的类mysql数据库是mariadb，会跟mysql冲突，要先删除</p>
-</blockquote>
-</li>
-<li><p>运行tar -xvf mysql-5.7.26-1.el7.x86_64.rpm-bundle.tar </p>
-</li>
-<li><p>运行rpm -qa|grep mari，查询mariadb相关安装包</p>
-</li>
-<li><p>运行rpm -e –nodeps mariadb-libs，卸载</p>
-</li>
-<li><p>然后开始真正安装mysql，依次运行以下几条</p>
-<p>rpm -ivh mysql-community-common-5.7.26-1.el7.x86_64.rpm</p>
-<p>rpm -ivh mysql-community-libs-5.7.26-1.el7.x86_64.rpm</p>
-<p>rpm -ivh mysql-community-client-5.7.26-1.el7.x86_64.rpm</p>
-<p>rpm -ivh mysql-community-server-5.7.26-1.el7.x86_64.rpm</p>
-<p><strong>注：在执行最后一条语句可能会发生错误，可能缺少依赖！问题的解决可自行百度</strong></p>
-</li>
-<li><p>运行systemctl start mysqld.service，启动mysql</p>
-</li>
-<li><p>然后开始设置root用户密码</p>
-<p>Mysql自动给root用户设置随机密码，运行grep “password” /var/log/mysqld.log可看到当前密码</p>
-</li>
-<li><p>运行mysql -u root  -p，用root用户登录，提示输入密码可用上述的，可以成功登陆进入mysql命令行</p>
-</li>
-<li><p>设置root密码，对于个人开发环境，如果要设比较简单的密码（****生产环境服务器要设复杂密码****），可以运行</p>
-<p>set global validate_password_policy=0;  提示密码设置策略(密码的复杂程度)</p>
-<p>（validate_password_policy默认值为1）</p>
-</li>
-<li><p>set password for ‘root‘@’localhost’ =password(‘zyh001’);  <strong>括号内为新设置的密码</strong></p>
-<p>运行flush privileges;使密码设置生效</p>
-</li>
-</ol>
-<h2 id="使用sqlyog远程登录mysql"><a href="#使用sqlyog远程登录mysql" class="headerlink" title="使用sqlyog远程登录mysql"></a>使用sqlyog远程登录mysql</h2><ol>
-<li><p>打开云服务器，添加mysql端口</p>
-<p><img src="./image/mysql.png" alt="mysql"></p>
-</li>
-<li><p>执行<code>firewall-cmd --state</code>查看防火墙状态为running</p>
-<p>然后测试端口是否能 <code>telnet</code> , 在电脑的cmd命令下输入 <code>telnet ip地址 3306</code> ，不行的话需要开放3306端口 <code>firewall-cmd --permanent --add-port=3306/tcp</code> , 然后执行 <code>firewall -cmd --reload</code></p>
-</li>
-<li><p>要启用对数据库的外部访问，需要将 localhost 更改为<code>%</code></p>
-<p>用Xsheel登录到云服务器，输入命令 <code>mysql -u root -p</code>  , 输入密码进入mysql，依次输入:</p>
-<ol>
-<li><p>use mysql</p>
-</li>
-<li><p>select host,user from user</p>
-</li>
-<li><p>update user set host=”%”</p>
-</li>
-<li><p>flush privileges</p>
-</li>
-</ol>
-</li>
-<li><p>打开SQLyog进行连接</p>
-<p><img src="./image/sqlyog.png" alt="sqlyog"></p>
-</li>
-</ol>
-<h2 id="nodejs-连接-mysql"><a href="#nodejs-连接-mysql" class="headerlink" title="nodejs 连接 mysql"></a>nodejs 连接 mysql</h2><ol>
-<li>npm init</li>
-<li>npm i mysql</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入 node_modules 中的 mysql 模块</span></span><br><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&#x27;mysql&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数据库连接对象</span></span><br><span class="line"><span class="keyword">const</span> connection = mysql.createConnection(&#123;</span><br><span class="line">    <span class="attr">host</span>:<span class="string">&#x27;ip地址&#x27;</span>,</span><br><span class="line">    <span class="attr">user</span>:<span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">    <span class="attr">password</span>:<span class="string">&#x27;zzzz&#x27;</span>,</span><br><span class="line">    <span class="attr">database</span>:<span class="string">&#x27;sql&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 连接数据库</span></span><br><span class="line">connection.connect()</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sql = <span class="string">&#x27;INSERT INTO user (username,password) VALUES (?,?)&#x27;</span></span><br><span class="line"><span class="comment">// 给 SQL 语句赋值的数组，赋值顺序与 ? 顺序相同</span></span><br><span class="line"><span class="keyword">let</span> params = [<span class="string">&#x27;张三&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>] </span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二个参数params表示sql中的 ?</span></span><br><span class="line">connection.query(sql,params,<span class="function"><span class="keyword">function</span>(<span class="params">err,result</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err.message)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`受影响行数：<span class="subst">$&#123;result.affectedRows&#125;</span>`</span>)</span><br><span class="line">    <span class="keyword">if</span>(result.affectedRows &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;插入成功！&#x27;</span>)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`插入数据的ID：<span class="subst">$&#123;result.insertId&#125;</span>`</span>)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;插入失败！&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 关闭数据库链接</span></span><br><span class="line">connection.end()</span><br></pre></td></tr></table></figure>
-
 
       
     </div>

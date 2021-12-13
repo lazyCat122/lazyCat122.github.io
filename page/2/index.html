@@ -83,8 +83,8 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">17</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">37</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">19</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">39</span></a></li>
   </ul>
 </nav>
 
@@ -129,13 +129,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -164,6 +164,304 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/06/vue%E7%BB%84%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/11/06/vue%E7%BB%84%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91/" class="post-title-link" itemprop="url">vue组件化开发</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-06 19:39:15" itemprop="dateCreated datePublished" datetime="2021-11-06T19:39:15+08:00">2021-11-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-07 19:28:01" itemprop="dateModified" datetime="2021-11-07T19:28:01+08:00">2021-11-07</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="主键注册"><a href="#主键注册" class="headerlink" title="主键注册"></a>主键注册</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 全局组件</span><br><span class="line">Vue.component(组件名称, &#123;</span><br><span class="line">	data: 组件数据,</span><br><span class="line">	template: 组件模板内容</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个名为button-counter的新组件</span><br><span class="line">Vue.component(&#x27;button-counter&#x27;, &#123;</span><br><span class="line">	data: function()&#123;</span><br><span class="line">		return &#123; count: 0 &#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	template: &#x27;&lt;button v-on:click=&quot;count++&quot;&gt;点击了&#123;&#123;count&#125;&#125;次&lt;/button&gt;&#x27;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 使用。 &lt;div id=&#x27;app&#x27;&gt;是一个根组件</span><br><span class="line">&lt;div id=&#x27;app&#x27;&gt;</span><br><span class="line">	&lt;button-counter&gt;&lt;/button-counter&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><ol>
+<li><p><strong>vue的模板内容都要放到vue实例中的<code>el</code>所指定的容器中</strong></p>
+</li>
+<li><p><strong>组件的data必须是一个方法，而vue实例中的data是一个对象</strong></p>
+</li>
+<li><p><strong>组件模板内容必须是单个根元素</strong></p>
+</li>
+<li><p><strong>组件模板内容可以是模板字符串</strong></p>
+</li>
+</ol>
+<h4 id="组件的命名方式"><a href="#组件的命名方式" class="headerlink" title="组件的命名方式"></a>组件的命名方式</h4><p>短横线方式：<code>Vue.component(&#39;my-component&#39;, &#123;&#125; )</code></p>
+<p>驼峰方式：<code>Vue.component(&#39;MyComponent&#39;, &#123;&#125; )</code></p>
+<p> <strong>全局组件，不仅可以用到根组件，也可以用到其它的组件</strong></p>
+<p><strong>这是规则：</strong>注意：如果使用驼峰式命名组件，那么在使用组件的时候，只能在字符串模板中用驼峰的方式使用组件，但是在普通的标签模板中，必须使用短横线的方式使用组件。<strong>因为DOM元素不区分大小写</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 在字符串模板中用驼峰的方式使用组件</span><br><span class="line">template: `</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">		&lt;HelloWorld&gt;&lt;/HelloWorld&gt; </span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">`</span><br><span class="line">// 在普通的标签模板中,要把驼峰式转化为短横线的方式。首字母变成小写，用横线隔开单词</span><br><span class="line">&lt;div id=&#x27;app&#x27;&gt;</span><br><span class="line">	&lt;hello-world&gt;&lt;/hello-world&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="局部组件"><a href="#局部组件" class="headerlink" title="局部组件"></a>局部组件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var ComponentA = &#123;  &#125;</span><br><span class="line">var ComponentB = &#123;  &#125;</span><br><span class="line">var ComponentC = &#123;  &#125;</span><br><span class="line">new Vue(&#123;</span><br><span class="line">	el: &#x27;#app&#x27;,</span><br><span class="line">	components: &#123;</span><br><span class="line">		&#x27;component-a&#x27;: ComponentA,</span><br><span class="line">		&#x27;component-b&#x27;: ComponentB,</span><br><span class="line">		&#x27;component-c&#x27;: ComponentC,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：局部组件自能在注册他的父组件中使用</strong></p>
+<h2 id="vue调试工具用法"><a href="#vue调试工具用法" class="headerlink" title="vue调试工具用法"></a>vue调试工具用法</h2><p>地址：<a target="_blank" rel="noopener" href="https://github.com/vuejs/vue-devtools">https://github.com/vuejs/vue-devtools</a></p>
+<ol>
+<li>克隆仓库</li>
+<li>安装依赖包(npm install)</li>
+<li>构建(npm run build)</li>
+<li>打开chrome扩展页面</li>
+<li>选中开发者模式</li>
+<li>加载已解压的扩展，选择shells/chrome</li>
+</ol>
+<h2 id="组件间数据交互"><a href="#组件间数据交互" class="headerlink" title="组件间数据交互"></a>组件间数据交互</h2><h4 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h4><ol>
+<li><p>组件内部通过props接收传递过来的值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&#x27;menu-item&#x27;, &#123;</span><br><span class="line">	prop: [&#x27;title&#x27;],</span><br><span class="line">	template: &#x27;&lt;div&gt;&#123;&#123; title &#125;&#125;&lt;/div&gt;&#x27;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>父组件通过属性将值传递给子组件 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;menu-item title=&#x27;来自父组件的数据&#x27;&gt;&lt;/menu-item&gt;</span><br><span class="line">&lt;menu-item :title=&#x27;title&#x27;&gt;&lt;/menu-item&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>vue实例是一个根组件</p>
+<ol start="3">
+<li><p>props属性名规则</p>
+<ul>
+<li>在props中使用驼峰形式，模板中需要使用短横线的形式</li>
+<li>字符串形式的模板中没有这个限制</li>
+</ul>
+</li>
+<li><p>props属性值类型</p>
+<ul>
+<li>字符串String </li>
+<li>数值Number</li>
+<li>布尔值Boolean</li>
+<li>数组Array</li>
+<li>对象Object</li>
+</ul>
+</li>
+</ol>
+<h4 id="子组件向父组件传值"><a href="#子组件向父组件传值" class="headerlink" title="子组件向父组件传值"></a>子组件向父组件传值</h4><ol>
+<li><p>子组件通过自定义事件向父组件传递信息</p>
+<p><code>&lt;button v-on:click=&#39;$emit(&quot;enlarge-text&quot;)&#39;&gt;扩大字体&lt;/button&gt;</code></p>
+</li>
+<li><p>父组件监听子组件的事件</p>
+<p><code>&lt;menu-item v-on:enlarge-text=&#39;fontSize += 0.1&#39;&gt;&lt;/menu-item&gt;</code></p>
+</li>
+<li><p>子组件通过自定义事件向父组件传递信息</p>
+<p><code>&lt;button v-on:click=&#39;$emit(&quot;enlarge-text&quot;, 0.1)&#39;&gt;扩大字体&lt;/button&gt;</code></p>
+<p>0.1是要传递给父组件的参数</p>
+</li>
+<li><p>父组件监听子组件的事件</p>
+<p><code>&lt;menu-item v-on:enlarge-text=&#39;fontSize += $event&#39;&gt;&lt;/menu-item&gt;</code></p>
+<p>$event代表接受的子组件的参数</p>
+</li>
+</ol>
+<h4 id="非父子组件间传值"><a href="#非父子组件间传值" class="headerlink" title="非父子组件间传值"></a>非父子组件间传值</h4><ol>
+<li><p>单独的事件中心管理组件间的通信</p>
+<p><code>var eventHub = new Vue()</code></p>
+</li>
+<li><p>监听事件与销毁事件</p>
+<p><code>eventHub.$on(&#39;add-todo&#39;, addTodo)</code></p>
+<p><code>eventHub.$off(&#39;add-todo&#39;)</code></p>
+</li>
+<li><p>触发事件 </p>
+<p><code>eventHub.$emit(&#39;add-todo&#39;, id)</code></p>
+</li>
+</ol>
+<h2 id="插槽"><a href="#插槽" class="headerlink" title="插槽"></a>插槽</h2><h4 id="组件插槽"><a href="#组件插槽" class="headerlink" title="组件插槽"></a>组件插槽</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">插槽位置：</span><br><span class="line">Vue.component(&#x27;alert-box&#x27;, &#123;</span><br><span class="line">	template: `</span><br><span class="line">		&lt;div class=&#x27;demo-alert-box&#x27;&gt;</span><br><span class="line">			&lt;strong&gt;Error!&lt;/strong&gt;</span><br><span class="line">			&lt;slot&gt;默认内容&lt;/slot&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">	`</span><br><span class="line">&#125;)</span><br><span class="line">// 插槽内容</span><br><span class="line">&lt;alert-box&gt;SOMETHING&lt;/alert-box&gt;//把标签中的内容传递给slot插槽，会把原本slot插槽中的内容覆盖</span><br></pre></td></tr></table></figure>
+
+<h4 id="具名插槽"><a href="#具名插槽" class="headerlink" title="具名插槽"></a>具名插槽</h4><p><strong>根据名称进行匹配，没有名称的放到默认插槽中</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">base-layout</span>&gt;</span></span><br><span class="line">	// slot的值要和下面的slot的名称匹配</span><br><span class="line">	<span class="tag">&lt;<span class="name">p</span> <span class="attr">slot</span>=<span class="string">&#x27;header&#x27;</span>&gt;</span>标题信息<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>中间信息<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">slot</span>=<span class="string">&#x27;footer&#x27;</span>&gt;</span>底部信息<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    // 如果把插槽的名字标注到便签上，只能标注一个，所以可以使用template标注，属于vue的API</span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">slot</span>=<span class="string">&#x27;header&#x27;</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">p</span>&gt;</span>标题内容一<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>标题内容二<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">base-layout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">sctipt</span>&gt;</span></span><br><span class="line">	Vue.component(&#x27;base-layout&#x27;, &#123;</span><br><span class="line">    	template: `</span><br><span class="line">    		<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&#x27;header&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&#x27;footer&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">    		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    	`</span><br><span class="line">    &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">sctipt</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h4><p>应用场景：父组件对子组件的内容进行加工处理</p>
+<p><strong>流程：就是在父组件中可以获取子组件的数据，并且对这些数据进行加工和处理。获取数据的方式就是通过slot-scope这个属性来得到，它当中得到的值就是从子组件中slot的属性中绑定的这个info</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;app&#x27;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">fruit-list</span> <span class="attr">:list</span>=<span class="string">&#x27;list&#x27;</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">template</span> <span class="attr">slot-scope</span>=<span class="string">&#x27;slotProps&#x27;</span>&gt;</span> // 值的名称是自定义的，通过插槽传递过来数据</span><br><span class="line">        	<span class="tag">&lt;<span class="name">strong</span> <span class="attr">v-if</span>=<span class="string">&#x27;slotProps.info.name==2&#x27;</span>&gt;</span>&#123;&#123;slotProps.info.name&#125;&#125;<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-else</span>&gt;</span>&#123;&#123;slotProps.info.name&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">fruit-list</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sctipt</span>&gt;</span></span><br><span class="line">    // 作用域插槽</span><br><span class="line">    Vue.component(&#x27;fruit-list&#x27;, &#123;</span><br><span class="line">    	props: [&#x27;list&#x27;],</span><br><span class="line">    	template: `</span><br><span class="line">    		<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">:key</span>=<span class="string">&#x27;item.id&#x27;</span> <span class="attr">v-for</span>=<span class="string">&#x27;item in list&#x27;</span>&gt;</span></span><br><span class="line">                	<span class="tag">&lt;<span class="name">slot</span> <span class="attr">:info</span>=<span class="string">&#x27;item&#x27;</span>&gt;</span>&#123;&#123;item.name&#125;&#125;<span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        	<span class="tag">&lt;/<span class="name">div</span>&gt;</span>		</span><br><span class="line">    	`</span><br><span class="line">    &#125;);</span><br><span class="line">    var vm = new Vue(&#123;</span><br><span class="line">    	el: &#x27;#app&#x27;,</span><br><span class="line">        data: &#123;</span><br><span class="line">        	list: [&#123; id: 1, name: &#x27;apple&#x27; &#125;, &#123; id: 2, name: &#x27;orange&#x27; &#125;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">sctipt</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/06/vue%E5%B8%B8%E7%94%A8%E7%89%B9%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/11/06/vue%E5%B8%B8%E7%94%A8%E7%89%B9%E6%80%A7/" class="post-title-link" itemprop="url">vue常用特性</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-06 12:38:38" itemprop="dateCreated datePublished" datetime="2021-11-06T12:38:38+08:00">2021-11-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-24 22:47:31" itemprop="dateModified" datetime="2021-11-24T22:47:31+08:00">2021-11-24</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h2><h4 id="自定义指令-1"><a href="#自定义指令-1" class="headerlink" title="自定义指令"></a>自定义指令</h4><p>inserted是一个钩子函数，固定写法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用自定义属性</span></span><br><span class="line">&lt;div id=<span class="string">&#x27;app&#x27;</span>&gt;</span><br><span class="line">	<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text&#x27;</span> <span class="attr">v-focus</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="comment">// 自定义指令</span></span><br><span class="line">Vue.directice(<span class="string">&#x27;focus&#x27;</span>, &#123;  <span class="comment">// 定义时指令名为focus，使用时v-focus</span></span><br><span class="line">	<span class="attr">inserted</span>: <span class="function"><span class="keyword">function</span>(<span class="params">el</span>)</span>&#123; </span><br><span class="line">		el.focus();  <span class="comment">// el表示指令所绑定的元素</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">	<span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">	<span class="attr">data</span>: &#123;&#125;,</span><br><span class="line">	<span class="attr">methods</span>: &#123;</span><br><span class="line">		<span class="attr">handle</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="局部指令"><a href="#局部指令" class="headerlink" title="局部指令"></a>局部指令</h4><p>局部指令只能在当前组件中使用</p>
+<p>在<strong>vue组件中</strong>接受一个<code>directives</code>的选项</p>
+<p><strong>vue实例本身就是一个组件</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">	<span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">	<span class="attr">data</span>: &#123;&#125;,</span><br><span class="line">	<span class="attr">directives</span>: &#123;</span><br><span class="line">		<span class="attr">focus</span>: &#123;</span><br><span class="line">			<span class="comment">// 指令的定义</span></span><br><span class="line">			<span class="attr">inserted</span>: <span class="function"><span class="keyword">function</span>(<span class="params">el</span>)</span>&#123;</span><br><span class="line">				el.focus()</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h2><ol>
+<li><p>为何需要计算属性</p>
+<p>表达式的计算逻辑可能会比较复杂，使用计算属性可以使模板内容更加简洁</p>
+</li>
+<li><p>计算属性的用法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">	<span class="attr">reversedMessage</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">this</span>.msg.split(<span class="string">&#x27;&#x27;</span>).reverse().join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>计算属性与方法的区别</p>
+<ul>
+<li>计算属性是基于它们的依赖进行缓存的</li>
+<li>方法不存在缓存</li>
+</ul>
+</li>
+</ol>
+<h2 id="侦听器"><a href="#侦听器" class="headerlink" title="侦听器"></a>侦听器</h2><ol>
+<li><p>侦听器的应用场景</p>
+<p>数据变化时执行异步或开销较大(耗时间)的操作</p>
+<p>数据一旦发生变化就通知侦听器所绑定的方法</p>
+<p><img src="./image/%E4%BE%A6%E5%90%AC%E5%99%A8.png" alt="侦听器"></p>
+</li>
+<li><p>侦听器的用法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">    <span class="attr">firstName</span>: <span class="string">&#x27;jim&#x27;</span>,</span><br><span class="line">    <span class="attr">lastName</span>: <span class="string">&#x27;freen&#x27;</span>,</span><br><span class="line">    <span class="attr">fullName</span>: <span class="string">&#x27;jim freen&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="attr">watch</span>: &#123;</span><br><span class="line">    <span class="comment">// firstName和lastName要和绑定的名字一致</span></span><br><span class="line">    <span class="attr">firstName</span>: <span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">        <span class="comment">//val表示变化之后的值</span></span><br><span class="line">        <span class="built_in">this</span>.fullName = val + <span class="built_in">this</span>.lastName;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">lastName</span>: <span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.fullName = <span class="built_in">this</span>.firstName + val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;input type=<span class="string">&#x27;text&#x27;</span> v-model=<span class="string">&#x27;firstName&#x27;</span>&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text&#x27;</span> <span class="attr">v-model</span>=<span class="string">&#x27;lastName&#x27;</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123;fullName&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="侦听器的应用场景"><a href="#侦听器的应用场景" class="headerlink" title="侦听器的应用场景"></a>侦听器的应用场景</h4><p>案例：验证用户名是否可用</p>
+<p>需求：输入框中输入姓名，<strong>失去焦点</strong>时验证是否存在，如果已经存在，提示从新输入，如果不存在，提示可以使用</p>
+<ol>
+<li>通过v-model实现数据绑定</li>
+<li>需要提供提示信息</li>
+<li><strong>需要侦听器监听输入信息的变化</strong></li>
+<li>需要修改触发的事件 (要让失去焦点时触发事件，而不是内容变化时触发事件)</li>
+</ol>
+<p><strong>setTimeout里面的this指向window，所有在它外面先获取this，或者把setTimeout的函数改为箭头函数</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span> = <span class="string">&#x27;app&#x27;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>用户名：<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    // .lazy 也就是在失去焦点 或者 按下回车键时才更新</span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text&#x27;</span> <span class="attr">v-model.lazy</span>=<span class="string">&#x27;uname&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;tip&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&#x27;text/javascript&#x27;</span> <span class="attr">src</span>=<span class="string">&#x27;js/vue.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">sctipt</span> <span class="attr">type</span>=<span class="string">&#x27;text/javascript&#x27;</span>&gt;</span></span><br><span class="line">	// 侦听器 1. 采用侦听器监听用户名的变化 2. 调用后台接口进行验证 3. 根据验证的结果调整提示信息</span><br><span class="line">    var vm = new Vue(&#123;</span><br><span class="line">    	el: &#x27;#app&#x27;,</span><br><span class="line">    	data: &#123; uname:&#x27;&#x27;, tip:&#x27;&#x27; &#125;,</span><br><span class="line">    	methods: &#123;</span><br><span class="line">    		checkName: function(uname)&#123;</span><br><span class="line">    			// 调用接口，但是可以使用定时任务的方式模拟接口调用</span><br><span class="line">    			var that = this;</span><br><span class="line">    			setTimeout(function()&#123;</span><br><span class="line">    				// 模拟接口调用</span><br><span class="line">    				if(uname == &#x27;admin&#x27;)&#123;</span><br><span class="line">    					that.tip = &#x27;用户名已经存在，请更换一个&#x27;;</span><br><span class="line">    				&#125;else&#123;</span><br><span class="line">    					that.tip = &#x27;用户名可以使用&#x27;</span><br><span class="line">    				&#125;</span><br><span class="line">    			&#125;,2000);</span><br><span class="line">    		&#125;</span><br><span class="line">    	&#125;,</span><br><span class="line">    	watch: &#123;</span><br><span class="line">    		uname: function(val)&#123;</span><br><span class="line">    			// 调用后台接口验证用户名的合法性</span><br><span class="line">    			this.checkName(val);</span><br><span class="line">    			// 修改提示信息</span><br><span class="line">    			this.tip = &#x27;正在验证...&#x27;</span><br><span class="line">    		&#125;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">sctipt</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><p><strong>过滤器的作用是什么？</strong></p>
+<p>格式化数据，比如将字符串格式化为首字母大写，将日期格式化为指定的格式等</p>
+<p><strong>自定义过滤器：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// value: 过滤器加到哪里，就加载哪里的数据</span><br><span class="line">Vue.filter(&#x27;过滤器名称&#x27;, function(value)&#123;</span><br><span class="line">	// 过滤器业务逻辑,最后需要return出去</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>过滤器的使用：</strong></p>
+<p>过滤器名称填写的是<code>upper</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;&#123;&#123;msg | upper&#125;&#125;&lt;/div&gt;</span><br><span class="line">&lt;div&gt;&#123;&#123;msg | upper | lower&#125;&#125;&lt;/div&gt;</span><br><span class="line">&lt;div v-bind:id=&quot;id | formatId&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>局部过滤器</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">filters: &#123;</span><br><span class="line">	capitalize: function()&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>带参数的过滤器</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Vue.filter(&#x27;format&#x27;, function(value, arg1)&#123;</span><br><span class="line">	// value就是过滤器传递过来的参数</span><br><span class="line">	return value.charAt(0).toUpperCase() + val.slice(1);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong>第一个参数是默认传递的<code>data</code>数据，format(‘yyyy-MM-dd’)中的参数是从第二个参数(arg1)中开始处理的</p>
+<p><strong>过滤器的使用</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;&#123;&#123;data | format(&#x27;yyyy-MM-dd&#x27;)&#125;&#125;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1483,270 +1781,6 @@
 <hr>
 <p>css定义中的用<code>!important</code>限定的定义是优先级最高的</p>
 <hr>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/14/css-mobile2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lazycat">
-      <meta itemprop="description" content="Notes on front-end learning">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="web">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/14/css-mobile2/" class="post-title-link" itemprop="url">flex弹性布局</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2021-10-14 15:12:13 / 修改时间：22:27:51" itemprop="dateCreated datePublished" datetime="2021-10-14T15:12:13+08:00">2021-10-14</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="flex布局"><a href="#flex布局" class="headerlink" title="flex布局"></a>flex布局</h2><p><strong>display:flex 。使用flex布局，就不分行内元素和块级元素</strong></p>
-<p>采用flex布局的元素，称为flex容器，他的所有子元素自动成为容器成员，称为flex项目</p>
-<p><strong>flex布局原理：</strong></p>
-<p><strong>就是通过给父盒子添加flex属性，来控制子盒子的位置和排列方式</strong></p>
-<h4 id="flex布局父项常见属性"><a href="#flex布局父项常见属性" class="headerlink" title="flex布局父项常见属性"></a>flex布局父项常见属性</h4><ul>
-<li>flex-direction：设置主轴的方向</li>
-<li>justify-content：设置主轴上的子元素排列方式</li>
-<li>flex-wrap：设置子元素是否换行</li>
-<li>align-content：设置侧轴上的子元素的排列方式（多行）</li>
-<li>align-items：设置侧轴上的子元素排列方式（单行）</li>
-<li>flex-flow：复合属性，相当于同时设置了flex-direction和flex-wrap</li>
-</ul>
-<h5 id="主轴和侧轴"><a href="#主轴和侧轴" class="headerlink" title="主轴和侧轴"></a>主轴和侧轴</h5><p>flex-direction属性决定主轴的方向（即项目的排列方向），我们的元素按照主轴方向排列的</p>
-<p>默认x轴为主轴，y轴为侧轴</p>
-<p><img src="./image/flex-direction.png" alt="flex-direction"></p>
-<h5 id="justify-content-设置了主轴上的子元素排列方式"><a href="#justify-content-设置了主轴上的子元素排列方式" class="headerlink" title="justify-content 设置了主轴上的子元素排列方式"></a>justify-content 设置了主轴上的子元素排列方式</h5><p>注意：使用这个属性之前一定要确定好主轴是哪个</p>
-<p>默认的是flex-start</p>
-<p><img src="./image/justify-content.png" alt="justify-content"></p>
-<h5 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h5><p>flex布局中，默认的子元素是不换行的，如果装不开，会缩小子元素的宽度，放到父元素里面</p>
-<table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>nowrap</td>
-<td>默认值，不换行</td>
-</tr>
-<tr>
-<td>wrap</td>
-<td>换行</td>
-</tr>
-</tbody></table>
-<h5 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h5><p>该属性是控制子项在侧轴上的排列方式，在子项为单项（单行）的时候使用</p>
-<p><img src="./image/align-item.png" alt="align-items"></p>
-<h5 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h5><p>设置子项在侧轴上的排列方式，并且只能用于子项出现<strong>换行</strong>的情况（多行），在单行下是没有效果的</p>
-<p><img src="./image/align-content.png" alt="align-content"></p>
-<p><strong>总结：单行找align-items, 多行找align-content</strong></p>
-<h4 id="flex布局子项常见属性"><a href="#flex布局子项常见属性" class="headerlink" title="flex布局子项常见属性"></a>flex布局子项常见属性</h4><ul>
-<li>flex子项目占的份数</li>
-<li>align-self控制子项目自己在侧轴的排列方式</li>
-<li>order属性定义子项的排列顺序（前后顺序）</li>
-</ul>
-<h5 id="flex属性定义子项目分配剩余空间，用flex来表示占多少份数"><a href="#flex属性定义子项目分配剩余空间，用flex来表示占多少份数" class="headerlink" title="flex属性定义子项目分配剩余空间，用flex来表示占多少份数"></a>flex属性定义子项目分配剩余空间，用flex来表示占多少份数</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.item &#123;</span><br><span class="line">	flex: &lt;number&gt;; /* default 0 */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 两边盒子固定，中间盒子自适应。圣杯布局(两边盒子不变，中间盒子自适应)</span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css"><span class="selector-tag">section</span> &#123;</span></span><br><span class="line"><span class="css">	<span class="attribute">width</span>: <span class="number">60%</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">height</span>: <span class="number">150px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">background-color</span>: pink;</span></span><br><span class="line"><span class="css">	<span class="attribute">margin</span>: <span class="number">0</span> auto;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"><span class="selector-tag">section</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>) &#123;</span></span><br><span class="line"><span class="css">	<span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">height</span>: <span class="number">150px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">background-color</span>: red;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css">    // <span class="attribute">flex</span>属性使得子项目分配剩余空间，这里是把剩余空间分为三份</span></span><br><span class="line"><span class="css"><span class="selector-tag">section</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>) &#123;</span></span><br><span class="line"><span class="css">	<span class="attribute">flex</span>: <span class="number">1</span>;   // 占一份剩余空间</span></span><br><span class="line"><span class="css">    <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">section</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">3</span>) &#123;</span></span><br><span class="line"><span class="css">	<span class="attribute">flex</span>: <span class="number">2</span>;       // 占两份剩余空间   </span></span><br><span class="line"><span class="css">    <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"><span class="selector-tag">section</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">4</span>) &#123;</span></span><br><span class="line"><span class="css">	<span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">height</span>: <span class="number">150px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">background-color</span>: blue;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="./image/flex%E5%B1%9E%E6%80%A7.jpg" alt="flex属性"></p>
-<h5 id="align-self-控制子项自己在侧轴上的排列方式"><a href="#align-self-控制子项自己在侧轴上的排列方式" class="headerlink" title="align-self 控制子项自己在侧轴上的排列方式"></a>align-self 控制子项自己在<em>侧轴</em>上的排列方式</h5><p><code>align-self</code> 属性允许单个项目有与其他项目不一样的对齐方式，可覆盖<code>align-items</code>属性。</p>
-<p>默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于<code>stretch</code>。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">span</span><span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>) &#123;</span><br><span class="line">	<span class="comment">/* 设置自己在侧轴上的排列方式 */</span></span><br><span class="line">	<span class="attribute">align-self</span>: flex-end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="order-属性定义项目的排列方式"><a href="#order-属性定义项目的排列方式" class="headerlink" title="order 属性定义项目的排列方式"></a>order 属性定义项目的排列方式</h5><p>数值越小，排列越靠前，默认为0.</p>
-<p>注意：和 z-index 不一样</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/13/css-mobile1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lazycat">
-      <meta itemprop="description" content="Notes on front-end learning">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="web">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/13/css-mobile1/" class="post-title-link" itemprop="url">移动端基础+流式布局</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-10-13 20:10:46" itemprop="dateCreated datePublished" datetime="2021-10-13T20:10:46+08:00">2021-10-13</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-10-14 15:15:37" itemprop="dateModified" datetime="2021-10-14T15:15:37+08:00">2021-10-14</time>
-      </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="视口"><a href="#视口" class="headerlink" title="视口"></a>视口</h2><p>视口(viewport)就是浏览器显示页面内容的屏幕区域。视口可以分为布局视口、视觉时刻、<strong>理想视口</strong></p>
-<p><strong>一般按照理想视口设计的</strong></p>
-<h4 id="理想视口"><a href="#理想视口" class="headerlink" title="理想视口"></a>理想视口</h4><ul>
-<li>为了使网站在移动端有最理想的浏览和阅读宽度而设定</li>
-<li>理想视口，对设备来讲，是最理想的视口尺寸</li>
-<li>需要手动添加meta视口标签通知浏览器操作</li>
-<li>meta视口标签的主要目的：布局视口的宽度应该与理想视口的宽度一致，即设备有多宽，我们布局的视口就有多宽</li>
-</ul>
-<h4 id="meta视口标签"><a href="#meta视口标签" class="headerlink" title="meta视口标签"></a>meta视口标签</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 标准的viewport标签</span><br><span class="line">&lt;meta name=&#x27;viewport&#x27; content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="./image/meta%E8%A7%86%E5%8F%A3%E6%A0%87%E7%AD%BE.png" alt="meta视口标签"></p>
-<h2 id="二倍图"><a href="#二倍图" class="headerlink" title="二倍图"></a>二倍图</h2><h4 id="物理像素-amp-物理像素比"><a href="#物理像素-amp-物理像素比" class="headerlink" title="物理像素&amp;物理像素比"></a>物理像素&amp;物理像素比</h4><ul>
-<li>物理像素点指的是屏幕显示的最小颗粒，是物理真实存在的。这是厂商在出厂时就设置好的，比如苹果6\7\8 是 750*1334</li>
-<li>我们开发时候的1px不是一定等于1个物理像素的</li>
-<li>PC端页面，1个px等于一个物理像素的，但是移动端就不尽相同</li>
-<li>一个px的能显示的物理像素点的个数，称为物理像素比或屏幕像素比</li>
-</ul>
-<p><img src="D:\myblog\source\image\物理像素比.png" alt="物理像素比"></p>
-<p>上图是开发者工具中手机像素(css像素)，<code>375px</code> x <code>667px</code>，但是iPhone 6/7/8的物理像素是 <code>750px</code> x <code>1334px</code>，</p>
-<p>所以它的物理像素比是 2</p>
-<p><img src="./image/%E7%89%A9%E7%90%86%E5%83%8F%E7%B4%A0.png" alt="物理像素"></p>
-<h4 id="二倍图-1"><a href="#二倍图-1" class="headerlink" title="二倍图"></a>二倍图</h4><p>我们需要一个50*50像素(css像素)的图片，直接放到我们的iphone8里面会放大2倍，100*100就会模糊</p>
-<p>我们采取的是放一个100*100 的图片，然后手动的把这个图片缩小为50*50(css像素)</p>
-<p>我们准备的图片比我们实际需要的大小 大2倍，这中方式就是2倍图</p>
-<h2 id="移动端开发方案"><a href="#移动端开发方案" class="headerlink" title="移动端开发方案"></a>移动端开发方案</h2><ol>
-<li><p>单独制作移动端页面（主流）</p>
-<p>PC端页面和移动端页面是不同的，两个页面</p>
-<p>京东商城手机版   淘宝触屏版   苏宁易购手机版。。。</p>
-<p>通常情况下，网址域名前面加<strong>m(mobile)<strong>可以打开移动端。通过判断设备，如果是移动设备打开，则跳到</strong>移动端页面</strong>。比如m.taobao.com   m.jd.com</p>
-</li>
-<li><p>响应式页面兼容移动端（其次）</p>
-<p>三星手机官网</p>
-<p>通过判断屏幕宽度来改变样式，以适应不同终端。</p>
-<p>缺点：制作麻烦，需要花费很大的精力去调兼容性问题</p>
-</li>
-</ol>
-<h2 id="CSS初始化normalize-css"><a href="#CSS初始化normalize-css" class="headerlink" title="CSS初始化normalize.css"></a>CSS初始化normalize.css</h2><p>移动端CSS初始化推荐使用normalize.css</p>
-<ul>
-<li>Normalize.css：保护了有价值的默认值</li>
-<li>Normalize.css：修复了浏览器的bug</li>
-<li>Normalize.css：是模块化的</li>
-<li>Normalize.css：拥有详细的文档</li>
-</ul>
-<p>官方地址：<a target="_blank" rel="noopener" href="http://necolas.github.io/normalize.css/">http://necolas.github.io/normalize.css/</a></p>
-<h2 id="移动端常见布局"><a href="#移动端常见布局" class="headerlink" title="移动端常见布局"></a>移动端常见布局</h2><ol>
-<li>单独制作移动端页面（主流）<ul>
-<li>流式布局（百分比布局）</li>
-<li>flex弹性布局（强烈推荐）</li>
-<li>less+rem+媒体查询布局</li>
-<li>混合布局</li>
-</ul>
-</li>
-<li>响应式页面兼容移动端（其次）<ul>
-<li>媒体查询</li>
-<li>bootstarp</li>
-</ul>
-</li>
-</ol>
-<h2 id="流式布局（百分比布局）"><a href="#流式布局（百分比布局）" class="headerlink" title="流式布局（百分比布局）"></a>流式布局（百分比布局）</h2><ul>
-<li>流式布局，就是百分比布局，也称非固定像素布局</li>
-<li>通过盒子的宽度设置成百分比来根据屏幕的宽度来进行伸缩，不受固定像素的限制，内容向两侧填充</li>
-<li>流式布局方式是移动WEB开发使用的比较常见的布局方式</li>
-<li>max-width, min-width: 盒子伸缩的最大宽度和最小宽度</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">section</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">max-width</span>: <span class="number">980px</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">min-width</span>: <span class="number">320</span>xp;</span></span><br><span class="line"><span class="css">        <span class="attribute">margin</span>: <span class="number">0</span> auto;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">section</span> <span class="selector-tag">div</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">        <span class="attribute">width</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="css">        <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">section</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>) &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: pink;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">section</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>) &#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">background-color</span>: purple;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>三种行内元素转为块级元素的方法：</p>
-<p>（1）display</p>
-<p>（2）float</p>
-<p>（3）position（absolute和fixed）</p>
 
       
     </div>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="express 中间件express 中间件express.static：快速托管静态资源的内置中间件 express.json：解析JSON格式的请求体数据 express.urlencoded：解析 URL-encoded 格式的请求体数据 12345678910111213141516171819&#x2F;&#x2F; express.json：解析JSON格式的请求体数据const express &#x3D; re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mongodb">
+<meta property="og:url" content="http://example.com/2021/12/06/mongodb/index.html">
+<meta property="og:site_name" content="web">
+<meta property="og:description" content="express 中间件express 中间件express.static：快速托管静态资源的内置中间件 express.json：解析JSON格式的请求体数据 express.urlencoded：解析 URL-encoded 格式的请求体数据 12345678910111213141516171819&#x2F;&#x2F; express.json：解析JSON格式的请求体数据const express &#x3D; re">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-06T06:41:37.000Z">
+<meta property="article:modified_time" content="2021-12-08T14:32:40.695Z">
+<meta property="article:author" content="lazycat">
+<meta property="article:tag" content="mongodb">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/12/06/mongodb/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/12/06/mongodb/","path":"2021/12/06/mongodb/","title":"mongodb"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>mongodb | web</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">web</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">19</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">39</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#express-%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">express 中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#express-%E4%B8%AD%E9%97%B4%E4%BB%B6-1"><span class="nav-number">1.0.1.</span> <span class="nav-text">express 中间件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CORS%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82"><span class="nav-number">1.0.2.</span> <span class="nav-text">CORS跨域请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1"><span class="nav-number">1.0.3.</span> <span class="nav-text">静态文件托管</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">mongodb数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mongodb%E5%AE%89%E8%A3%85"><span class="nav-number">2.0.1.</span> <span class="nav-text">mongodb安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8mongodb"><span class="nav-number">2.0.2.</span> <span class="nav-text">使用mongodb</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Mongoose%E5%9F%BA%E4%BA%8EMongoDB%E5%BB%BA%E6%A8%A1%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%85%B3%E8%81%94"><span class="nav-number">2.0.3.</span> <span class="nav-text">使用Mongoose基于MongoDB建模并设置关联</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lazycat"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">lazycat</p>
+  <div class="site-description" itemprop="description">Notes on front-end learning</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/06/mongodb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mongodb
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-06 14:41:37" itemprop="dateCreated datePublished" datetime="2021-12-06T14:41:37+08:00">2021-12-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-12-08 22:32:40" itemprop="dateModified" datetime="2021-12-08T22:32:40+08:00">2021-12-08</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="express-中间件"><a href="#express-中间件" class="headerlink" title="express 中间件"></a>express 中间件</h2><h4 id="express-中间件-1"><a href="#express-中间件-1" class="headerlink" title="express 中间件"></a>express 中间件</h4><p>express.static：快速托管静态资源的内置中间件</p>
+<p>express.json：解析JSON格式的请求体数据</p>
+<p>express.urlencoded：解析 URL-encoded 格式的请求体数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// express.json：解析JSON格式的请求体数据</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>) </span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意：除了错误级别的中间件，其他的中间件，必须在路由之前进行配置</span></span><br><span class="line"><span class="comment">// 通过 express.json() 这个中间件，解析表单中的 JSON 格式的数据</span></span><br><span class="line">app.use(express.json())</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">&#x27;/user&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 在服务器，可以使用 req.body 这个属性，来接收客户端发送过来的请求体数据</span></span><br><span class="line">  <span class="comment">// 默认情况下，如果不配置解析表单数据中间件，则 req.body 默认等于 undefined</span></span><br><span class="line">  <span class="built_in">console</span>.log(req.body)</span><br><span class="line">  res.send(<span class="string">&#x27;ok&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;running……&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// express.urlencoded：解析 URL-encoded 格式的请求体数据</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过 express.urlencoded() 这个中间件，来解析表单中的 url-encoded 格式的数据</span></span><br><span class="line">app.use(express.urlencoded(&#123; <span class="attr">extended</span>: <span class="literal">false</span> &#125;))</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">&#x27;/book&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.body)</span><br><span class="line">  res.send(req.body)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;running……&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="CORS跨域请求"><a href="#CORS跨域请求" class="headerlink" title="CORS跨域请求"></a>CORS跨域请求</h4><ol>
+<li>安装<code>npm i cors</code></li>
+<li>添加语句：<code>app.use(require(&#39;cors&#39;)())</code></li>
+</ol>
+<h4 id="静态文件托管"><a href="#静态文件托管" class="headerlink" title="静态文件托管"></a>静态文件托管</h4><ol>
+<li><p>根路径上新建文件夹public，public文件夹里面新建一个index.html</p>
+</li>
+<li><p>添加<code>app.use(express.static(&#39;public&#39;))</code>   // url默认是根路径</p>
+<p>在浏览器上输入路径<code>localhost:3000/index.html</code>就可以访问到<code>index.html</code>文件</p>
+</li>
+<li><p>或者添加<code>app.use(&#39;/static&#39;, express.static(&#39;public&#39;))</code>  // url路径要有<code>/static</code></p>
+<p>在浏览器上输入路径<code>localhost:3000/static/index.html</code>就可以访问到<code>index.html</code>文件</p>
+</li>
+</ol>
+<h2 id="mongodb数据库"><a href="#mongodb数据库" class="headerlink" title="mongodb数据库"></a>mongodb数据库</h2><h4 id="mongodb安装"><a href="#mongodb安装" class="headerlink" title="mongodb安装"></a>mongodb安装</h4><p><code>vim /etc/yum.repos.d/mongodb-org-4.4.repo</code></p>
+<p>复制粘贴下面代码块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[mongodb-org-4.4]</span><br><span class="line"></span><br><span class="line">name=MongoDB Repository</span><br><span class="line"></span><br><span class="line">baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.4/x86_64/</span><br><span class="line"></span><br><span class="line">gpgcheck=1</span><br><span class="line"></span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line">gpgkey=https://www.mongodb.org/static/pgp/server-4.4.asc</span><br></pre></td></tr></table></figure>
+
+<p><strong>执行代码安装mongodb</strong></p>
+<p><code>sudo yum install -y mongodb-org-4.4.1 mongodb-org-server-4.4.1 mongodb-org-shell-4.4.1 mongodb-org-mongos-4.4.1 mongodb-org-tools-4.4.1</code></p>
+<p><strong>启动mongodb</strong></p>
+<p><code>sudo systemctl start mongod</code></p>
+<p><strong>系统重启后mongodb自动启动</strong></p>
+<p><code>sudo systemctl enable mongod</code>        </p>
+<p><strong>停止mongodb</strong></p>
+<p><code>sudo systemctl stop mongod</code></p>
+<p><strong>重启mongodb</strong></p>
+<p><code>sudo systemctl restart mongod</code></p>
+<h4 id="使用mongodb"><a href="#使用mongodb" class="headerlink" title="使用mongodb"></a>使用mongodb</h4><p><code>npm i mongoose</code> </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mongodb服务器要先启动，mongoose只是一个nodejs中连接和操作mongodb数据库的包而已</span></span><br><span class="line"><span class="keyword">const</span> mongoose = <span class="built_in">require</span>(<span class="string">&#x27;mongoose&#x27;</span>)</span><br><span class="line"><span class="comment">// localhost是ip地址，27017：端口号，express-test：数据库名称</span></span><br><span class="line">mongoose.connect(<span class="string">&#x27;mongodb://localhost:27017/express-test&#x27;</span>, &#123; <span class="attr">useNewUrlParser</span>: <span class="literal">true</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数据库的操作需要定义一个模型</span></span><br><span class="line"><span class="comment">// Product: 模型名(表名)  new mongoose.Schema：定义表结构</span></span><br><span class="line"><span class="keyword">const</span> Product = mongoose.model(<span class="string">&#x27;Product&#x27;</span>, <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="built_in">String</span></span><br><span class="line">&#125;))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写入数据到表结构里</span></span><br><span class="line">Product.insertMany([</span><br><span class="line">    &#123;<span class="attr">title</span>: <span class="string">&#x27;产品1&#x27;</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">title</span>: <span class="string">&#x27;产品2&#x27;</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">title</span>: <span class="string">&#x27;产品3&#x27;</span>&#125;</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用数据库的表结构</span></span><br><span class="line">app.get(<span class="string">&#x27;/products&#x27;</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">    res.send(<span class="keyword">await</span> Product.find()) <span class="comment">// find()查找数据库中的所有记录</span></span><br><span class="line">    <span class="comment">// res.send(await Product.find().skip(1).limit(2))</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">&#x27;/products&#x27;</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> data = req.body</span><br><span class="line">    <span class="keyword">const</span> product = <span class="keyword">await</span> Product.create(data)<span class="comment">// 返回刚插入的数据</span></span><br><span class="line">    res.send(product)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>开发接口常用的方式，不再用浏览器看，用接口请求的方式看</strong></p>
+<ol>
+<li>在vscode中安装 REST Client</li>
+<li>新建文件 test.http(后缀为http)</li>
+<li>在 test.http 文件中就可以访问后端接口了</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">GET http://localhost:4000/products</span><br><span class="line">###</span><br><span class="line">或者 @uri = http://localhost:3000/</span><br><span class="line">GET &#123;&#123;uri&#125;&#125;products</span><br><span class="line">###</span><br><span class="line">// 原生js必须设置Content-Type，在axios中已经封装好了，所以不用单独设置</span><br><span class="line">POST &#123;&#123;uri&#125;&#125;products</span><br><span class="line">Content-Type:application/json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;title&quot;: &quot;产品4&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 服务端接口看上面的代码 </span><br><span class="line">客户端就会返回 &#123; &quot;_id&quot;:&quot;jlkjlk&quot;,&quot;title&quot;: &quot;产品4&quot;,&quot;__v&quot;:0 &#125;，说明插入成功</span><br><span class="line"></span><br><span class="line">再执行 GET &#123;&#123;uri&#125;&#125;products</span><br><span class="line">就会返回一个数组</span><br><span class="line">[</span><br><span class="line">	&#123; &quot;_id&quot;:&quot;jlkjlk&quot;,&quot;title&quot;: &quot;产品4&quot;,&quot;__v&quot;:0 &#125;,</span><br><span class="line">	&#123; &quot;_id&quot;:&quot;jlkjlk&quot;,&quot;title&quot;: &quot;产品4&quot;,&quot;__v&quot;:0 &#125;,</span><br><span class="line">	&#123; &quot;_id&quot;:&quot;jlkjlk&quot;,&quot;title&quot;: &quot;产品4&quot;,&quot;__v&quot;:0 &#125;,</span><br><span class="line">	&#123; &quot;_id&quot;:&quot;jlkjlk&quot;,&quot;title&quot;: &quot;产品4&quot;,&quot;__v&quot;:0 &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用Mongoose基于MongoDB建模并设置关联"><a href="#使用Mongoose基于MongoDB建模并设置关联" class="headerlink" title="使用Mongoose基于MongoDB建模并设置关联"></a>使用Mongoose基于MongoDB建模并设置关联</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// db.js</span></span><br><span class="line"><span class="keyword">const</span> mongoose = <span class="built_in">require</span>(<span class="string">&#x27;mongoose&#x27;</span>)</span><br><span class="line">mongoose.connect(<span class="string">&#x27;mongodb://localhost:27017/express-test&#x27;</span>, &#123; <span class="attr">useNewUrlParser</span>: <span class="literal">true</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Category = mongoose.model(<span class="string">&#x27;Category&#x27;</span>, <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    <span class="attr">name</span>: &#123; <span class="attr">type</span>: <span class="built_in">String</span> &#125; </span><br><span class="line">&#125;))</span><br><span class="line"><span class="keyword">const</span> Post = mongoose.model(<span class="string">&#x27;Post&#x27;</span>, <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    <span class="attr">title</span>: &#123; <span class="attr">type</span>: <span class="built_in">String</span> &#125;,</span><br><span class="line">    <span class="attr">body</span>: &#123; <span class="attr">type</span>: <span class="built_in">String</span> &#125;,</span><br><span class="line">    <span class="attr">category</span>: &#123; <span class="attr">type</span>:mongoose.SchemaTypes.ObjectId, <span class="attr">ref</span>: <span class="string">&#x27;Category&#x27;</span> &#125; <span class="comment">// 关联到category这个表中，存id</span></span><br><span class="line">    <span class="comment">//categorys: [ &#123; type:mongoose.SchemaTypes.ObjectId, ref: &#x27;Category&#x27; &#125; ] // 关联多个分类</span></span><br><span class="line">&#125;))</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">await</span> Post.insertMany([</span><br><span class="line">        &#123; <span class="attr">title</span>: <span class="string">&#x27;列表一&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;内容一&#x27;</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">title</span>: <span class="string">&#x27;列表二&#x27;</span>, <span class="attr">body</span>: <span class="string">&#x27;内容二&#x27;</span> &#125; </span><br><span class="line">    ])</span><br><span class="line">    <span class="keyword">await</span> Category.insertMany([</span><br><span class="line">        &#123; <span class="attr">name</span>: <span class="string">&#x27;nodejs&#x27;</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">name</span>: <span class="string">&#x27;vuejs&#x27;</span> &#125;</span><br><span class="line">    ])</span><br><span class="line">    <span class="keyword">const</span> cat1 = <span class="keyword">await</span> Category.findOne(&#123;<span class="attr">name</span>: <span class="string">&#x27;nodejs&#x27;</span>&#125;)</span><br><span class="line">    <span class="keyword">const</span> cat2 = <span class="keyword">await</span> Category.findOne(&#123;<span class="attr">name</span>: <span class="string">&#x27;vuejs&#x27;</span>&#125;)</span><br><span class="line">    <span class="keyword">const</span> post1 = <span class="keyword">await</span> Category.findOne(&#123;<span class="attr">title</span>: <span class="string">&#x27;列表一&#x27;</span>&#125;)</span><br><span class="line">    <span class="keyword">const</span> post2 = <span class="keyword">await</span> Category.findOne(&#123;<span class="attr">title</span>: <span class="string">&#x27;列表二&#x27;</span>&#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 关联到category这个表中的nodejs这个分类上</span></span><br><span class="line">    post1.category = cat1</span><br><span class="line">    <span class="comment">// post1.categories = [cat1, cat2]</span></span><br><span class="line">    post2.category = cat1</span><br><span class="line">    <span class="keyword">await</span> post1.save()</span><br><span class="line">    <span class="keyword">await</span> post2.save()</span><br><span class="line">    <span class="keyword">const</span> posts = <span class="keyword">await</span> Post.find()<span class="comment">// 输出对象数据多个category:jljlkj</span></span><br><span class="line">    <span class="comment">// populate: 把category这个关联字段查出来</span></span><br><span class="line">    <span class="keyword">const</span> posts = <span class="keyword">await</span> Post.find().populate(<span class="string">&#x27;category&#x27;</span>)<span class="comment">// 输出对象数据多个category:&#123;_id: jljlkj, name: &#x27;nodejs&#x27;, __v: 0&#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(posts)</span><br><span class="line">&#125;</span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cats = <span class="keyword">await</span> Category.find()</span><br><span class="line"><span class="built_in">console</span>.log(cats) </span><br><span class="line">输出[ &#123;<span class="attr">_id</span>: jljlkj,<span class="attr">name</span>:<span class="string">&#x27;nodejs&#x27;</span>,<span class="attr">__v</span>:<span class="number">0</span>&#125;, &#123;<span class="attr">_id</span>: fafdsf,<span class="attr">name</span>:<span class="string">&#x27;vuejs&#x27;</span>,<span class="attr">__v</span>:<span class="number">0</span>&#125; ]</span><br><span class="line"></span><br><span class="line">如何把他关联的post调出来？</span><br><span class="line">从输出中可以看出，在Category这个分类中是没有posts这个字段的，怎么样把它显示出来？</span><br><span class="line"><span class="comment">// 添加一个虚拟字段</span></span><br><span class="line"><span class="keyword">const</span> CategotySchema = <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">	<span class="attr">name</span>: &#123; <span class="attr">type</span>: <span class="built_in">String</span> &#125;</span><br><span class="line">&#125;)</span><br><span class="line">CategorySchema.virtual(<span class="string">&#x27;posts&#x27;</span>, &#123; <span class="comment">//这个posts数据是关联到Post</span></span><br><span class="line">	<span class="attr">localField</span>: <span class="string">&#x27;_id&#x27;</span>,</span><br><span class="line">	<span class="attr">ref</span>: <span class="string">&#x27;Post&#x27;</span>,   <span class="comment">// 参考到Post模型上，从这上面找</span></span><br><span class="line">	<span class="attr">foreignField</span>: <span class="string">&#x27;categories&#x27;</span>,</span><br><span class="line">	<span class="attr">justOne</span>: <span class="literal">false</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> Category = mongoose.model(<span class="string">&#x27;Category&#x27;</span>, CategorySchema)</span><br></pre></td></tr></table></figure>
+
+<p><strong>我们是在CategotySchema中定义的virtual，所以本地键(localField)就表示我们需要用什么键去关联</strong></p>
+<p><strong>外键(foreignField)表示的是 Post中的哪一个键</strong></p>
+<p><strong>_id关联的是外面的Post模型里面的categories</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const cats = await Category.find()</span><br><span class="line">console.log(cats[0].posts) </span><br><span class="line">// 打印出与Category模型相关联的post模型</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mongodb/" rel="tag"># mongodb</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/11/23/Gulp/" rel="prev" title="Gulp">
+                  <i class="fa fa-chevron-left"></i> Gulp
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/12/09/Jest/" rel="next" title="Jest">
+                  Jest <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lazycat</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

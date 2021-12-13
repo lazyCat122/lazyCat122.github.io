@@ -83,8 +83,8 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">17</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">37</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">19</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">39</span></a></li>
   </ul>
 </nav>
 
@@ -129,13 +129,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -164,6 +164,258 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/06/js8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/06/js8/" class="post-title-link" itemprop="url">Web-API-事件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-06 18:47:25" itemprop="dateCreated datePublished" datetime="2021-10-06T18:47:25+08:00">2021-10-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-07 00:21:05" itemprop="dateModified" datetime="2021-10-07T00:21:05+08:00">2021-10-07</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><ol>
+<li>编写一个通用的事件监听函数</li>
+<li>描述事件冒泡的流程</li>
+<li>无限下拉的图片列表，如何监听每个图片的点击</li>
+</ol>
+<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
+<li>事件绑定</li>
+<li>事件冒泡</li>
+<li>时间代理</li>
+</ul>
+<h2 id="事件绑定，事件冒泡，事件代理"><a href="#事件绑定，事件冒泡，事件代理" class="headerlink" title="事件绑定，事件冒泡，事件代理"></a>事件绑定，事件冒泡，事件代理</h2><h4 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;btn1&#x27;</span>)</span><br><span class="line">btn.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;clicked&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通用的事件绑定函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindEvent</span>(<span class="params">elem, type, fn</span>)</span>&#123;</span><br><span class="line">    elem.addEventListener(type, fn)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;btn1&#x27;</span>)</span><br><span class="line">bindEvent(a, <span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(event.target)<span class="comment">// 获取触发的元素 &lt;button id=&#x27;btn1&#x27;&gt;一个按钮&lt;/button&gt;</span></span><br><span class="line">    e.preventDefault()  <span class="comment">// 阻止默认行为</span></span><br><span class="line">    alert(<span class="string">&#x27;clicked&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h4><p><strong>事件冒泡：当前元素中监听事件和，在它上一级，上上一级，只要是它的上级监听事件，都可以把这个事件监听到</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;div1&#x27;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&#x27;p1&#x27;</span>&gt;</span>激活<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&#x27;p2&#x27;</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&#x27;p3&#x27;</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&#x27;p4&#x27;</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;div2&#x27;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&#x27;p5&#x27;</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&#x27;p6&#x27;</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p1 = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;p1&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> body = <span class="built_in">document</span>.body</span><br><span class="line">bindEvent(p1, <span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    e.stopPropagation()  <span class="comment">// 注释这一行，体验冒泡</span></span><br><span class="line">    alert(<span class="string">&#x27;激活&#x27;</span>)        <span class="comment">// 注释后，点击当前元素，先弹出激活，再弹出div1，再弹出取消</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 点击body下的元素，最后都会弹出取消!除非取消冒泡(e.stopPropagation())</span></span><br><span class="line">bindEvent(body, <span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    alert(<span class="string">&#x27;取消&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;div1&#x27;</span>)</span><br><span class="line"><span class="comment">// 点击id=div1下的元素，先弹出div1，再弹出取消</span></span><br><span class="line">bindEvent(div1, <span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    alert(<span class="string">&#x27;div1&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="事件代理"><a href="#事件代理" class="headerlink" title="事件代理"></a>事件代理</h4><ul>
+<li>代码简洁</li>
+<li>减少浏览器内存占用</li>
+<li>但是，不要滥用</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;div3&#x27;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#x27;#&#x27;</span>&gt;</span>a1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#x27;#&#x27;</span>&gt;</span>a1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#x27;#&#x27;</span>&gt;</span>a1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#x27;#&#x27;</span>&gt;</span>a1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span>&gt;</span></span><br><span class="line">        加载更多。。。。</span><br><span class="line">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>事件代理需要用到事件冒泡</strong></p>
+<p><strong>事件代理：不要滥用。结构复杂，不好每个都去绑定事件的情况下，把它绑定到某个父元素上。通过event.target获取元素，然后进行判断</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> div3 = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;div3&#x27;</span>)</span><br><span class="line">bindEvent(div3, <span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">    event.preventDefault()</span><br><span class="line">    <span class="keyword">const</span> target = event.target    <span class="comment">// 获取点击到当前元素，如&lt;a href=&#x27;#&#x27;&gt;a1&lt;/a&gt;&lt;br&gt;</span></span><br><span class="line">    <span class="comment">//if(target.nodeName === &#x27;A&#x27;)&#123;</span></span><br><span class="line">        alert(target.innerHTML)</span><br><span class="line">    <span class="comment">//&#125;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="通用的事件绑定函数"><a href="#通用的事件绑定函数" class="headerlink" title="通用的事件绑定函数"></a>通用的事件绑定函数</h4><p><img src="./image/%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E5%87%BD%E6%95%B0.jpg" alt="事件绑定函数"></p>
+<h4 id="描述事件冒泡的流程"><a href="#描述事件冒泡的流程" class="headerlink" title="描述事件冒泡的流程"></a>描述事件冒泡的流程</h4><ol>
+<li>基于DOM树形结构</li>
+<li>事件会顺着触发元素往上冒泡</li>
+<li>应用场景：代理</li>
+</ol>
+<h4 id="无限下拉图片列表，如何监听每个图片被点击"><a href="#无限下拉图片列表，如何监听每个图片被点击" class="headerlink" title="无限下拉图片列表，如何监听每个图片被点击"></a>无限下拉图片列表，如何监听每个图片被点击</h4><ol>
+<li>事件代理。用上面的通用的事件绑定函数</li>
+<li>用<strong>e.target</strong>获取触发元素</li>
+<li>用<strong>matches</strong>来判断是否是触发元素</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/05/js7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/05/js7/" class="post-title-link" itemprop="url">JS Web API</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-05 21:55:16" itemprop="dateCreated datePublished" datetime="2021-10-05T21:55:16+08:00">2021-10-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-12-05 10:47:12" itemprop="dateModified" datetime="2021-12-05T10:47:12+08:00">2021-12-05</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Web-API:</strong> DOM, BOM, 事件绑定，ajax，存储</p>
+<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><p><strong>前言：vue和react框架应用广泛，封装了DOM操作，但是DOM操作一只都是前端工程师的基础，只会vue而不懂DOM操作的前端程序员不会长久</strong></p>
+<h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><ol>
+<li>DOM是那种数据类型      //  树（DOM树）</li>
+<li>DOM操作的常用API        //  1. DOM节点操作  2. DOM结构操作</li>
+<li>attribute和property的区别</li>
+<li>一次性插入多个DOM节点，考虑性能</li>
+</ol>
+<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ol>
+<li>DOM本质</li>
+<li>DOM节点操作</li>
+<li>DOM结构操作</li>
+<li>DOM性能</li>
+</ol>
+<p> DOM本质：DOM本质是一个树，可以理解为浏览器把拿到的HTML代码结构化，并且浏览器可以识别，js可以操作的一个模型</p>
+<h2 id="DOM节点操作"><a href="#DOM节点操作" class="headerlink" title="DOM节点操作"></a>DOM节点操作</h2><ul>
+<li>获取DOM节点</li>
+<li>atribute</li>
+<li>property</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HTML</span></span><br><span class="line">&lt;div id=<span class="string">&#x27;div1&#x27;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&#x27;container&#x27;</span>&gt;&lt;/div&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;div2&#x27;</span> <span class="attr">class</span>=<span class="string">&#x27;container&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// JS</span></span><br><span class="line"><span class="keyword">const</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;div1&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;div1&#x27;</span>, div1)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> divList = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;div&#x27;</span>) <span class="comment">// 集合</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;divList.length&#x27;</span>, divList.length)  <span class="comment">// divList.length 2</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;divList[1]&#x27;</span>, divList[<span class="number">1</span>])  <span class="comment">// divList[1]                            // &lt;div id=&#x27;div2&#x27; class=&#x27;container&#x27;&gt;&lt;/div&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> containerList = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&#x27;container&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;containerList[1]&#x27;</span>, containerList[<span class="number">1</span>])  <span class="comment">// containerList[1] </span></span><br><span class="line"> <span class="comment">// &lt;div id=&#x27;div2&#x27; class=&#x27;container&#x27;&gt;&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="property形式"><a href="#property形式" class="headerlink" title="property形式"></a>property形式</h4><blockquote>
+<p>property本身不是一个API的名字，它是JS的属性操作的一种形式</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pList = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;p&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> p1 = pList[<span class="number">0</span>]</span><br><span class="line">p1.style.width = <span class="string">&#x27;100px&#x27;</span>    </span><br><span class="line">p1.className = <span class="string">&#x27;red&#x27;</span>     <span class="comment">// &lt;p style:&#x27;width:100px&#x27; class=&#x27;red&#x27;&gt;&lt;/p&gt;</span></span><br><span class="line"><span class="built_in">console</span>.log(p1.nodeName, p1.className) <span class="comment">// p  red</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="attribute形式"><a href="#attribute形式" class="headerlink" title="attribute形式"></a>attribute形式</h4><blockquote>
+<p>通过getAttribute和setAttribute去直接修改html的结构</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">p.getAttribute(<span class="string">&#x27;data-name&#x27;</span>)</span><br><span class="line">p.setAttribute(<span class="string">&#x27;data-name&#x27;</span>, <span class="string">&#x27;imooc&#x27;</span>)</span><br><span class="line"></span><br><span class="line">p.getAttribute(<span class="string">&#x27;style&#x27;</span>)</span><br><span class="line">p.setAttribute(<span class="string">&#x27;style&#x27;</span>, <span class="string">&#x27;font-size:300px&#x27;</span>)</span><br><span class="line"><span class="comment">// 得到 &lt;p data-name=&#x27;imooc&#x27; style=&#x27;font-size:300px&#x27;&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>property和attribute的区别：</strong></p>
+<p><strong>1. property：修改对象属性，不会体现到html结构</strong></p>
+<p><strong>2. attribute：修改html属性，会改变html结构</strong></p>
+<p><strong>两者都有可能引起DOM重新渲染，建议使用property操作</strong></p>
+<h2 id="DOM结构操作"><a href="#DOM结构操作" class="headerlink" title="DOM结构操作"></a>DOM结构操作</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新增、插入节点</span></span><br><span class="line"><span class="keyword">const</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;div1&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="built_in">document</span>.createElement(<span class="string">&#x27;p&#x27;</span>)</span><br><span class="line">p1.innerHTML = <span class="string">&#x27;this is p1&#x27;</span></span><br><span class="line">div1.appendChild(p1)  <span class="comment">// 添加新创建的元素</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&#x27;div1&#x27;</span>&gt;</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>一段文字1<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>一段文字2<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>一段文字3<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;div1&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(div1.childNodes)  <span class="comment">// 3个p元素和4个text文本节点</span></span><br><span class="line"><span class="keyword">const</span> div1ChildNodesP = <span class="built_in">Array</span>.prototype.slice.call(div1.childNodes).filter(</span><br><span class="line">	<span class="function"><span class="params">child</span> =&gt;</span> &#123;<span class="keyword">if</span>(child.nodeType === <span class="number">1</span>) &#123; <span class="keyword">return</span> <span class="literal">true</span> &#125; <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="literal">false</span> &#125;&#125;</span><br><span class="line">)</span><br><span class="line"><span class="built_in">console</span>.log(div1ChildNodesP)  <span class="comment">// 3个p元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除子元素</span></span><br><span class="line"><span class="keyword">const</span> child = div1.childNodes</span><br><span class="line">div1.removeChild(child[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li>节点是一个元素节点，nodeType 属性返回1</li>
+<li>节点是一个属性节点，nodeType 属性返回2</li>
+<li>节点是一个文本节点，nodeType 属性返回3</li>
+<li>节点是一个注释节点，nodeType 属性返回8</li>
+</ul>
+<h2 id="DOM性能"><a href="#DOM性能" class="headerlink" title="DOM性能"></a>DOM性能</h2><ul>
+<li>DOM操作非常”昂贵”，避免频繁的DOM操作</li>
+<li>对DOM查询做缓存</li>
+<li>将频繁操作改为一次操作</li>
+</ul>
+<h4 id="DOM查询做缓存"><a href="#DOM查询做缓存" class="headerlink" title="DOM查询做缓存"></a>DOM查询做缓存</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不缓存DOM查询结果</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> = <span class="number">0</span>; i &lt; <span class="built_in">document</span>.getElementByTagName(<span class="string">&#x27;p&#x27;</span>).length; i++)&#123;</span><br><span class="line">    <span class="comment">// 每次循环都会计算length, 频繁进行DOM查询</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 缓存DOM查询结果</span></span><br><span class="line"><span class="keyword">const</span> pList = <span class="built_in">document</span>.getElementByTagName(<span class="string">&#x27;p&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> length = pList.length</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;length; i++)&#123;</span><br><span class="line">    <span class="comment">// 缓存length, 只进行一次DOM查询</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="将频繁操作改为一次性操作"><a href="#将频繁操作改为一次性操作" class="headerlink" title="将频繁操作改为一次性操作"></a>将频繁操作改为一次性操作</h4><p><strong>一次性插入多个DOM节点，考虑性能</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// html</span></span><br><span class="line">&lt;ul id=<span class="string">&#x27;list&#x27;</span>&gt;&lt;/ul&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ListNode = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;list&#x27;</span>)</span><br><span class="line"><span class="comment">// 创建一个文档片段，此时还没有插入到DOM树中</span></span><br><span class="line"><span class="keyword">const</span> frag = <span class="built_in">document</span>.createDocumentFragment()</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> x=<span class="number">0</span>; x&lt;<span class="number">10</span>; x++)&#123;</span><br><span class="line">    <span class="keyword">const</span> li = <span class="built_in">document</span>.createElement(<span class="string">&#x27;li&#x27;</span>)</span><br><span class="line">    li.innerHTML = <span class="string">&#x27;List item&#x27;</span> + x</span><br><span class="line">    frag.appendChild(li)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 都完成以后，再插入到DOM树中</span></span><br><span class="line">listNode.appendChild(frag)</span><br></pre></td></tr></table></figure>
+
+<h2 id="BOM操作"><a href="#BOM操作" class="headerlink" title="BOM操作"></a>BOM操作</h2><h4 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h4><ul>
+<li>如何识别浏览器的类型     // navigator</li>
+<li>分析拆解url各个部分       // location</li>
+</ul>
+<h4 id="知识点-1"><a href="#知识点-1" class="headerlink" title="知识点"></a>知识点</h4><ul>
+<li>navigator</li>
+<li>screen</li>
+<li>location</li>
+<li>history</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// navigator</span></span><br><span class="line"><span class="keyword">const</span> ua = navigator.userAgent   <span class="comment">//通过 navigator.userAgent拿到浏览器信息</span></span><br><span class="line"><span class="comment">// indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。</span></span><br><span class="line"><span class="keyword">const</span> isChrome = ua.indexOf(<span class="string">&#x27;Chrome&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(isChrome)</span><br><span class="line"></span><br><span class="line"><span class="comment">// screen</span></span><br><span class="line"><span class="built_in">console</span>.log(screen.width)</span><br><span class="line"><span class="built_in">console</span>.log(screen.height)</span><br><span class="line"></span><br><span class="line"><span class="comment">// location</span></span><br><span class="line"><span class="comment">// https://www.baidu.com/class/chapter/115.html?a=100&amp;b=200#Anchor</span></span><br><span class="line">location.protocol  <span class="comment">// https:</span></span><br><span class="line">location.host      <span class="comment">// www.baidu.com</span></span><br><span class="line">location.search    <span class="comment">// ?a=100&amp;b=200</span></span><br><span class="line">location.hash      <span class="comment">// #Anchor</span></span><br><span class="line">location.pathname  <span class="comment">// /class/chapter/115.html</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// history</span></span><br><span class="line">history.back()    <span class="comment">// 后退</span></span><br><span class="line">history.forward() <span class="comment">// 前进</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -315,7 +567,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-10-05 16:46:08" itemprop="dateModified" datetime="2021-10-05T16:46:08+08:00">2021-10-05</time>
+        <time title="修改时间：2021-12-05 10:12:01" itemprop="dateModified" datetime="2021-12-05T10:12:01+08:00">2021-12-05</time>
       </span>
 
   
@@ -378,7 +630,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name</span><br><span class="line">        <span class="built_in">this</span>.age = <span class="number">20</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">sayHi</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> zhangsan = <span class="keyword">new</span> People(<span class="string">&#x27;张三&#x27;</span>)</span><br><span class="line"><span class="comment">// 在class方法中被调用，谁调用this就指向谁</span></span><br><span class="line">zhangsan.sayHi()  <span class="comment">// 打印出 zhangsan  this指向zhangsan这个对象</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="手写bind函数"><a href="#手写bind函数" class="headerlink" title="手写bind函数"></a>手写bind函数</h4><p><strong>bind函数的用法</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params">a, b, c</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;this&#x27;</span>, <span class="built_in">this</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(a, b)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;this is fn1&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 第一个参数就是我们的this,其他参数对应a b c</span></span><br><span class="line"><span class="keyword">const</span> fn2 = fn1.bind(&#123; <span class="attr">x</span>: <span class="number">100</span> &#125;, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>) </span><br><span class="line"><span class="keyword">const</span> res = fn2()</span><br><span class="line"><span class="built_in">console</span>.log(res)   <span class="comment">// this &#123;x: 100&#125; , 10 20 30 , this is fn1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params">a, b, c</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;this&#x27;</span>, <span class="built_in">this</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(a, b, c)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;this is fn1&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 第一个参数就是我们的this,其他参数对应a b c</span></span><br><span class="line"><span class="keyword">const</span> fn2 = fn1.bind(&#123; <span class="attr">x</span>: <span class="number">100</span> &#125;, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>) </span><br><span class="line"><span class="keyword">const</span> res = fn2()</span><br><span class="line"><span class="built_in">console</span>.log(res)   <span class="comment">// this &#123;x: 100&#125; , 10 20 30 , this is fn1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p><img src="./image/bind%E5%87%BD%E6%95%B0.jpg" alt="bind函数"></p>
 <h2 id="实际开发中闭包的应用"><a href="#实际开发中闭包的应用" class="headerlink" title="实际开发中闭包的应用"></a>实际开发中闭包的应用</h2><ol>

@@ -196,10 +196,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-10-14 15:12:13 / 修改时间：22:27:51" itemprop="dateCreated datePublished" datetime="2021-10-14T15:12:13+08:00">2021-10-14</time>
+      <time title="创建时间：2021-10-14 15:12:13" itemprop="dateCreated datePublished" datetime="2021-10-14T15:12:13+08:00">2021-10-14</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-12-13 15:42:31" itemprop="dateModified" datetime="2021-12-13T15:42:31+08:00">2021-12-13</time>
+      </span>
 
   
 </div>
@@ -225,10 +231,60 @@
 </ul>
 <h5 id="主轴和侧轴"><a href="#主轴和侧轴" class="headerlink" title="主轴和侧轴"></a>主轴和侧轴</h5><p>flex-direction属性决定主轴的方向（即项目的排列方向），我们的元素按照主轴方向排列的</p>
 <p>默认x轴为主轴，y轴为侧轴</p>
-<p><img src="./image/flex-direction.png" alt="flex-direction"></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>row</td>
+<td>默认值从左到右</td>
+</tr>
+<tr>
+<td>row-reverse</td>
+<td>从右到左</td>
+</tr>
+<tr>
+<td>column</td>
+<td>从上到下</td>
+</tr>
+<tr>
+<td>column-reverse</td>
+<td>从下到上</td>
+</tr>
+</tbody></table>
 <h5 id="justify-content-设置了主轴上的子元素排列方式"><a href="#justify-content-设置了主轴上的子元素排列方式" class="headerlink" title="justify-content 设置了主轴上的子元素排列方式"></a>justify-content 设置了主轴上的子元素排列方式</h5><p>注意：使用这个属性之前一定要确定好主轴是哪个</p>
 <p>默认的是flex-start</p>
-<p><img src="./image/justify-content.png" alt="justify-content"></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flex-start</td>
+<td>默认值 从头部开始，如果主轴是x轴，则从左到右</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td>从尾部开始排列</td>
+</tr>
+<tr>
+<td>center</td>
+<td>在主轴居中对齐</td>
+</tr>
+<tr>
+<td>space-around</td>
+<td>平分剩余空间</td>
+</tr>
+<tr>
+<td>space-between</td>
+<td>先两边贴边，再平分剩余空间</td>
+</tr>
+</tbody></table>
 <h5 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h5><p>flex布局中，默认的子元素是不换行的，如果装不开，会缩小子元素的宽度，放到父元素里面</p>
 <table>
 <thead>
@@ -247,9 +303,63 @@
 </tr>
 </tbody></table>
 <h5 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h5><p>该属性是控制子项在侧轴上的排列方式，在子项为单项（单行）的时候使用</p>
-<p><img src="./image/align-item.png" alt="align-items"></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flex-start</td>
+<td>默认值 从上到下</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td>从下到上</td>
+</tr>
+<tr>
+<td>center</td>
+<td>挤在一起居中(垂直居中)</td>
+</tr>
+<tr>
+<td>stretch</td>
+<td>拉伸</td>
+</tr>
+</tbody></table>
 <h5 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h5><p>设置子项在侧轴上的排列方式，并且只能用于子项出现<strong>换行</strong>的情况（多行），在单行下是没有效果的</p>
-<p><img src="./image/align-content.png" alt="align-content"></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flex-start</td>
+<td>默认值在侧轴的头部开始排列</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td>在侧轴的尾部开始排列</td>
+</tr>
+<tr>
+<td>center</td>
+<td>在侧轴中间显示</td>
+</tr>
+<tr>
+<td>space-around</td>
+<td>子项在侧轴平分剩余空间</td>
+</tr>
+<tr>
+<td>space-between</td>
+<td>子项在侧轴先分布在两头，再平分剩余空间</td>
+</tr>
+<tr>
+<td>stretch</td>
+<td>设置子项元素高度平分父元素高度</td>
+</tr>
+</tbody></table>
 <p><strong>总结：单行找align-items, 多行找align-content</strong></p>
 <h4 id="flex布局子项常见属性"><a href="#flex布局子项常见属性" class="headerlink" title="flex布局子项常见属性"></a>flex布局子项常见属性</h4><ul>
 <li>flex子项目占的份数</li>

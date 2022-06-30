@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="项目功能 短信验证码登录、注册  vuex 地址管理、订单管理、购物车数据管理  router  导航守卫  支付、分享   封装tabbar使用淘宝无限适配 tabbar的跳转使用replace，没有回退：this.$route.replace(‘&#x2F;home’)，如果是当前路由切换，就不跳转 images放到public文件夹下，使用绝对路径 .&#x2F;images&#x2F;home.png 跳转样式的改变：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="茶七网笔记">
+<meta property="og:url" content="http://example.com/2022/04/15/%E8%8C%B6%E4%B8%83%E7%BD%91%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="web">
+<meta property="og:description" content="项目功能 短信验证码登录、注册  vuex 地址管理、订单管理、购物车数据管理  router  导航守卫  支付、分享   封装tabbar使用淘宝无限适配 tabbar的跳转使用replace，没有回退：this.$route.replace(‘&#x2F;home’)，如果是当前路由切换，就不跳转 images放到public文件夹下，使用绝对路径 .&#x2F;images&#x2F;home.png 跳转样式的改变：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-15T12:34:28.000Z">
+<meta property="article:modified_time" content="2022-04-17T07:16:13.930Z">
+<meta property="article:author" content="lazycat">
+<meta property="article:tag" content="项目面试题">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/04/15/%E8%8C%B6%E4%B8%83%E7%BD%91%E7%AC%94%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/04/15/%E8%8C%B6%E4%B8%83%E7%BD%91%E7%AC%94%E8%AE%B0/","path":"2022/04/15/茶七网笔记/","title":"茶七网笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>茶七网笔记 | web</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">web</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">42</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%8A%9F%E8%83%BD"><span class="nav-number">1.</span> <span class="nav-text">项目功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%81%E8%A3%85tabbar"><span class="nav-number">2.</span> <span class="nav-text">封装tabbar</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#config%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E8%B7%AF%E5%BE%84"><span class="nav-number">3.</span> <span class="nav-text">config文件配置路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%B4%E9%83%A8topbar%E5%88%87%E6%8D%A2%E6%8F%92%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">头部topbar切换插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#swiper%E6%8F%92%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">swiper插件</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lazycat"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">lazycat</p>
+  <div class="site-description" itemprop="description">Notes on front-end learning</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/15/%E8%8C%B6%E4%B8%83%E7%BD%91%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          茶七网笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-15 20:34:28" itemprop="dateCreated datePublished" datetime="2022-04-15T20:34:28+08:00">2022-04-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-04-17 15:16:13" itemprop="dateModified" datetime="2022-04-17T15:16:13+08:00">2022-04-17</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="项目功能"><a href="#项目功能" class="headerlink" title="项目功能"></a>项目功能</h4><ol>
+<li><p>短信验证码登录、注册</p>
+</li>
+<li><p>vuex</p>
+<p>地址管理、订单管理、购物车数据管理</p>
+</li>
+<li><p>router</p>
+</li>
+<li><p>导航守卫</p>
+</li>
+<li><p>支付、分享</p>
+</li>
+</ol>
+<h4 id="封装tabbar"><a href="#封装tabbar" class="headerlink" title="封装tabbar"></a>封装tabbar</h4><p>使用淘宝无限适配</p>
+<p>tabbar的跳转使用replace，没有回退：this.$route.replace(‘/home’)，如果是当前路由切换，就不跳转</p>
+<p>images放到public文件夹下，使用绝对路径 ./images/home.png</p>
+<p>跳转样式的改变：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data数据：</span><br><span class="line">routerList:[&#123;title:&#x27;首页&#x27;,path:&#x27;/home&#x27;,active:&#x27;./images/home.png&#x27;,selected:&#x27;./images/home-select.png&#x27;&#125;,&#123;&#125;,&#123;&#125;,&#123;&#125;]</span><br><span class="line"></span><br><span class="line">&lt;img :src=&quot;$route.path.includes(item.path)?item.selected:item.active&quot; alt=&quot;&quot;&gt;</span><br><span class="line">&lt;span :class=&#x27;$route.path.includes(item.path)?&quot;active&quot;:&quot;&quot;&#x27;</span><br></pre></td></tr></table></figure>
+
+<h4 id="config文件配置路径"><a href="#config文件配置路径" class="headerlink" title="config文件配置路径"></a>config文件配置路径</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vue.config.js文件：</span><br><span class="line">let path = require(&#x27;path&#x27;);</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  configureWebpack: (config)=&gt;&#123;</span><br><span class="line">    config.resolve = &#123;</span><br><span class="line">      extensions: [&#x27;.js&#x27;,&#x27;.json&#x27;,&#x27;.vue&#x27;],</span><br><span class="line">      alias: &#123;</span><br><span class="line">        &#x27;@&#x27;: path.resolve(__dirname, &#x27;./src&#x27;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="头部topbar切换插件"><a href="#头部topbar切换插件" class="headerlink" title="头部topbar切换插件"></a>头部topbar切换插件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">github上ly-tab插件</span><br><span class="line">1. 下载插件</span><br><span class="line">	npm install ly-tab -S</span><br><span class="line">2. 引入插件</span><br><span class="line">	import LyTab from &#x27;ly-tab&#x27;</span><br><span class="line">	Vue.use(LyTab)</span><br></pre></td></tr></table></figure>
+
+<h4 id="swiper插件"><a href="#swiper插件" class="headerlink" title="swiper插件"></a>swiper插件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-awesome-swiper@3.1.3 -S</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%A1%B9%E7%9B%AE%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag"># 项目面试题</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/22/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98css/" rel="prev" title="前端面试题css">
+                  <i class="fa fa-chevron-left"></i> 前端面试题css
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lazycat</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

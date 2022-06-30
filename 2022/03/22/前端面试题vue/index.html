@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="vue2.x生命周期1234567891011121314151617181920212223241. 有哪些生命周期   系统自带：beforeCreate, created, beforeMount, mounted, beforeUpdate, updated, beforeDestroy, destroyed2. 一旦进入到页面或者组件，会执行哪些生命周期，顺序   beforeCreat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试题">
+<meta property="og:url" content="http://example.com/2022/03/22/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98vue/index.html">
+<meta property="og:site_name" content="web">
+<meta property="og:description" content="vue2.x生命周期1234567891011121314151617181920212223241. 有哪些生命周期   系统自带：beforeCreate, created, beforeMount, mounted, beforeUpdate, updated, beforeDestroy, destroyed2. 一旦进入到页面或者组件，会执行哪些生命周期，顺序   beforeCreat">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-22T11:09:45.000Z">
+<meta property="article:modified_time" content="2022-04-17T06:53:41.520Z">
+<meta property="article:author" content="lazycat">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="前端面试题">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/03/22/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98vue/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/03/22/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98vue/","path":"2022/03/22/前端面试题vue/","title":"前端面试题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>前端面试题 | web</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">web</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">42</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#vue2-x%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.</span> <span class="nav-text">vue2.x生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9keep-alive%E7%9A%84%E4%BA%86%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">谈谈你对keep-alive的了解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v-if%E5%92%8Cv-show%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">v-if和v-show的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v-if%E5%92%8Cv-for%E8%B0%81%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7%E9%AB%98"><span class="nav-number">4.</span> <span class="nav-text">v-if和v-for谁的优先级高</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ref%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">5.</span> <span class="nav-text">ref是什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nextTick%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">6.</span> <span class="nav-text">nextTick是什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scoped%E5%8E%9F%E7%90%86"><span class="nav-number">7.</span> <span class="nav-text">scoped原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue%E4%B8%AD%E7%9A%84%E6%A0%B7%E5%BC%8F%E7%A9%BF%E9%80%8F"><span class="nav-number">8.</span> <span class="nav-text">vue中的样式穿透</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E4%BC%A0%E5%80%BC%E9%80%9A%E4%BF%A1"><span class="nav-number">9.</span> <span class="nav-text">vue组件之间如何传值通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#computed-methods-watch%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">10.</span> <span class="nav-text">computed  methods  watch有什么区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#props-%E5%92%8C-data-%E4%BC%98%E5%85%88%E7%BA%A7%E8%B0%81%E9%AB%98"><span class="nav-number">11.</span> <span class="nav-text">props 和 data 优先级谁高</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vuex%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B1%9E%E6%80%A7"><span class="nav-number">12.</span> <span class="nav-text">Vuex有哪些属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vuex%E6%98%AF%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81%E8%BF%98%E6%98%AF%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="nav-number">13.</span> <span class="nav-text">vuex是单向数据流还是双向数据流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vuex%E4%B8%AD%E7%9A%84mutations%E5%92%8Cactions%E5%8C%BA%E5%88%AB"><span class="nav-number">14.</span> <span class="nav-text">vuex中的mutations和actions区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vuex%E5%A6%82%E4%BD%95%E5%81%9A%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8"><span class="nav-number">15.</span> <span class="nav-text">vuex如何做持久化存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F"><span class="nav-number">16.</span> <span class="nav-text">vue路由模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8BSPA%E4%BB%A5%E5%8F%8ASPA%E6%9C%89%E4%BB%80%E4%B9%88%E7%BC%BA%E7%82%B9"><span class="nav-number">17.</span> <span class="nav-text">介绍一下SPA以及SPA有什么缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue%E8%B7%AF%E5%BE%84%E4%BC%A0%E5%80%BC"><span class="nav-number">18.</span> <span class="nav-text">vue路径传值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">19.</span> <span class="nav-text">路由导航守卫有哪些</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="nav-number">20.</span> <span class="nav-text">vue动态路由</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lazycat"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">lazycat</p>
+  <div class="site-description" itemprop="description">Notes on front-end learning</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/22/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98vue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lazycat">
+      <meta itemprop="description" content="Notes on front-end learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="web">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前端面试题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-22 19:09:45" itemprop="dateCreated datePublished" datetime="2022-03-22T19:09:45+08:00">2022-03-22</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-04-17 14:53:41" itemprop="dateModified" datetime="2022-04-17T14:53:41+08:00">2022-04-17</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="vue2-x生命周期"><a href="#vue2-x生命周期" class="headerlink" title="vue2.x生命周期"></a>vue2.x生命周期</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1. 有哪些生命周期</span><br><span class="line"></span><br><span class="line">   系统自带：beforeCreate, created, beforeMount, mounted, beforeUpdate, updated, beforeDestroy, destroyed</span><br><span class="line"></span><br><span class="line">2. 一旦进入到页面或者组件，会执行哪些生命周期，顺序</span><br><span class="line"></span><br><span class="line">   beforeCreate, created, beforeMount, mounted</span><br><span class="line"></span><br><span class="line">3. 在哪个阶段有$el, 哪个阶段有$data</span><br><span class="line"></span><br><span class="line">   beforeCreate 啥也没有</span><br><span class="line"></span><br><span class="line">   created  有data，没有el  发送请求时</span><br><span class="line"></span><br><span class="line">   beforeMount  有data，没有el</span><br><span class="line"></span><br><span class="line">   mounted  都有  调用插件时</span><br><span class="line"></span><br><span class="line">4. 如果加入了keep-alive会多两个生命周期</span><br><span class="line">   activated, deactivated</span><br><span class="line">5. 如果加入了keep-alive，第一次进入组件会执行那些生命周期</span><br><span class="line">   beforeCreate, created, beforeMount, mounted, activated</span><br><span class="line">6. 如果加入了keep-alive，第二次或者第N次进入组件会执行那些生命周期</span><br><span class="line">   只执行一个生命周期：activated</span><br></pre></td></tr></table></figure>
+
+<h4 id="谈谈你对keep-alive的了解"><a href="#谈谈你对keep-alive的了解" class="headerlink" title="谈谈你对keep-alive的了解"></a>谈谈你对keep-alive的了解</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 是什么</span><br><span class="line">vue系统自带的一个组件，功能：是来缓存组件的。提升性能</span><br><span class="line">2. 使用场景</span><br><span class="line">就是用来缓存组件的，提升项目的性能。具体实现比如：首页进入到详情页，如果用户在首页每次点击都是相同的，那么详情页就没必要请求N次了，直接缓存起来就可以了，当然如果点击的不是同一个，那么就直接请求</span><br></pre></td></tr></table></figure>
+
+<h4 id="v-if和v-show的区别"><a href="#v-if和v-show的区别" class="headerlink" title="v-if和v-show的区别"></a>v-if和v-show的区别</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 展示场景不同</span><br><span class="line">v-if 是创建一个dom节点</span><br><span class="line">v-show 是display：none</span><br><span class="line">2. 使用场景</span><br><span class="line">初次加载v-if要比v-show好，页面不会做加载盒子</span><br><span class="line">频繁切换v-show要比v-if好，创建和删除的开销太大了，显示和隐藏开销较小</span><br></pre></td></tr></table></figure>
+
+<h4 id="v-if和v-for谁的优先级高"><a href="#v-if和v-for谁的优先级高" class="headerlink" title="v-if和v-for谁的优先级高"></a>v-if和v-for谁的优先级高</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v-for的优先级要比v-if高</span><br></pre></td></tr></table></figure>
+
+<h4 id="ref是什么"><a href="#ref是什么" class="headerlink" title="ref是什么"></a>ref是什么</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">来获取dom的, 相等于document.getElementById(&#x27;img&#x27;)</span><br><span class="line">&lt;div ref=&#x27;img&#x27;&gt;&lt;/div&gt;</span><br><span class="line">this.$refs.img.clientHeight</span><br></pre></td></tr></table></figure>
+
+<h4 id="nextTick是什么"><a href="#nextTick是什么" class="headerlink" title="nextTick是什么"></a>nextTick是什么</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">获取更新后的dom内容</span><br><span class="line"></span><br><span class="line">&lt;button @click=&#x27;btn&#x27; ref=&#x27;box&#x27;&gt;&#123;&#123;str&#125;&#125;&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">this.str = &#x27;bbb&#x27;</span><br><span class="line"></span><br><span class="line">this.$nextTick(()=&gt;&#123;</span><br><span class="line">	console.log(this.$refs.box.innerHTML) //bbb</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="scoped原理"><a href="#scoped原理" class="headerlink" title="scoped原理"></a>scoped原理</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 作用：让样式在本组件中生效，不影响其他组件</span><br><span class="line">2. 原理：给节点新增自定义属性，然后css根据属性选择器添加样式</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">属性选择器</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">	div[data-v-xxx]&#123;</span><br><span class="line">		background: red;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div data-v-xxx&gt;111&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="vue中的样式穿透"><a href="#vue中的样式穿透" class="headerlink" title="vue中的样式穿透"></a>vue中的样式穿透</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1. 让css只在当前组件中生效</span><br><span class="line">	&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">2. scss , stylus</span><br><span class="line">scss穿透: </span><br><span class="line">	1. 下载 npm install sass-loader node-sass --save</span><br><span class="line">	2. &lt;styel lang=&#x27;scss&#x27; scoped&gt;</span><br><span class="line">	3. scss 样式穿透</span><br><span class="line">		父元素 /deep/ 子元素</span><br><span class="line">stylus穿透:</span><br><span class="line">	1. 下载 npm install stylus stylus-loader --save</span><br><span class="line">	2. &lt;style lang=&#x27;stylus&#x27; scoped&gt;</span><br><span class="line">	3. stylus 样式穿透</span><br><span class="line">		父元素 &gt;&gt;&gt; 子元素</span><br><span class="line">3.  通用样式穿透：::v-deep .ly-tabbar</span><br></pre></td></tr></table></figure>
+
+<h4 id="vue组件之间如何传值通信"><a href="#vue组件之间如何传值通信" class="headerlink" title="vue组件之间如何传值通信"></a>vue组件之间如何传值通信</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 父组件 传值 子组件</span><br><span class="line">父组件：&lt;Header :msg=&#x27;msg&#x27;&gt;&lt;/Header&gt;</span><br><span class="line">子组件：props: [&#x27;msg&#x27;]</span><br><span class="line">	   props: &#123; msg:数据类型 &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">2. 子组件 传值 父组件</span><br><span class="line">子组件：this.$emit(&quot;自定义事件名称&quot;, 要传的数据);</span><br><span class="line">	   this.$emit(&quot;childInput&quot;, this.msg)</span><br><span class="line">父组件：&lt;Header @childInput=&#x27;getVal&#x27;&gt;&lt;/Header&gt;</span><br><span class="line">	   methods:&#123;</span><br><span class="line">	     getVal(msg)&#123;</span><br><span class="line">	     	// msg就是子组件传递的数据</span><br><span class="line">	     &#125;</span><br><span class="line">	   &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">3. 兄弟之间传值</span><br><span class="line">通过一个中转 （bus）</span><br><span class="line">bus.js:  </span><br><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">export default new Vue</span><br><span class="line"></span><br><span class="line">A兄弟传值：</span><br><span class="line">import bus from &#x27;@/common/bus&#x27;</span><br><span class="line">bus.$emit(&quot;toFooter&quot;, this.msg);</span><br><span class="line">B兄弟接收：</span><br><span class="line">import bus from &#x27;@/common/bus&#x27;</span><br><span class="line">mounted()&#123;</span><br><span class="line">	bus.$on(&#x27;toFooter&#x27;, (data)=&gt;&#123;</span><br><span class="line">		// data是this.msg数据</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="computed-methods-watch有什么区别"><a href="#computed-methods-watch有什么区别" class="headerlink" title="computed  methods  watch有什么区别"></a>computed  methods  watch有什么区别</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. computed vs methods</span><br><span class="line">	computed有缓存</span><br><span class="line">	methods没有缓存</span><br><span class="line">2. computed vs watch区别</span><br><span class="line">	watch是监听，数据或者路由发生了改变才可以响应(执行)</span><br><span class="line">	computed计算某一个属性的改变，如果某一个值改变了，计算属性会监听到进行返回</span><br><span class="line">	watch是当前监听到数据改变了，才会执行内部代码</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">	&#123;&#123;change&#125;&#125;</span><br><span class="line">	&#123;&#123;change&#125;&#125;</span><br><span class="line">	&#123;&#123;change&#125;&#125;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">	computed: &#123;</span><br><span class="line">		change()&#123;</span><br><span class="line">			console.log(&#x27;computed&#x27;);</span><br><span class="line">			return 111;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>视图显示三个111，控制台只打印一次computed，当返回的数据没有发生变化，computed就执行一次，这就是有缓存</strong></p>
+<h4 id="props-和-data-优先级谁高"><a href="#props-和-data-优先级谁高" class="headerlink" title="props 和 data 优先级谁高"></a>props 和 data 优先级谁高</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">props ==&gt; methods ==&gt; data ==&gt; computed ==&gt; watch</span><br></pre></td></tr></table></figure>
+
+<h4 id="Vuex有哪些属性"><a href="#Vuex有哪些属性" class="headerlink" title="Vuex有哪些属性"></a>Vuex有哪些属性</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">state  getters  mutations  actions  modules</span><br><span class="line">state 类似于组件中data，存放数据</span><br><span class="line">getters 类似于组件中computed </span><br><span class="line">mutation 类似于组件中methods</span><br><span class="line">actions 提交mutations的</span><br><span class="line">modules 把以上4个属性再细分，让仓库更好管理</span><br></pre></td></tr></table></figure>
+
+<h4 id="vuex是单向数据流还是双向数据流"><a href="#vuex是单向数据流还是双向数据流" class="headerlink" title="vuex是单向数据流还是双向数据流"></a>vuex是单向数据流还是双向数据流</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vuex是单向数据流</span><br><span class="line">为什么是单向数据流？改不了state数据，只能通过mutation，actions方法去提交，去改</span><br><span class="line">为什么在组件中直接修改vuex数据会报错？因为vuex是单向数据流</span><br></pre></td></tr></table></figure>
+
+<h4 id="vuex中的mutations和actions区别"><a href="#vuex中的mutations和actions区别" class="headerlink" title="vuex中的mutations和actions区别"></a>vuex中的mutations和actions区别</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mutations : 都是同步事物</span><br><span class="line">actions : 可以包含任意异步操作</span><br></pre></td></tr></table></figure>
+
+<h4 id="vuex如何做持久化存储"><a href="#vuex如何做持久化存储" class="headerlink" title="vuex如何做持久化存储"></a>vuex如何做持久化存储</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vuex本身不是持久化存储</span><br><span class="line">1. 使用localStorage自己写 </span><br><span class="line">2. 使用vuex-persist插件</span><br></pre></td></tr></table></figure>
+
+<h4 id="vue路由模式"><a href="#vue路由模式" class="headerlink" title="vue路由模式"></a>vue路由模式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">路由模式有两种：history  hash</span><br><span class="line">区别：</span><br><span class="line">1. 表现形式不同</span><br><span class="line">	history: http://localhost:8080/about</span><br><span class="line">	hash: http://localhost:8080/#/about</span><br><span class="line">2. 跳转请求</span><br><span class="line">比如说后面跟的是一个找不到的页面，history依然会发送请求，hash不会发送请求</span><br><span class="line">history: http://localhost:8080/id  ===&gt; 发送请求</span><br><span class="line">3. 打包后前端自测要使用hash，如果使用history会出现空白页</span><br></pre></td></tr></table></figure>
+
+<h4 id="介绍一下SPA以及SPA有什么缺点"><a href="#介绍一下SPA以及SPA有什么缺点" class="headerlink" title="介绍一下SPA以及SPA有什么缺点"></a>介绍一下SPA以及SPA有什么缺点</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SPA是什么？ 单页面应用，打包后只有一个index.html文件</span><br><span class="line">缺点：</span><br><span class="line">	1. SEO优化不好</span><br><span class="line">	2. 性能不是特别好</span><br></pre></td></tr></table></figure>
+
+<h4 id="vue路径传值"><a href="#vue路径传值" class="headerlink" title="vue路径传值"></a>vue路径传值</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1. 显示 ，可以在url上看到</span><br><span class="line">http://localhost:8080/about?a=1</span><br><span class="line"></span><br><span class="line">传：btn()&#123;</span><br><span class="line">  this.$router.push(&#123;</span><br><span class="line">    path: &#x27;/about&#x27;,</span><br><span class="line">    query: &#123; a:1 &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">this.$route.query.a 拿到数据</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">2. 隐式</span><br><span class="line">http://localhost:8080/about</span><br><span class="line"></span><br><span class="line">2.1 传：this.$router.push(&#123;</span><br><span class="line">  name: &#x27;about&#x27;,</span><br><span class="line">  params: &#123;</span><br><span class="line">  	a:1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">2.2 接：this.$route.params.a</span><br></pre></td></tr></table></figure>
+
+<h4 id="路由导航守卫有哪些"><a href="#路由导航守卫有哪些" class="headerlink" title="路由导航守卫有哪些"></a>路由导航守卫有哪些</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">全局 、路由独享、组件内</span><br><span class="line"></span><br><span class="line">1. 全局</span><br><span class="line">  beforeEach beforeResolve afterEach</span><br><span class="line">2. 路由独享</span><br><span class="line">  beforeEnter</span><br><span class="line">3. 组件内</span><br><span class="line">  beforeRouteEnter beforeRouteUpdate beforeRouteLeave</span><br><span class="line"> </span><br><span class="line">使用场景：判断是否登录， </span><br></pre></td></tr></table></figure>
+
+<h4 id="vue动态路由"><a href="#vue动态路由" class="headerlink" title="vue动态路由"></a>vue动态路由</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">场景：详情页（文章，商品）</span><br><span class="line"></span><br><span class="line">list.vue配置：</span><br><span class="line">&lt;router-link to=&#x27;/list/123&#x27;&gt;123&lt;/router-link&gt;</span><br><span class="line">&lt;router-link to=&#x27;/list/456&#x27;&gt;456&lt;/router-link&gt;</span><br><span class="line">&lt;router-link to=&#x27;/list/789&#x27;&gt;789&lt;/router-link&gt;</span><br><span class="line">&lt;router-view&gt;&lt;/router-view&gt;</span><br><span class="line"></span><br><span class="line">router.js配置：</span><br><span class="line">&#123;</span><br><span class="line">  path: &#x27;/list&#x27;,</span><br><span class="line">  name: &#x27;List&#x27;,</span><br><span class="line">  component: ()=&gt;&#123;</span><br><span class="line">  	import(&#x27;../views/list.vue&#x27;)</span><br><span class="line">  &#125;</span><br><span class="line">  children:[</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#x27;/list/:id&#x27;,</span><br><span class="line">      name: &#x27;Details&#x27;,</span><br><span class="line">      component: ()=&gt;&#123;</span><br><span class="line">        import(&#x27;../views/Details.vue&#x27;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue/" rel="tag"># vue</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag"># 前端面试题</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/09/Jest/" rel="prev" title="Jest">
+                  <i class="fa fa-chevron-left"></i> Jest
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/03/22/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98css/" rel="next" title="前端面试题css">
+                  前端面试题css <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lazycat</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
